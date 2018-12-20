@@ -5,99 +5,138 @@
 package programs.datastructure;
 
 
-class SLLNode {
+import java.util.LinkedList;
 
-    int data;
-    SLLNode nextRef = null;
+public class MyLinkedList<T> {
 
-    SLLNode(int data) {
-        this.data = data;
+    public T getElement() {
+        return element;
     }
 
-    public SLLNode getNextRef() {
-        return nextRef;
+    public void setElement(T element) {
+        this.element = element;
     }
 
-    public void setNextRef(SLLNode nextRef) {
-        this.nextRef = nextRef;
+    private T element;
+
+    public MyLinkedList<T> getNext() {
+        return this.next;
     }
 
-
-}
-
-public class MyLinkedList {
-
-    SLLNode head;
-    SLLNode current;
-
-    public static void main(String[] args) {
-
-        MyLinkedList newll = new MyLinkedList();
-
-        newll.add(1);
-        newll.add(2);
-        newll.add(3);
-        newll.add(4);
-        newll.add(5);
-
-        SLLNode temp = null;
-
-        while ((temp = newll.current) != null) {
-
-            System.out.println("Element = " + temp.data);
-
-            temp = newll.traverse(temp);
-
-            if (temp.getNextRef() == null) {
-                break;
-            }
-
-        }
-
-
+    public void setNext(MyLinkedList<T> next) {
+        this.next = next;
     }
 
-    void add(int i) {
+    private MyLinkedList<T> next = null, current = this;
 
-        if (head == null) {
-            this.head = new SLLNode(i);
-            this.current = this.head;
-            System.out.println("added " + i);
+    public MyLinkedList(T t) {
+        this.setElement(t);
+    }
+
+    public boolean add(T e) {
+
+        MyLinkedList<T> temp = new MyLinkedList<>(e);
+
+        LinkedList l = new LinkedList();
+
+        if (this.getNext() == null) {
+            this.setNext(temp);
+            System.out.println("added element " + e);
+            return true;
         } else {
+
+            // traversing for finding null next
+            MyLinkedList<T> current = this.getNext();
+
             while (true) {
-                if (current.getNextRef() == null) {
-                    current.setNextRef(new SLLNode(i));
-                    break;
+                if (current.getNext() != null) {
+                    current = current.getNext();
                 } else {
-                    current = current.getNextRef();
+                    current.setNext(temp);
+                    System.out.println("added element " + e);
+                    return true;
                 }
             }
         }
 
     }
 
-    public boolean remove(SLLNode root, SLLNode del) {
-        SLLNode pointer = null;
-        while (traverse(root) != null) {
-            pointer = traverse(root);
+    public boolean remove(T e) {
 
-            if (pointer.data == del.data) {
-                root.nextRef = del.nextRef;
-                return true;
-            } else {
-                root = pointer;
+        if (this.getElement() == e) {
+            this.current = this.getNext();
+            System.out.println("removed element " + e);
+            return true;
+        } else {
+
+            // traversing for finding null next
+            MyLinkedList<T> next = this.getNext();
+
+            while (next != null) {
+                if (next.getElement() == e) {
+                    current.setNext(next.getNext());
+                    System.out.println("removed element " + e);
+                    break;
+                } else {
+                    current = next;
+                    next = next.getNext();
+                }
             }
         }
         return false;
     }
 
-    public SLLNode traverse(SLLNode root) {
-        if (root.nextRef != null)
-            return root.nextRef;
-        else
-            return null;
+    public MyLinkedList<T> reverseLinkedList() {
+
+        MyLinkedList current = this, next = null, previous = null;
+
+        while (current != null) {
+            next = current.getNext();
+
+            current.setNext(previous);
+
+            previous = current;
+            current = next;
+        }
+        return previous;
     }
 
+    public int size() {
+        int count = 1;
+        MyLinkedList current = this;
 
+        while (current.getNext() != null) {
+            ++count;
+            current = current.getNext();
+        }
+
+        return count;
+
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+
+        if (obj == this) {
+            return true;
+        }
+
+        if (!(obj instanceof MyLinkedList)) {
+            return false;
+        }
+
+        MyLinkedList lhs = this, rhs = (MyLinkedList) obj;
+
+
+        do {
+            if (lhs.getElement() != rhs.getElement())
+                return false;
+            lhs = lhs.getNext();
+            rhs = rhs.getNext();
+
+        } while (rhs != null);
+
+        return true;
+
+    }
 }
-

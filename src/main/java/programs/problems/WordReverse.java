@@ -14,12 +14,15 @@ public class WordReverse {
 
         Scanner scan = new Scanner(System.in);
         String input = scan.nextLine();
-        String[] inputArray = input.split(" ");
 
-        // standard array based reversal
-        for (int i = inputArray.length - 1; i >= 0; i--) {
-            System.out.println(inputArray[i]);
-        }
+        //  wordReverse(input);
+
+        System.out.println("reverse in place = " + reverseStringInPlace(input));
+    }
+
+    private static void wordReverse(String input) {
+
+        String[] inputArray = input.split(" ");
 
         // using stack and pop for reverse
         Stack<String> stack = new Stack<>();
@@ -28,8 +31,23 @@ public class WordReverse {
 
         while (!stack.isEmpty())
             System.out.println(stack.pop());
+    }
 
+
+    private static String reverseStringInPlace(String input) {
+
+        StringBuilder sb = new StringBuilder(input);
+
+        for (int i = 0; i < sb.length() / 2; i++) {
+            char c = sb.charAt(i);
+            int otherEnd = sb.length() - i - 1;
+            sb.setCharAt(i, sb.charAt(otherEnd));
+            sb.setCharAt(otherEnd, c);
+        }
+
+        return sb.toString();
 
     }
+
 
 }

@@ -1,6 +1,6 @@
 # Java / Bigdata / ML #
 
-Set of Programs related to various programming problems, data structures, techs, ML etc...
+Set of Programs related to various programming problems, value structures, techs, ML etc...
 
 It may include code on below:
 
@@ -50,6 +50,10 @@ It may include code on below:
 * great for fixed length/elements with no/fewer updates/deletes
 * updates and deletes would need array copy (System.arraycopy()) and reconstruction
 * ArrayList internally uses Array for impl
+
+StringBuffer - is mutable unlike string and is thread safe / synchronized.
+StringBuilder - is mutable and is not thread safe so gives better performance when multi threads are not used.
+
     
 #### Linked List (Singly / Doubly) ->
 * Linked List is better for frequency updates/deletes/extension of list
@@ -65,10 +69,10 @@ It may include code on below:
 * HashMap internally uses arrays is not ordered
     * LinkedHashMap same as hashmap with O(1) search and is also ordered
     * ConcurrentHashMap - thread safe 
+* HashTable is same as HashMap but is Synchronized 
 * TreeMap uses BST internally and is ordered
-* each node in tree is  a key value pair
+* Each node in tree is  a key value pair
 *  In case of hash collision, can use secondary hash fn and value can be used as an offset 
-
 
 #### Sets 
 * Unordered set of elements with no dups
@@ -76,7 +80,6 @@ It may include code on below:
 * HashSet, TreeSet and LinkedHashSet
 * Collections.newSetFromMap returns a Set from Map
  
-
 #### Graphs
 * An adjacency list is simply a list of edges between nodes in a graph. 
 * An adjacency list takes O(n) time to check whether an edge exists because you potentially must iterate over all elements in the list to check for the existence of an edge.
@@ -89,9 +92,7 @@ It may include code on below:
 * Binary Heap Tree - Children are more than parent, binary tree
 * A breadth-first search typically uses a Queue (FIFO) to keep track of nodes, whereas a depth-first search typically uses a Stack (LIFO)
 
-
 ### Sorting:
-
 Comparable - natural ordering, example Arrays.sort(), String class.
 Comparator - controlled custom impl - Collections.sort(list, ComparatorIMPL)
 
@@ -134,6 +135,9 @@ Binary Search - O(log n):
    * break it from middle of list
    * match element at middle if less then recursively call function with lower list else with higher list
    * return true when match found or false when list is empty or null
+
+#### Memoization -
+When the result of a method call is cached to save recalculating the result again later.
 
 #### Concurrency Deadlock:
 Be aware of the Coffman conditions, a list of conditions that are required for a deadlock to occur:
@@ -182,7 +186,7 @@ Decorator Pattern -
 * ex. Java IO FileInputStream->BufferedInputStream->ObjectInputStream->xxx
 
 Flyweight Pattern - 
-* make flyweight objects by sharing as much data as possible in memory
+* make flyweight objects by sharing as much value as possible in memory
 * ex Integer in Java stores a cache of all integer objects which are shared using valueOf
 * share same objects across needs the object to be immutable 
 
@@ -193,3 +197,4 @@ Singleton Pattern -
 * serialization would create new objects even when its a singleton class
 * public enum singleton { INSTANCE; } 
 * its good only for small concurrent users, for building highly scalable concurrent systems stay away from singleton
+

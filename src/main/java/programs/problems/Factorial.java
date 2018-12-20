@@ -4,11 +4,11 @@
 
 package programs.problems;
 
+import java.math.BigInteger;
 import java.util.Scanner;
 
+// Factorial program for large numbers
 public class Factorial {
-
-    int temp = 1;
 
     public static void main(String[] args) {
 
@@ -21,28 +21,27 @@ public class Factorial {
 
         System.out.println("input = " + input);
 
-        System.out.println(factorial(input));
-
-        System.out.println(factorialRecursion(input));
+        System.out.println(factorialRecursion(BigInteger.valueOf(input)));
 
     }
 
-    private static int factorial(int input) {
-        int temp = 1;
+    private static BigInteger factorial(int input) {
+        BigInteger temp = BigInteger.valueOf(1);
+
         for (int i = 1; i <= input; i++) {
 
-            temp = i * temp;
+            temp = temp.multiply(BigInteger.valueOf(i));
 
         }
         return temp;
     }
 
-    private static int factorialRecursion(int i) {
+    private static BigInteger factorialRecursion(BigInteger i) {
 
-        if (i <= 1)
+        if (i.intValue() <= 1)
             return i;
 
-        return i * factorialRecursion(i - 1);
+        return i.multiply(factorialRecursion(i.subtract(BigInteger.valueOf(1))));
 
     }
 
