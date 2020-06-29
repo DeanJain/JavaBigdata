@@ -1,4 +1,4 @@
-# Java / Algo / Data Structures / Bigdata / ML
+# Java / Algo / Data Structures
 
 * Java Programming Problems
 * Data Structures
