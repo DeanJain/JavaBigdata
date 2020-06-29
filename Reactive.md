@@ -9,7 +9,6 @@
 - Spring Cloud Config Server – provides remote config capability from git to APis
 - Spring Cloud Netflix – Combines all of above into a single Spring based package and provide it OOB
 	 
-
 ## Future - Reactive Systems
  - [Reactive Manifesto](https://www.reactivemanifesto.org)   
  - Everything the service needs (but not more)   
@@ -84,6 +83,4 @@
    - Query  is read from DB
    - both are from different DBs
     
-    
-![Kube Deployment](src/content/KubeDeploy.png)
     

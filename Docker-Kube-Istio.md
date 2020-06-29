@@ -18,6 +18,7 @@
 - API Gateway can be created by using ambassador or Ingress on Kube	 
 
 ## Kubertnetes 
+![Kube Deployment](src/content/KubeDeploy.png)
 
 ### MiniKube
 

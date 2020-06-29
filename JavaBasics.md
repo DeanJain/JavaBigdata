@@ -1,15 +1,3 @@
-# Java / Algo / Data Structures
-
-* Java Programming Problems
-* Data Structures
-* Apache Spark
-* ElasticSearch
-* Kafka
-* MicroServices
-* [Machine Learning](ML.md)
-
-
-## Data Structures:
 
 ### Java Collections Framework
 * Collection is parent interface --> Sets and Lists ; Maps Interface does not follow Collection
