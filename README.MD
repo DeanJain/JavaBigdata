@@ -1,11 +1,11 @@
-# Java / Algo / Data Structures
+# Learnings
 
-* [Java Programming Problems](JavaBasics.md)
+* [Java & Data Structure](Java-DataStructure.md)
 * [Machine Learning](ML.md)
 * [Docker Kube ServiceMesh](Docker-Kube-Istio.md) 
 * [Reactive Programming](Reactive.md)
 * [Databases](DB.md)
-* Data Structures
+* [Architecture](Architecture.md)
 * Apache Spark
 * ElasticSearch
 * Kafka

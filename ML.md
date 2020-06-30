@@ -46,7 +46,7 @@ It is the type of Unsupervised Learning, in which the dimensions of the data is 
 ### Reinforcement Learning - 
 This type of machine learning in which no raw data is given as input instead reinforcement learning algorithm have to figures out the situation on their own. The reinforcement learning frequently used for robotics, gaming, and navigation. With reinforcement learning, the algorithm discovers through trial and error which actions yield the most significant rewards. This type of training has three main components which are the agent which can describe as the learner or decision maker, the environment which described as everything the agent interacts with and actions which represented as what the agent can do
 
-![ML Big Picture](src/content/AppliedML.png)
+![ML Big Picture](static/AppliedML.png)
 
 
 * Model parameters that minimize error in the model’s predictions

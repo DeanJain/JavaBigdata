@@ -6,7 +6,7 @@
 *  `LinkedHashMap` has all the properties of a HashMap, quick lookup on a key, it also preserves the order of entry into the map.
 * for any serious use of a Map interface in a parallel environment, use `ConcurrentHashMap`
 
-![Java Collections Big Picture](src/content/JavaCollectionCheatSheet.png)
+![Java Collections Big Picture](static/JavaCollectionCheatSheet.png)
 
 #### Arrays / ArrayList ->
 * Random access , direct access by memory calculation (mem ref + Data type * index)

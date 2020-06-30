@@ -18,7 +18,7 @@
 - API Gateway can be created by using ambassador or Ingress on Kube	 
 
 ## Kubertnetes 
-![Kube Deployment](src/content/KubeDeploy.png)
+![Kube Deployment](static/KubeDeploy.png)
 
 ### MiniKube
 
@@ -42,7 +42,7 @@
     minikube delete`
 
 
-![Kube Deployment](src/content/KubeDeploy.png)
+![Kube Deployment](static/KubeDeploy.png)
     
 ### Istio 
 
