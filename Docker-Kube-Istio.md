@@ -43,6 +43,16 @@
 
 
 ![Kube Deployment](static/KubeDeploy.png)
+
+Resource types are defined in the Kubernetes APIs
+• Pods: the basic unit in Kubernetes, represents a set of containers that share common resources such as an IP address and storage volumes
+• Deployments: standard entity that is rolled out with Kubernetes
+• Services: make deployments accessible from the outside by providing a single IP/port combination. Services by default provide access to pods in round-robin fashion using a load balancer
+• Persistent Volumes: persistent (networked) storage that can be mounted within a container by using a Persistent Volume Claim
+
+When	running	 a	deployment,	 Pods	have	an	internal	network	address	in	the	172.17.0.0/16	network
+
+The	service	connects	to	the	Pods	internal	IP	addresses	by	making	them	endpoints
     
 ### Istio 
 
