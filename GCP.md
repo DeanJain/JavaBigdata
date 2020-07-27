@@ -1,6 +1,60 @@
 
 ## GCP - Google Cloud Platform
 
+- Hierarchy    
+    Organization
+        Folders (grouping within org)
+        Project --> Billing account
+            Resources  --> Labels (k:v)
+            
+- Internals            
+    - Zone Availability zone (similar to a datacenter) 
+    - Region Set of zones with high-speed network links 
+    - Network User-controlled IP addresses, subnets and firewalls  
+    
+    - Global:
+        - Static external IP addresses 
+        - Images and snapshots
+        - Networks,firewalls,routes
+    - Regional 
+        - Subnets
+        - Regional persistent disks
+    - Zonal
+        - Instances
+        - Persistent disks
+   
+Persistent Disks
+   - Block storage
+   - Max 64TB in size
+   - Pay what you allocate
+   - Tied to GCE VMs
+   - Zonal or regional access
+   - Resize on the  fly
+   - Move across zones
+   - Create images and snapshots 
+   - Encrypted at rest
+   
+Buckets
+   - Object storage
+   - Infinitely scalable
+   - Pay what you use
+   - Independent of GCE VMs
+   - Global access
+
+Image
+- Binary file used to instantiate VM rootdisk 
+- Usually based off OS image
+- Also contains bootloader
+- Can also contain customizations
+- Managed by GCP image service   
+
+Snapshot
+- Binary file with exact contents of persistent disk 
+- “Point-in-time” snapshot
+- Managed by GCP snapshot service
+- Incremental backups possible too
+- Used to back up data from persistent disks
+    
 ### Google COMPUTE ENGINE - Raw Vms
 
 ##### login to compute vm instance 
@@ -23,6 +77,35 @@ gcloud compute instances list
 
 
 ### GAE APP ENGINE: Platform as a Service PaaS - Deploy your Apps from your code / github etc to STD Image
+
+Standard 
+- App runs in a proprietary sandbox VM 
+- Instances start up in seconds 
+- Code in few languages/versions only 
+- No other runtimes possible 
+- Apps cannot access Compute Engine resources 
+- No installation of third-party binaries 
+
+Flexible 
+- Instance start up in minutes 
+- Code in far more languages/ versions 
+- Custom runtimes possible
+- Apps can access Compute Engine resources, some OS packages
+- Can install and access third-party binaries 
+
+### Storage Usecases
+
+|     Use Case                                              |     Appropriate GCP Service              |     Non-GCP Equivalents                      |
+|-----------------------------------------------------------|------------------------------------------|----------------------------------------------|
+|     Block storage                                         |     Persistent disks   or local SSDs     |     AWS   EBS, Azure Disk                    |
+|     Object/blob   storage                                 |     Cloud Storage   (GCS) buckets        |     AWS   S3, Azure Blob Storage             |
+|     Relational data -   small, regional payloads          |     Cloud SQL                            |     AWS   RDS, Azure SQL Database            |
+|     Relational data -   large, global payloads            |     Cloud Spanner                        |                                              |
+|     HTML/XML documents   with NoSQL access                |     Firestore                            |     AWS   DynamoDB, Azure Cosmos DB          |
+|     Large, naturally   ordered data with NoSQL access     |     BigTable                             |                                              |
+|     Analytics and   complex queries with SQL access       |     BigQuery                             |     AWS   Redshift, Azure Data Warehouse     |
+
+
 
 ##### create blank app instance
 gcloud app create
@@ -85,10 +168,18 @@ gcloud container clusters get-credentials dean-kube-cluster-1 --zone us-central1
 
 ### GCP Databases:
 
-- Cloud SQL -> RDBMS - MySQL/ PostGres / SQLServer - 10 tb data, 208 gb ram, 32 cores
-- Spanner - Google RDBMS / SQL which is horizontally scalable - the best RDBMS on planet
-- Bigtable - Hbase bigdata key value pair columnar storage 
+- Cloud SQL -> RDBMS - MySQL/ PostGres / SQLServer - 10 tb max data, 208 gb ram, 32 cores, Transactional support, ACID support
+
+
+- Spanner - Google RDBMS / SQL horizontally scalable - the best RDBMS on the Planet
+
+
+- Big table - Hbase bigdata key value pair columnar storage 
+
+
 - Cloud Datastore - Document DB like MOngo
+
+
 - Cloud Storage - File Storage / Object store
 	* cloud storage life cycle - > store std --> after 6 months move to nearline storage 1 year --> coldline storage 5 yr - delete it
 	* like S3
@@ -96,6 +187,10 @@ gcloud container clusters get-credentials dean-kube-cluster-1 --zone us-central1
 	* 11 9s durability
 	* cloud storage is HDFS compliant same way we can read files like hadoop - hdfs:// vs gs://
 	* cloud object notification --> pubsub or functions 
+
+- Cloud Firestore : Flexible, scalable, NoSQL database for keeping data in sync across client apps, Mobile and web server development, Realtime listeners
+
+ 
 
 ### GCP Bigdata:
 
@@ -106,7 +201,7 @@ gcloud container clusters get-credentials dean-kube-cluster-1 --zone us-central1
 - Datalab - Analytical / Visual tool 
 - Pub/Sub - Event Driven like kafka
 
-- BigTable: HBase
+- BigTable: HBase - sequential ordering in key column; provides very fast writes as well as reads
    * Regional	resource	scope
    * Managed	NoSQL
    * Scalable	but	not	serverless
@@ -114,16 +209,16 @@ gcloud container clusters get-credentials dean-kube-cluster-1 --zone us-central1
    * HBase	compatible*
    * Great	for	many	concurrent	reads/writes
 
-- BigQuery:  DatawareHouse
+- BigQuery:  Serverless Data Warehouse RDBMS
     * Regional	resource	scope
-    * Managed	Data	Warehouse
+    * OLAP
     * Scales	to	Petabytes
     * SQL	(ANSI:2011)	compliant
     * Dedicated	CLI
-    * Separate	compute	and	storage	tiers
-    * Integrates	and	ML	and	BI	offerings
+    * Separate compute and storage	tiers
+    * Integrates with ML and BI	offerings
 
-- Cloud	DataStore/Firestore
+- Cloud	DataStore/Firestore (Mongo kind ??)
     * Regional	or	multi-regional	resource	scope
     * Cloud-native	NoSQL
     * Strong	mobile	support
@@ -136,3 +231,26 @@ gcloud container clusters get-credentials dean-kube-cluster-1 --zone us-central1
     * Managed	Apache	Beam
     * Batch	or	streaming	data	pipelines
     * For	Hadoop	use	DataProc	instead
+   
+#### Google Virtual Private Cloud
+ A VPC network is a global, private, isolated virtual network partition that provides managed network functionality on the GCP
+
+- VPC are global
+- Subnet in each region
+- resources are provisioned on the subnet
+- Each VPC must exist inside a project
+- Default VPC pre-created in each project 
+- Can add additional VPCs
+    - AutoMode
+    - CustomMode                
+
+Subnets
+- IP range partitions within global VPCs
+- VPCs have no IP ranges
+- Subnets are regional - can span zones inside a region
+- Network has to have at least one subnet before you can use it
+- Each subnet must have primary address range 
+- Valid RFC 1918 CIDR block
+- Subnet ranges in same network cannot overlap
+- Subnet ranges in different networks can overlap    
+    
