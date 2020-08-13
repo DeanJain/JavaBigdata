@@ -54,6 +54,46 @@ Snapshot
 - Managed by GCP snapshot service
 - Incremental backups possible too
 - Used to back up data from persistent disks
+
+   
+#### Google Virtual Private Cloud
+ A VPC network is a global, private, isolated virtual network partition that provides managed network functionality on the GCP
+
+- VPC are global
+- Subnet in each region
+- resources are provisioned on the subnet
+- Each VPC must exist inside a project
+- Default VPC pre-created in each project 
+- Can add additional VPCs
+    - AutoMode
+    - CustomMode                
+
+Subnets
+- IP range partitions within global VPCs
+- VPCs have no IP ranges
+- Subnets are regional - can span zones inside a region
+- Network has to have at least one subnet before you can use it
+- Each subnet must have primary address range 
+- Valid RFC 1918 CIDR block
+- Subnet ranges in same network cannot overlap
+- Subnet ranges in different networks can overlap    
+    
+
+### Cloud IAM
+Roles   diff roles defined
+Member  who can get access
+Policy  join both roles to member 
+    
+    
+GCP Identities:
+- Google accounts
+- Service accounts
+- Google groups
+- GSuite domains
+- Cloud Identity domains
+
+
+
     
 ### Google COMPUTE ENGINE - Raw Vms
 
@@ -65,7 +105,6 @@ gcloud compute instances stop unicorn-instance-1
 
 ##### start instance 
 gcloud compute instances start unicorn-instance-1
-
 
 ##### create GCP  compute template from existing vm instance
 gcloud compute instance-templates create basic-vm-instance-template \
@@ -132,6 +171,26 @@ gcloud app deploy
 
 - Deployments (uses pod templates) --> set of Multiple identical pods 
 
+• ReplicaSet - Scaling and healing
+• Deployment - Versioning and rollback
+• Service - Static(non-ephemeral) IP addresses,  Stable networking
+• Persistent volumes - Non-ephemeral storage
+
+#### Workloads on Kubernetes
+
+- Stateless applications
+   • Does not preserve state, saves no data to persistent disk
+   • Deployed using the Deployment object
+- Stateful applications
+   • State is saved or persisted, uses persistent volumes
+   • Deployed using the StatefulSet object
+- Batch jobs
+   • Finite, independent, parallel jobs
+   • Deployed using the Job object
+- Daemons
+    • Ongoing, background tasks, run without intervention
+    • Deployed using a DaemonSet
+
 ##### Set Auth for GCP on local:
 
 ```yaml
@@ -165,6 +224,28 @@ gcloud container clusters get-credentials dean-kube-cluster-1 --zone us-central1
    kubectl get services
    kubectl get services --watch
 ```
+
+### Load Balancing
+
+External load balancing includes four options:
+- HTTP(S) Load Balancing for HTTP or HTTPS traffic,
+- TCP Proxy for TCP traffic for ports other than 80 and 8080, without SSL offload
+- SSL Proxy for SSL offload on ports other than 80 or 8080.
+- Network Load Balancing for TCP/UDP traffic.
+
+- For HTTP and HTTPS traffic, use:
+  -  External HTTP(S) Load Balancing
+  -  Internal HTTP(S) Load Balancing
+- For TCP traffic, use:
+  -  TCP Proxy Load Balancing
+  -  Network Load Balancing
+  -  Internal TCP/UDP Load Balancing
+- For UDP traffic, use:
+  -  Network Load Balancing
+  -  Internal TCP/UDP Load Balancing
+
+#### Google Stackdriver
+Suite of ops services providing monitoring, logging, debugging, error reporting, tracing, alerting and profiling. Integrates with several third-party tools
 
 ### GCP Databases:
 
@@ -231,26 +312,3 @@ gcloud container clusters get-credentials dean-kube-cluster-1 --zone us-central1
     * Managed	Apache	Beam
     * Batch	or	streaming	data	pipelines
     * For	Hadoop	use	DataProc	instead
-   
-#### Google Virtual Private Cloud
- A VPC network is a global, private, isolated virtual network partition that provides managed network functionality on the GCP
-
-- VPC are global
-- Subnet in each region
-- resources are provisioned on the subnet
-- Each VPC must exist inside a project
-- Default VPC pre-created in each project 
-- Can add additional VPCs
-    - AutoMode
-    - CustomMode                
-
-Subnets
-- IP range partitions within global VPCs
-- VPCs have no IP ranges
-- Subnets are regional - can span zones inside a region
-- Network has to have at least one subnet before you can use it
-- Each subnet must have primary address range 
-- Valid RFC 1918 CIDR block
-- Subnet ranges in same network cannot overlap
-- Subnet ranges in different networks can overlap    
-    
