@@ -92,8 +92,6 @@ GCP Identities:
 - GSuite domains
 - Cloud Identity domains
 
-
-
     
 ### Google COMPUTE ENGINE - Raw Vms
 
@@ -258,7 +256,7 @@ Suite of ops services providing monitoring, logging, debugging, error reporting,
 - Big table - Hbase bigdata key value pair columnar storage 
 
 
-- Cloud Datastore - Document DB like MOngo
+- Cloud Datastore/Firestore - Document DB like MongoDB
 
 
 - Cloud Storage - File Storage / Object store
@@ -271,16 +269,14 @@ Suite of ops services providing monitoring, logging, debugging, error reporting,
 
 - Cloud Firestore : Flexible, scalable, NoSQL database for keeping data in sync across client apps, Mobile and web server development, Realtime listeners
 
- 
-
 ### GCP Bigdata:
 
 - Bigtable - HBase kind...
 - BigQuery - EDW Enterprise data warehose
-- Dataflow -  Apache Beam impl
-- DataProc  - Hadoop / Spark Cluster
+- Dataflow -  Apache Beam impl for ETL and Streaming both
+- DataProc  - Hadoop / Spark Cluster for batch / hadoop only
 - Datalab - Analytical / Visual tool 
-- Pub/Sub - Event Driven like kafka
+- Pub/Sub - Event Driven and is a message queue (e.g. Rabbit MQ) 
 
 - BigTable: HBase - sequential ordering in key column; provides very fast writes as well as reads
    * Regional	resource	scope
