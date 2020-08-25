@@ -56,7 +56,7 @@ Snapshot
 - Used to back up data from persistent disks
 
    
-#### Google Virtual Private Cloud
+#### Google Virtual Private Cloud - VPC
  A VPC network is a global, private, isolated virtual network partition that provides managed network functionality on the GCP
 
 - VPC are global
@@ -64,11 +64,36 @@ Snapshot
 - resources are provisioned on the subnet
 - Each VPC must exist inside a project
 - Default VPC pre-created in each project 
-- Can add additional VPCs
-    - AutoMode
-    - CustomMode                
+- can have upto 5 max VPC per project
+- VPCs types
+    - Auto Mode
+    - Custom Mode  
+    - Default Mode              
 
-Subnets
+##### Auto Scaling & Load Balancing
+ - High performance, scalable load balancing, GCP provides Global Load Balancing - Scale your applications on Google Compute Engine from zero to full-throttle. Distribute your load balanced compute resources in single or multiple regions, close to your users and to meet your high availability requirements
+
+##### Cloud Interconnect
+- Google Cloud Interconnect allows Cloud platform customers to connect to Google via enterprise-grade connections with higher availability and/or lower latency than their existing Internet connections.
+
+##### Google Cloud CDN 
+- leverages Google's globally distributed edge caches to accelerate content delivery for websites and applications served out of Google Compute Engine.
+- Cloud CDN lowers network latency, offloads origins, and reduces serving costs. Once you've set up HTTP(S) Load Balancing, simply enable Cloud CDN with a single checkbox
+
+##### Google Cloud DNS 
+- scalable, reliable and managed authoritative Domain Naming System (DNS) service running on the same infrastructure as Google.
+- It has low latency, high availability and is a cost-effective way to make application and services available to your users.      
+
+#### Subnets
+
+-  VPC Contains Subnetworks
+-  Subnets are Region Specific
+-  Subnet be in single zone or multiple zone within the region
+-  Using Subnetworks – we can apply single firewall rules all VMs even if they are in different zone.
+-  You can create multiple subnets within single region/zone to isolations resources based on different business needs.
+- Each Subnet has contiguous private RFC1918 IP Space - IP Range
+- Virtual machine (VM) instances in a VPC network can communicate with instances in all other subnets of the same VPC network, regardless of region, using their RFC1918 private IP addresses.
+- You can isolate portions of the network, even entire subnets, using firewall rules.
 - IP range partitions within global VPCs
 - VPCs have no IP ranges
 - Subnets are regional - can span zones inside a region
@@ -78,11 +103,44 @@ Subnets
 - Subnet ranges in same network cannot overlap
 - Subnet ranges in different networks can overlap    
     
+ #### IP Addresses
+- You can assign certain resources with IP addresses , You can assign external and internal IP addresses to Compute Engine (VM) , forwarding rule for external or internal Load balancing resp.
+- Each VM has one primary – internal IP address, one or more secondary IP addresses and one external IP address
+- To communicate with VM within VPC you can use internal IP address and to communicate with internet you must use external IP address
+- Both internal and external IP addresses can be static or ephemeral
+
+#### Routes
+- All network have automatically created routes to the internet and IP range in network
+- The subnet routes let instances send traffic to any other instance or resource in the same VPC network.
+- The default route let instances send traffic outside the VPC n/w
+- Name automatically generated
+- Applies to traffic egressing a VM
+- Forward traffic to most specific route
+- Traffic is delivered only if it also matched a firewall rules (ingress)
+- Created when subnet is created
+- Applies to tagged VM as well
+- Enable VM on same subnet to communicate
+
+#### Firewall Rules
+
+- Each network has its own firewall controlling access to and from the instances
+- You can have “allow” rules , no “deny’ rules
+- The default network has automatically created firewall rules that are shown in default firewall rules
+- No manually created network has automatically created firewall rules except for a default "allow" rule for outgoing traffic and a default "deny" for incoming traffic.
+- Tags :
+    - Rules can match tags
+    - Tags are used defined Strings
+    - Tags are applied to VM and not to IP.
+
+#### Shared VPC
+- You may need to put different departments or different applications into different projects for purposes of separating budgeting, access control, and so on
+- With Shared VPC, Cloud Organization administrators can give multiple projects permission to use a single, shared VPC network and corresponding networking resources
+ 
 
 ### Cloud IAM
-Roles   diff roles defined
-Member  who can get access
-Policy  join both roles to member 
+- Roles   diff roles defined
+- Member  who can get access
+- Policy  join both roles to member 
     
     
 GCP Identities:
@@ -249,15 +307,17 @@ Suite of ops services providing monitoring, logging, debugging, error reporting,
 
 - Cloud SQL -> RDBMS - MySQL/ PostGres / SQLServer - 10 tb max data, 208 gb ram, 32 cores, Transactional support, ACID support
 
-
 - Spanner - Google RDBMS / SQL horizontally scalable - the best RDBMS on the Planet
-
 
 - Big table - Hbase bigdata key value pair columnar storage 
 
-
-- Cloud Datastore/Firestore - Document DB like MongoDB
-
+- Cloud Datastore/Firestore - Document DB like MongoDB, Flexible, scalable, NoSQL database for keeping data in sync across client apps, Mobile and web server development, Realtime listeners
+    * Regional	or	multi-regional	resource	scope
+    * Cloud-native	NoSQL
+    * Strong	mobile	support
+    * Offline	support	for	clients
+    * Documents	and	collections
+    * ACID	compliance
 
 - Cloud Storage - File Storage / Object store
 	* cloud storage life cycle - > store std --> after 6 months move to nearline storage 1 year --> coldline storage 5 yr - delete it
@@ -267,26 +327,18 @@ Suite of ops services providing monitoring, logging, debugging, error reporting,
 	* cloud storage is HDFS compliant same way we can read files like hadoop - hdfs:// vs gs://
 	* cloud object notification --> pubsub or functions 
 
-- Cloud Firestore : Flexible, scalable, NoSQL database for keeping data in sync across client apps, Mobile and web server development, Realtime listeners
 
 ### GCP Bigdata:
 
-- Bigtable - HBase kind...
-- BigQuery - EDW Enterprise data warehose
-- Dataflow -  Apache Beam impl for ETL and Streaming both
-- DataProc  - Hadoop / Spark Cluster for batch / hadoop only
-- Datalab - Analytical / Visual tool 
-- Pub/Sub - Event Driven and is a message queue (e.g. Rabbit MQ) 
-
-- BigTable: HBase - sequential ordering in key column; provides very fast writes as well as reads
+- Bigtable - HBase kind...sequential ordering in key column; provides very fast writes as well as reads
    * Regional	resource	scope
    * Managed	NoSQL
    * Scalable	but	not	serverless
    * Powers	well-known apps like gmail, maps etc
    * HBase	compatible*
    * Great	for	many	concurrent	reads/writes
-
-- BigQuery:  Serverless Data Warehouse RDBMS
+   
+- BigQuery - EDW Enterprise data warehouse, fully managed, petabyte scale, low cost enterprise data warehouse for analytics, Serverless, There is no infrastructure to manage and you don't need a database administrator, so you can focus on analyzing data to find meaningful insights using familiar SQL.
     * Regional	resource	scope
     * OLAP
     * Scales	to	Petabytes
@@ -294,17 +346,12 @@ Suite of ops services providing monitoring, logging, debugging, error reporting,
     * Dedicated	CLI
     * Separate compute and storage	tiers
     * Integrates with ML and BI	offerings
-
-- Cloud	DataStore/Firestore (Mongo kind ??)
-    * Regional	or	multi-regional	resource	scope
-    * Cloud-native	NoSQL
-    * Strong	mobile	support
-    * Offline	support	for	clients
-    * Documents	and	collections
-    * ACID	compliance
     
-- Cloud	DataFlow     
-    * Zonal	and	Regional	resource	scope
-    * Managed	Apache	Beam
-    * Batch	or	streaming	data	pipelines
-    * For	Hadoop	use	DataProc	instead
+- Dataflow -  Apache Beam impl for ETL and Streaming both - unified programming for both batch and streaming. dynamic workflow rebalancing, fully managed and auto scales.
+
+- DataProc  - Hadoop / Spark Cluster for batch / hadoop only, Use Google Cloud Dataproc, a managed Spark and Hadoop service, to easily process big datasets using the powerful and open tools in the Apache big data ecosystem.
+
+- Datalab - Analytical / Visual tool, interactive notebook (based on Jupyter) to explore, collaborate, analyze and visualize data. It is integrated with BigQuery and Google Cloud Machine Learning to give you easy access to key data processing services
+
+- Pub/Sub - Event Driven and is a message queue (e.g. Rabbit MQ), serverless, large scale, reliable, real-time messaging service that allows you to send and receive messages between independent applications, You can leverage Cloud Pub/Sub’s flexibility to decouple systems and components hosted on Cloud Platform or elsewhere on the Internet. By building on the same technology Google uses, Cloud Pub/Sub is designed to provide “at least once” delivery at low latency with on-demand scaling to tens of millions of messages per second.
+
