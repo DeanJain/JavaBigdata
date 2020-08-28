@@ -70,11 +70,41 @@ Snapshot
     - Custom Mode  
     - Default Mode              
 
-##### Auto Scaling & Load Balancing
- - High performance, scalable load balancing, GCP provides Global Load Balancing - Scale your applications on Google Compute Engine from zero to full-throttle. Distribute your load balanced compute resources in single or multiple regions, close to your users and to meet your high availability requirements
+#### Hybrid cloud topology:
 
-##### Cloud Interconnect
-- Google Cloud Interconnect allows Cloud platform customers to connect to Google via enterprise-grade connections with higher availability and/or lower latency than their existing Internet connections.
+Network Links:
+- Cloud VPN: lower-cost option that does not require managing site-to-site connections, but throughput is lower, implemented using IPsec VPNs and supports bandwidths up to 3 Gbps. transmitted over the public Internet
+- Cloud Interconnect: high throughput, low latency, and high availability
+    - direct connect: 10 Gbps or 100 Gbps configurations
+    - Partner Interconnect : configuring 50 Mbps to 10 Gbps
+- Direct peering: works by exchanging Border Gateway Protocol (BGP) routes, which define paths for transmitting data between networks. not recommended...
+
+Topology:
+- Mirrored topology. In this topology, the public cloud and private on-premise environments mirror each other. This topology could be used to set up test or disaster recovery environments.
+- Meshed topology. With this topology, all systems within all clouds and private networks can communicate with each other.
+- Gated egress topology. In this topology, on-premises service APIs are made available to applications running in the cloud without exposing them to the public Internet.
+- Gated ingress topology. With this topology, cloud service APIs are made available to applications running on premises without exposing them to the public Internet.
+- Gated egress and ingress topology. This topology combines gated egress and gated ingress.
+- Handover topology. In this topology, applications running on premises upload data to a shared storage service, such as Cloud Storage, and then a service running in GCP consumes and processes that data. This is commonly used with data warehousing and analytic services.
+
+##### Load Balancing
+ - High performance, scalable load balancing, GCP provides Global Load Balancing - Scale your applications on Google Compute Engine from zero to full-throttle. Distribute your load balanced compute resources in single or multiple regions, close to your users and to meet your high availability requirements
+Types:
+ - Network TCP/UDP regional
+    - uses forwarding rules to determine how to distribute traffic. 
+    - Forwarding rules use the IP address, protocol, and ports to determine which servers, known as a target pool, should receive the traffic.
+ 
+ - Internal TCP/UDP regional: only internal load balancer
+ - HTTP(S) : global premium network tier
+    - distribute HTTP and HTTPS traffic globally
+    - use forwarding rules to direct traffic to a target HTTP proxy. then route the traffic to a URL map, which determines which target group to send the request to based on the URL
+ 
+ - SSL Proxy : global premium network tier
+ SSL offloading terminates SSL/TLS traffic at the load balancer and distributes traffic across the set of backend servers
+ 
+ - TCP Proxy : global premium network tier
+lets you use a single IP address for all users regardless of where they are on the globe, and it will route traffic to the closest instance. should be used for non-HTTPS and non-SSL traffic.
+
 
 ##### Google Cloud CDN 
 - leverages Google's globally distributed edge caches to accelerate content delivery for websites and applications served out of Google Compute Engine.
@@ -152,6 +182,7 @@ GCP Identities:
 
     
 ### Google COMPUTE ENGINE - Raw Vms
+Managed instance groups are the best way to create a cluster of VMs, all running the same services in the same configuration. A managed instance group uses an instance template to specify the configuration of each VM in the group.
 
 ##### login to compute vm instance 
 gcloud beta compute ssh --zone "us-central1-a" "unicorn-instance-1" --project "perfect-transit-278123"
@@ -330,9 +361,29 @@ Suite of ops services providing monitoring, logging, debugging, error reporting,
 
 ### GCP Databases:
 
+Several factors influence the choice of storage system / databases, such as the following:
+
+- Is the data structured or unstructured?
+- How frequently will the data be accessed?
+- What is the read/write pattern? What is the frequency of reads versus writes?
+- What are the consistency requirements?
+- Can Google managed keys be used for encryption, or do you need to deploy customer managed keys?
+- What are the most common query patterns?
+- Does your application require mobile support, such as synchronization?
+- For structured data, is the workload analytic or transactional?
+- Does your application require low-latency writes?
+- The answer to these and similar questions will help you decide which storage services to use and how to configure them.
+
+#### Cloud Filestore 
+- network-attached storage service that provides a filesystem that is accessible from Compute Engine and Kubernetes Engine. Cloud Filestore is designed to provide low latency and IOPS, so it can be used for databases and other performance-sensitive services.
+- Some typical use cases for Cloud Filestore are home directories and shared directories, web server content, and migrated applications that require a filesystem.
+
+
 - Cloud SQL -> RDBMS - MySQL/ PostGres / SQLServer - 10 tb max data, 208 gb ram, 32 cores, Transactional support, ACID support
 
 - Spanner - Google RDBMS / SQL horizontally scalable - the best RDBMS on the Planet
+**Relational databases can scale horizontally, but that requires server clock synchronization if strong consistency is required among all nodes. Cloud Spanner uses the TrueTime service, which depends on atomic clocks and GPS signals to track time.**
+
 
 - Big table - Hbase bigdata key value pair columnar storage 
 
