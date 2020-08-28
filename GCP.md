@@ -105,15 +105,6 @@ Types:
  - TCP Proxy : global premium network tier
 lets you use a single IP address for all users regardless of where they are on the globe, and it will route traffic to the closest instance. should be used for non-HTTPS and non-SSL traffic.
 
-
-##### Google Cloud CDN 
-- leverages Google's globally distributed edge caches to accelerate content delivery for websites and applications served out of Google Compute Engine.
-- Cloud CDN lowers network latency, offloads origins, and reduces serving costs. Once you've set up HTTP(S) Load Balancing, simply enable Cloud CDN with a single checkbox
-
-##### Google Cloud DNS 
-- scalable, reliable and managed authoritative Domain Naming System (DNS) service running on the same infrastructure as Google.
-- It has low latency, high availability and is a cost-effective way to make application and services available to your users.      
-
 #### Subnets
 
 -  VPC Contains Subnetworks
@@ -166,6 +157,14 @@ lets you use a single IP address for all users regardless of where they are on t
 - You may need to put different departments or different applications into different projects for purposes of separating budgeting, access control, and so on
 - With Shared VPC, Cloud Organization administrators can give multiple projects permission to use a single, shared VPC network and corresponding networking resources
  
+
+##### Google Cloud CDN 
+- leverages Google's globally distributed edge caches to accelerate content delivery for websites and applications served out of Google Compute Engine.
+- Cloud CDN lowers network latency, offloads origins, and reduces serving costs. Once you've set up HTTP(S) Load Balancing, simply enable Cloud CDN with a single checkbox
+
+##### Google Cloud DNS 
+- scalable, reliable and managed authoritative Domain Naming System (DNS) service running on the same infrastructure as Google.
+- It has low latency, high availability and is a cost-effective way to make application and services available to your users.   
 
 ### Cloud IAM
 - Roles   diff roles defined
@@ -337,25 +336,6 @@ service that allows you to specify infrastructure as code. It is a good practice
 
 #### gcloud command, you can interact with other Google Cloud products like the App Engine, Google Kubernetes Engine etc. 
 
-### Load Balancing
-
-External load balancing includes four options:
-- HTTP(S) Load Balancing for HTTP or HTTPS traffic,
-- TCP Proxy for TCP traffic for ports other than 80 and 8080, without SSL offload
-- SSL Proxy for SSL offload on ports other than 80 or 8080.
-- Network Load Balancing for TCP/UDP traffic.
-
-- For HTTP and HTTPS traffic, use:
-  -  External HTTP(S) Load Balancing
-  -  Internal HTTP(S) Load Balancing
-- For TCP traffic, use:
-  -  TCP Proxy Load Balancing
-  -  Network Load Balancing
-  -  Internal TCP/UDP Load Balancing
-- For UDP traffic, use:
-  -  Network Load Balancing
-  -  Internal TCP/UDP Load Balancing
-
 #### Google Stackdriver
 Suite of ops services providing monitoring, logging, debugging, error reporting, tracing, alerting and profiling. Integrates with several third-party tools
 
@@ -374,20 +354,26 @@ Several factors influence the choice of storage system / databases, such as the 
 - Does your application require low-latency writes?
 - The answer to these and similar questions will help you decide which storage services to use and how to configure them.
 
-#### Cloud Filestore 
+##### Cloud Filestore 
 - network-attached storage service that provides a filesystem that is accessible from Compute Engine and Kubernetes Engine. Cloud Filestore is designed to provide low latency and IOPS, so it can be used for databases and other performance-sensitive services.
 - Some typical use cases for Cloud Filestore are home directories and shared directories, web server content, and migrated applications that require a filesystem.
 
 
-- Cloud SQL -> RDBMS - MySQL/ PostGres / SQLServer - 10 tb max data, 208 gb ram, 32 cores, Transactional support, ACID support
+##### Cloud SQL -> 
+- RDBMS - MySQL/ PostGres / SQLServer - 10 tb max data, 208 gb ram, 32 cores, 
+- Transactional support, ACID support
 
-- Spanner - Google RDBMS / SQL horizontally scalable - the best RDBMS on the Planet
-**Relational databases can scale horizontally, but that requires server clock synchronization if strong consistency is required among all nodes. Cloud Spanner uses the TrueTime service, which depends on atomic clocks and GPS signals to track time.**
+##### Spanner 
+- Google RDBMS / SQL horizontally scalable - the best RDBMS on the Planet
+- **Relational databases can scale horizontally, but that requires server clock synchronization if strong consistency is required among all nodes. Cloud Spanner uses the TrueTime service, which depends on atomic clocks and GPS signals to track time.**
 
 
-- Big table - Hbase bigdata key value pair columnar storage 
+##### Big table 
+- Hbase bigdata key value pair columnar storage 
 
-- Cloud Datastore/Firestore - Document DB like MongoDB, Flexible, scalable, NoSQL database for keeping data in sync across client apps, Mobile and web server development, Realtime listeners
+##### Cloud Datastore/Firestore 
+- Document DB like MongoDB, Flexible, scalable, 
+- NoSQL database for keeping data in sync across client apps, Mobile and web server development, Realtime listeners
     * Regional	or	multi-regional	resource	scope
     * Cloud-native	NoSQL
     * Strong	mobile	support
@@ -395,7 +381,7 @@ Several factors influence the choice of storage system / databases, such as the 
     * Documents	and	collections
     * ACID	compliance
 
-- Cloud Storage - File Storage / Object store
+##### Cloud Storage - File Storage / Object store
 	* cloud storage life cycle - > store std --> after 6 months move to nearline storage 1 year --> coldline storage 5 yr - delete it
 	* like S3
 	* store immutable files, read it and delete it, cant edit, archive it 
@@ -403,12 +389,12 @@ Several factors influence the choice of storage system / databases, such as the 
 	* cloud storage is HDFS compliant same way we can read files like hadoop - hdfs:// vs gs://
 	* cloud object notification --> pubsub or functions 
 
-- Cloud Memorystore
+##### Cloud Memorystore
     * Reduce latency with scalable, secure, and highly available in-memory service for Redis and Memcached.
 
 ### GCP Bigdata:
 
-- Bigtable - HBase kind...sequential ordering in key column; provides very fast writes as well as reads
+##### Bigtable - HBase kind...sequential ordering in key column; provides very fast writes as well as reads
    * Regional	resource	scope
    * Managed	NoSQL
    * Scalable	but	not	serverless
@@ -416,7 +402,8 @@ Several factors influence the choice of storage system / databases, such as the 
    * HBase	compatible*
    * Great	for	many	concurrent	reads/writes
    
-- BigQuery - EDW Enterprise data warehouse, fully managed, petabyte scale, low cost enterprise data warehouse for analytics, Serverless, There is no infrastructure to manage and you don't need a database administrator, so you can focus on analyzing data to find meaningful insights using familiar SQL.
+##### BigQuery 
+- EDW Enterprise data warehouse, fully managed, petabyte scale, low cost enterprise data warehouse for analytics, Serverless, There is no infrastructure to manage and you don't need a database administrator, so you can focus on analyzing data to find meaningful insights using familiar SQL.
     * Regional	resource	scope
     * OLAP
     * Scales	to	Petabytes
@@ -425,13 +412,17 @@ Several factors influence the choice of storage system / databases, such as the 
     * Separate compute and storage	tiers
     * Integrates with ML and BI	offerings
     
-- Dataflow -  Apache Beam impl for ETL and Streaming both - unified programming for both batch and streaming. dynamic workflow rebalancing, fully managed and auto scales. Developers can write stream and batch processing code using Java, Python, and SQL. If you need to process the data, for example applying transformations to a stream of IoT data, then Cloud Dataflow is good option.
+##### Dataflow 
+-  Apache Beam impl for ETL and Streaming both 
+- unified programming for both batch and streaming. dynamic workflow rebalancing, fully managed and auto scales. Developers can write stream and batch processing code using Java, Python, and SQL. If you need to process the data, for example applying transformations to a stream of IoT data, then Cloud Dataflow is good option.
 
-- DataProc  - Hadoop / Spark Cluster for batch / hadoop only, Use Google Cloud Dataproc, a managed Spark and Hadoop service, to easily process big datasets using the powerful and open tools in the Apache big data ecosystem.
+##### DataProc  
+- Hadoop / Spark Cluster for batch / hadoop only, Use Google Cloud Dataproc, a managed Spark and Hadoop service, to easily process big datasets using the powerful and open tools in the Apache big data ecosystem.
 
-- Datalab - Analytical / Visual tool, interactive notebook (based on Jupyter) to explore, collaborate, analyze and visualize data. It is integrated with BigQuery and Google Cloud Machine Learning to give you easy access to key data processing services
+##### Cloud Datalab 
+- Analytical / Visual tool, interactive notebook (based on Jupyter) to explore, collaborate, analyze and visualize data. It is integrated with BigQuery and Google Cloud Machine Learning to give you easy access to key data processing services
 
-- Pub/Sub - 
+##### Cloud Pub/Sub 
 - Event Driven and is a message queue (e.g. Rabbit MQ), serverless, large scale, reliable, real-time messaging service that allows you to send and receive messages between independent applications, 
 - You can leverage Cloud Pub/Sub’s flexibility to decouple systems and components hosted on Cloud Platform or elsewhere on the Internet. 
 - By building on the same technology Google uses, Cloud Pub/Sub is designed to provide “at least once” delivery at low latency with on-demand scaling to tens of millions of messages per second.
@@ -439,7 +430,6 @@ Several factors influence the choice of storage system / databases, such as the 
 - *With a push subscription, message data is sent to by HTTP POST request to a push endpoint URL. The push model is useful when a single endpoint processes messages from multiple topics.* 
 - It’s also a good option when the data will be processed by an App Engine Standard application or a Cloud Function. Both of those services bill only when in use, and *pushing a message avoids the need to check the queue continually for messages to pull.*
 - With a pull subscription, a service reads messages from the topic. This is a good approach when processing large volumes of data and efficiency is a top concern.
-
 
 #### Stackdriver 
 
