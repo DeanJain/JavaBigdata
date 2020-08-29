@@ -125,6 +125,10 @@ lets you use a single IP address for all users regardless of where they are on t
 - Subnet ranges in different networks can overlap    
     
  #### IP Addresses
+ - IPv4 uses four octets, such as 192.168.20.10. IPv6 uses eight 16-bit blocks, such as FE80:0000:0000:0000:0202:B3FF:FE1E:8329.
+ - When you create a subnet, you will have to specify a range of IP addresses.
+ - specify an IP range using the CIDR notation
+ - **IPv4 IP address followed by a /, followed by an integer. The integer specifies the number of bits used to identify the subnet (known as subnet mask); the remaining bits are used to determine the host address.**
 - You can assign certain resources with IP addresses , You can assign external and internal IP addresses to Compute Engine (VM) , forwarding rule for external or internal Load balancing resp.
 - Each VM has one primary – internal IP address, one or more secondary IP addresses and one external IP address
 - To communicate with VM within VPC you can use internal IP address and to communicate with internet you must use external IP address
@@ -171,13 +175,43 @@ lets you use a single IP address for all users regardless of where they are on t
 - Member  who can get access
 - Policy  join both roles to member 
     
-    
 GCP Identities:
 - Google accounts
 - Service accounts
 - Google groups
 - GSuite domains
 - Cloud Identity domains
+
+#### encryption at rest:
+
+- Data at rest is encrypted by default in Google Cloud Platform.
+- Data is encrypted at multiple levels, including the application, infrastructure, and device levels.
+- Data is encrypted in chunks. Each chunk has its own encryption key, which is called a data encryption key.
+- Data encryption keys are themselves encrypted using a key encryption key.
+
+#### Key management
+1. default key management - inbuilt in gcp
+2. kms - store keys into gcp kms 
+3. Customer supplied keys - keys are stored on prem and then sent over to services along with request and it not persisted on gcp  
+    
+#### Security Evaluation
+1. Penetration testing
+* **Reconnaissance** is the phase at which penetration testers gather information about the target system and the people who operate it or have access to it. This could include phishing attacks that lure a user into disclosing their login credentials or details of software running on their network equipment and servers.
+* **Scanning** is the automated process of probing ports and checking for known and unpatched vulnerabilities.
+* **Gaining access** is the phase at which the attackers exploit the information gathered in the first two phases to access the target system.
+* In the **maintaining access phase**, attackers will do things to hide their presence, such as manipulating logs or preventing attacking processes from appearing in a list of processes running on a server.
+* **Removing footprints**, the final phase, involves eliminating indications that the attackers have been in the system. This can entail manipulating audit logs and deleting data and code used in the attack.
+
+2. Auditing
+* All managed services does automatic audit logging
+* Cloud Audit Logs - service provided by gcp that records administrative actions and data operations. Administrative actions that modify configurations or metadata of resources is always logged by Cloud Audit Logs.
+
+#### SECURITY DESIGN PRINCIPLES
+- **Separation of duties (SoD)** is the practice of limiting the responsibilities of a single individual in order to prevent the person from successfully acting alone in a way detrimental to the organization. 
+- **Least privilege** is the practice of granting only the minimal set of permissions needed to perform a duty. IAM roles and permissions are fine-grained and enable the practice of least privilege.
+- **Defense in depth** is the practice of using more than one security control to protect resources and data
+
+
 
     
 ### Google COMPUTE ENGINE - Raw Vms
