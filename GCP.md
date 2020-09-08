@@ -212,8 +212,6 @@ GCP Identities:
 - **Defense in depth** is the practice of using more than one security control to protect resources and data
 
 
-
-    
 ### Google COMPUTE ENGINE - Raw Vms
 Managed instance groups are the best way to create a cluster of VMs, all running the same services in the same configuration. A managed instance group uses an instance template to specify the configuration of each VM in the group.
 
@@ -401,7 +399,6 @@ Several factors influence the choice of storage system / databases, such as the 
 - Google RDBMS / SQL horizontally scalable - the best RDBMS on the Planet
 - **Relational databases can scale horizontally, but that requires server clock synchronization if strong consistency is required among all nodes. Cloud Spanner uses the TrueTime service, which depends on atomic clocks and GPS signals to track time.**
 
-
 ##### Big table 
 - Hbase bigdata key value pair columnar storage 
 
@@ -511,6 +508,39 @@ The combination of all expenses related to maintaining a service, which can incl
 - Charges against missed service-level agreements
 - Network connectivity charges, such as those for a dedicated connection between an on-premises data center and Google Cloud
 
+#### MIGRATION SERVICES AND TOOLS
+Migrations typically require the transfer of large volumes of data and depends on:
+
+- Volume of data
+- Network bandwidth
+- Workflow time constraints on data transfer
+- Location of data
+
+* Google Transfer Service - allows for the transfer of data from an HTTP/S location, an AWS S3 bucket, or a Cloud Storage bucket
+* gsutil command-line utility
+* Google Transfer Appliance
+* Third-party vendors
+
+#### Migration Planning
+- Integrating cloud services with existing systems
+- Migrating systems and data
+- License mapping
+- Network management planning
+- Testing and proof-of-concept development
+
+##### five-step migration planning:
+* Assessment
+* Pilot
+* Data migration
+* Application migration
+* Optimization
+
+
+#### GCP SDK COMPONENTS
+
+gcloud: A command-line tool for interacting with most GCP services
+gsutil: A command-line tool for working with Cloud Storage
+bq: A command-line tool for working with BigQuery
 
 
 ### Google Architect Certification Case Studies:
