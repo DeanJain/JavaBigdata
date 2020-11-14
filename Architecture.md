@@ -16,6 +16,29 @@ Which Services Arch fits your needs:
 * Dependency Inversion Principle - Instead of writing code that refers to actual classes, you should instead write code that refers to interfaces or perhaps abstract classes
 ![solid](static/solid.png)
 
+#### CQRS - Command Query Responsibility Segregation with Event Sourcing
+
+Consistency
+- Command – can be implemented with strong consistency in the write model
+- Query – can be eventually consistent in the read model
+
+Data storage
+- Command – storage optimized for writing, e.g. normalized form
+- Query – storage optimized for reading, e.g. reduce joins with denormalized form
+
+Scalability
+- Command – mostly low scalability requirements, because writes are few compared to reads
+- Query – most of the operations in a typical system are reading data
+
+Pointers:
+- CQRS introduces complexity, which makes changing the system more difficult. This makes sense only if you have some ridiculous performance problems, which are solved better with two data models, instead of one. Most applications do not fall into this category.
+- It could be, that CQRS is a match for you. However, have you tested a simpler approach first? Do you have some numbers, which prove, that a traditional relational database will not be sufficient? You will be surprised how well an RDBS can scale, without your users noticing any delay.
+- Eventual consistency is a problem, which you cannot avoid. Furthermore, whether eventual consistency is a deal-breaker, is decided by the business people, not by you.
+- Event-sourcing: Try with one data model first. Write the events (the write part) and their projections (the read part) in the same model. If one model does not work for you, then move on to two models. As said, you will be surprised how far you can go with a simple RDBS. There is a reason, they are still around.
+- Scalability Requirements: You must prove that you have a performance problem first. Have you tried using one model? Do you have numbers, which point to performance problems? Or are you building a Twitter architecture for your small proof of concept application?
+- Most people, who apply this pattern, hope to improve the design of their system and make it easier to maintain. This is a huge misunderstanding about the advantages and disadvantages of this architecture. CQRS is to be used with extreme caution because there are very few use-cases, where it solves more problems than it creates.
+
+
 #### EDD Event Driven Design
 
 
