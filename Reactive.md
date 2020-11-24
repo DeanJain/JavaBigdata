@@ -78,9 +78,24 @@
    - Spring cloud gateway is built on web flux reactive 
    - Polyglot persistence - having diff kind of Dbs based on usecase 
 
-## CQRS - Command Query Responsibility Segregation
-   - Command is updates on DB
-   - Query  is read from DB
-   - both are from different DBs
+## The Reactive Principles
+I. Stay Responsive - Always respond in a timely manner
+
+II. Accept Uncertainty - Build reliability despite unreliable foundations
+
+III. Embrace Failure - Expect things to go wrong and design for resilience
+
+IV. Assert Autonomy - Design components that act independently and interact collaboratively
+
+V. Tailor Consistency - Individualize consistency per component to balance availability and performance
+
+VI. Decouple Time - Process asynchronously to avoid coordination and waiting
+                    
+
+VII. Decouple Space - Create flexibility by embracing the network
+
+VIII. Handle Dynamics - Continuously adapt to varying demand and resources
+
+
     
     
