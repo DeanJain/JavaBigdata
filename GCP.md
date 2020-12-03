@@ -8,17 +8,19 @@
 	    - Resources  --> Labels (k:v)
             
 **Internals**            
-    - Zone -> Availability zone (similar to a datacenter) 
-    - Region -> Set of zones with high-speed network links 
-    - Network User-controlled IP addresses, subnets and firewalls  
+- Zone -> Availability zone (similar to a datacenter) 
+- Region -> Set of zones with high-speed network links 
+- Network User-controlled IP addresses, subnets and firewalls  
     
-- Global:
+- Global
     - Static external IP addresses 
     - Images and snapshots
     - Networks,firewalls,routes
+    
 - Regional 
     - Subnets
     - Regional persistent disks
+
 - Zonal
     - Instances
     - Persistent disks
