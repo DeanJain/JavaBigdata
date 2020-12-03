@@ -2,10 +2,10 @@
 ## GCP - Google Cloud Platform
 
 **Hierarchy**    
-    - Organization
-        - Folders (grouping within org)
-        - Project --> Billing account
-            - Resources  --> Labels (k:v)
+- Organization
+	- Folders (grouping within org)
+	- Project --> Billing account
+	    - Resources  --> Labels (k:v)
             
 **Internals**            
     - Zone -> Availability zone (similar to a datacenter) 
