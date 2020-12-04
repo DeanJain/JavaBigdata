@@ -81,7 +81,7 @@
     - Partner Interconnect: 50 Mbps - 10 Gbps piped through a Google partner
     - Direct peering: works by exchanging Border Gateway Protocol (BGP) routes, which define paths for transmitting data between networks. not recommended...
 
-Topology:
+**Topology:**
 - Mirrored topology. In this topology, the public cloud and private on-premise environments mirror each other. This topology could be used to set up test or disaster recovery environments.
 - Meshed topology. With this topology, all systems within all clouds and private networks can communicate with each other.
 - Gated egress topology. In this topology, on-premises service APIs are made available to applications running in the cloud without exposing them to the public Internet.
@@ -89,22 +89,23 @@ Topology:
 - Gated egress and ingress topology. This topology combines gated egress and gated ingress.
 - Handover topology. In this topology, applications running on premises upload data to a shared storage service, such as Cloud Storage, and then a service running in GCP consumes and processes that data. This is commonly used with data warehousing and analytic services.
 
-##### Load Balancing
- - High performance, scalable load balancing, GCP provides Global Load Balancing - Scale your applications on Google Compute Engine from zero to full-throttle. Distribute your load balanced compute resources in single or multiple regions, close to your users and to meet your high availability requirements
+#### Load Balancing
+High performance, scalable load balancing, GCP provides Global Load Balancing - Scale your applications on Google Compute Engine from zero to full-throttle. Distribute your load balanced compute resources in single or multiple regions, close to your users and to meet your high availability requirements.
+ 
 Types:
- - Network TCP/UDP regional
+ - **Network TCP/UDP regional**
     - uses forwarding rules to determine how to distribute traffic. 
     - Forwarding rules use the IP address, protocol, and ports to determine which servers, known as a target pool, should receive the traffic.
  
- - Internal TCP/UDP regional: only internal load balancer
- - HTTP(S) : global premium network tier
+ - **Internal TCP/UDP regional**: only internal load balancer
+ - **HTTP(S)** : global premium network tier
     - distribute HTTP and HTTPS traffic globally
     - use forwarding rules to direct traffic to a target HTTP proxy. then route the traffic to a URL map, which determines which target group to send the request to based on the URL
  
- - SSL Proxy : global premium network tier
+ - **SSL Proxy** : global premium network tier
  SSL offloading terminates SSL/TLS traffic at the load balancer and distributes traffic across the set of backend servers
  
- - TCP Proxy : global premium network tier
+ - **TCP Proxy** : global premium network tier
 lets you use a single IP address for all users regardless of where they are on the globe, and it will route traffic to the closest instance. should be used for non-HTTPS and non-SSL traffic.
 
 #### Subnets
