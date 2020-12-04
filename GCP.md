@@ -265,20 +265,6 @@ Flexible
 - Apps can access Compute Engine resources, some OS packages
 - Can install and access third-party binaries 
 
-### Storage Usecases
-
-|     Use Case                                              |     Appropriate GCP Service              |     Non-GCP Equivalents                      |
-|-----------------------------------------------------------|------------------------------------------|----------------------------------------------|
-|     Block storage                                         |     Persistent disks   or local SSDs     |     AWS   EBS, Azure Disk                    |
-|     Object/blob   storage                                 |     Cloud Storage   (GCS) buckets        |     AWS   S3, Azure Blob Storage             |
-|     Relational data -   small, regional payloads          |     Cloud SQL                            |     AWS   RDS, Azure SQL Database            |
-|     Relational data -   large, global payloads            |     Cloud Spanner                        |                                              |
-|     HTML/XML documents   with NoSQL access                |     Firestore                            |     AWS   DynamoDB, Azure Cosmos DB          |
-|     Large, naturally   ordered data with NoSQL access     |     BigTable                             |                                              |
-|     Analytics and   complex queries with SQL access       |     BigQuery                             |     AWS   Redshift, Azure Data Warehouse     |
-
-
-
 ##### create blank app instance
 gcloud app create
 
@@ -385,6 +371,22 @@ service that allows you to specify infrastructure as code. It is a good practice
 
 #### Google Stackdriver
 Suite of ops services providing monitoring, logging, debugging, error reporting, tracing, alerting and profiling. Integrates with several third-party tools
+
+
+### Storage Usecases
+
+|     Use Case                                              |     Appropriate GCP Service              |     Non-GCP Equivalents                      |
+|-----------------------------------------------------------|------------------------------------------|----------------------------------------------|
+|     Block storage                                         |     Persistent disks   or local SSDs     |     AWS   EBS, Azure Disk                    |
+|     Object/blob   storage                                 |     Cloud Storage   (GCS) buckets        |     AWS   S3, Azure Blob Storage             |
+|     Relational data -   small, regional payloads          |     Cloud SQL                            |     AWS   RDS, Azure SQL Database            |
+|     Relational data -   large, global payloads            |     Cloud Spanner                        |                                              |
+|     HTML/XML documents   with NoSQL access                |     Firestore                            |     AWS   DynamoDB, Azure Cosmos DB          |
+|     Large, naturally   ordered data with NoSQL access     |     BigTable                             |                                              |
+|     Analytics and   complex queries with SQL access       |     BigQuery                             |     AWS   Redshift, Azure Data Warehouse     |
+
+
+
 
 ### GCP Databases:
 
