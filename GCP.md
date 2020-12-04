@@ -149,8 +149,9 @@ lets you use a single IP address for all users regardless of where they are on t
 - Applies to tagged VM as well
 - Enable VM on same subnet to communicate
 
-#### Firewall Rules
-
+#### Firewall
+ GCP Firewall is a service that allows for micro-segmentation. Firewall rules are created per VPC and can be based on IPs, IP ranges, tags, and service accounts. Several firewall rules are created by default but can be modified.
+ 
 - Each network has its own firewall controlling access to and from the instances
 - You can have “allow” rules , no “deny’ rules
 - The default network has automatically created firewall rules that are shown in default firewall rules
@@ -178,9 +179,6 @@ Cloud [NAT](https://en.wikipedia.org/wiki/Network_address_translation) is a regi
 - scalable, reliable and managed authoritative Domain Naming System (DNS) service running on the same infrastructure as Google.
 - It has low latency, high availability and is a cost-effective way to make application and services available to your users.   
 
-##### Firewall
- GCP Firewall is a service that allows for micro-segmentation. Firewall rules are created per VPC and can be based on IPs, IP ranges, tags, and service accounts. Several firewall rules are created by default but can be modified.
-
 ##### Identity Aware Proxy (IAP)
 IAP is a service that replaces the VPN when a user is working from an untrusted network. It controls access to your application based on user identity, device status, and IP address. It is part of Google's BeyondCorp security model.
 
@@ -188,11 +186,11 @@ IAP is a service that replaces the VPN when a user is working from an untrusted 
 Cloud Armor is a service that allows protection against infrastructure DDoS attacks using Google's global infrastructure and security systems. It integrates with global HTTP(S) load balancers and blocks traffic based on IP addresses or ranges. Preview mode allows users to analyze the attack pattern without cutting off regular users.
 
 ### Cloud IAM
-- Roles   diff roles defined
-- Member  who can get access
-- Policy  join both roles to member 
+- Roles :  diff roles defined
+- Member : who can get access
+- Policy : join both roles to member 
     
-GCP Identities:
+**GCP Identities:**
 - Google accounts
 - Service accounts
 - Google groups
