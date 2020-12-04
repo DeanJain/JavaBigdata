@@ -72,19 +72,14 @@
     - Custom Mode  
     - Default Mode              
 
-#### Hybrid cloud topology:
+#### Hybrid cloud topology / **Network Links:**
 
-- Virtual Private Network (VPN): VPNs allow a connection between your on-premises network and GCP VPC through an IPsec tunnel over the internet. Only site-to-site VPNs are supported. To establish a VPN connection, there needs to be two gateways on each side of the tunnel. The traffic in transit is encrypted. Both static and dynamic routing are supported, with the former requiring a cloud router. Using a VPN should be the first method of connecting your environment to GCP as it entails the lowest cost. If there are low-latency and high-bandwidth requirements, then Cloud Interconnect should be considered.
+- Virtual Private Network (VPN): VPNs allow a connection between your on-premises network and GCP VPC through an IPsec tunnel over the internet. Only site-to-site VPNs are supported. To establish a VPN connection, there needs to be two gateways on each side of the tunnel. The traffic in transit is encrypted. Both static and dynamic routing are supported, with the former requiring a cloud router. Using a VPN should be the first method of connecting your environment to GCP as it entails the lowest cost. lower-cost option that does not require managing site-to-site connections, but throughput is lower, implemented using IPsec VPNs and supports bandwidths up to 3 Gbps. transmitted over the public Internet
+
 - Cloud Interconnect: If there is a need for low latency and a highly available connection, then interconnect should be considered. In this case, the traffic does not traverse the internet. There are two interconnect options, which are as follows:
-    - Dedicated Interconnect: 10 Gbps piped directly to a Google datacenter
-    - Partner Interconnect: 50 Mbps-10 Gbps piped through a Google partner
-
-Network Links:
-- Cloud VPN: lower-cost option that does not require managing site-to-site connections, but throughput is lower, implemented using IPsec VPNs and supports bandwidths up to 3 Gbps. transmitted over the public Internet
-- Cloud Interconnect: high throughput, low latency, and high availability
-    - direct connect: 10 Gbps or 100 Gbps configurations
-    - Partner Interconnect : configuring 50 Mbps to 10 Gbps
-- Direct peering: works by exchanging Border Gateway Protocol (BGP) routes, which define paths for transmitting data between networks. not recommended...
+    - Dedicated / Direct Interconnect: 10 Gbps piped directly to a Google datacenter - 10 Gbps or 100 Gbps configurations
+    - Partner Interconnect: 50 Mbps - 10 Gbps piped through a Google partner
+    - Direct peering: works by exchanging Border Gateway Protocol (BGP) routes, which define paths for transmitting data between networks. not recommended...
 
 Topology:
 - Mirrored topology. In this topology, the public cloud and private on-premise environments mirror each other. This topology could be used to set up test or disaster recovery environments.
