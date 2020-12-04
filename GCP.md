@@ -114,7 +114,7 @@ lets you use a single IP address for all users regardless of where they are on t
 -  Subnets are Region Specific
 -  Subnet be in single zone or multiple zone within the region
 -  Using Subnetworks – we can apply single firewall rules all VMs even if they are in different zone.
--  You can create multiple subnets within single region/zone to isolations resources based on different business needs.
+-  You can create multiple subnets within single region/zone to isolate resources based on different business needs.
 - Each Subnet has contiguous private RFC1918 IP Space - IP Range
 - Virtual machine (VM) instances in a VPC network can communicate with instances in all other subnets of the same VPC network, regardless of region, using their RFC1918 private IP addresses.
 - You can isolate portions of the network, even entire subnets, using firewall rules.
@@ -157,7 +157,7 @@ lets you use a single IP address for all users regardless of where they are on t
 - No manually created network has automatically created firewall rules except for a default "allow" rule for outgoing traffic and a default "deny" for incoming traffic.
 - Tags :
     - Rules can match tags
-    - Tags are used defined Strings
+    - Tags are user defined Strings
     - Tags are applied to VM and not to IP.
 
 #### Shared VPC
@@ -168,7 +168,7 @@ lets you use a single IP address for all users regardless of where they are on t
 Cloud Router is a service that allows for dynamic routing exchange between Compute Engine, VPNs, and external networks. It eliminates the need for the creation of static routes. 
 
 #### Cloud NAT
-Cloud NAT is a regional service that allows VMs without external IPs to communicate with the internet. It is a fully managed service with built-in autoscalability. It works with both GCE and GKE. It is a better alternative for NAT instances that need to be managed by users.
+Cloud [NAT](https://en.wikipedia.org/wiki/Network_address_translation) is a regional service that allows VMs without external IPs to communicate with the internet. It is a fully managed service with built-in autoscalability. It works with both GCE and GKE. It is a better alternative for NAT instances that need to be managed by users.
 
 ##### Google Cloud CDN 
 - leverages Google's globally distributed edge caches to accelerate content delivery for websites and applications served out of Google Compute Engine.
