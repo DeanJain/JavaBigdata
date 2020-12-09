@@ -286,7 +286,7 @@ gcloud app deploy
   $ gcloud app logs tail -s default
 
 
-### Kubernetes - Managed Containers on docker / Kubernetes
+### [Kubernetes](Docker-Kube-Istio.md) - Managed Containers on docker
 
 A Kubernetes cluster has two types of instances: cluster masters and nodes.
 
@@ -294,14 +294,13 @@ A Kubernetes cluster has two types of instances: cluster masters and nodes.
 - The controller manager runs services that manage Kubernetes abstract components, such as deployments and replica sets.
 - Applications interacting with the Kubernetes cluster make calls to the master using the API server. The API server also handles intercluster interactions.
 - The scheduler is responsible for determining where to run pods, which are low-level compute abstractions that support containers.
-- ectd is a distributed key-value store used to store stateStatefulSets information across a cluster.
+- ectd is a distributed key-value store used to store state / StatefulSets information across a cluster.
 - Nodes are instances that execute workloads. They communicate with the cluster master through an agent called kubelet
-- Master and Node, Node is worker, Each Node can Have a Service, Service can have multiple pods, each pods can have multiple container
+- _Node is worker, Each Node can Have a Service, Service can have multiple pods, each pods can have multiple container_
 
 - Node (Inside a Node Pool) --> Service --> 1+ Pods --> 1+  Containers
-- Deployments (uses pod templates) --> set of Multiple identical pods 
+- Deployments (uses pod templates) --> set of Multiple identical pods, Versioning and rollback
 - ReplicaSet - Scaling and healing
-- Deployment - Versioning and rollback
 - Service - Static(non-ephemeral) IP addresses,  Stable networking
 - Persistent volumes - Non-ephemeral storage
 - StatefulSets - used to designate pods as stateful and assign a unique identifier to them. Kubernetes uses these to track which clients are using which pods and to keep them paired

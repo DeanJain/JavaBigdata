@@ -41,9 +41,6 @@
     minikube start
     minikube delete`
 
-
-![Kube Deployment](static/KubeDeploy.png)
-
 Resource types are defined in the Kubernetes APIs
 • Pods: the basic unit in Kubernetes, represents a set of containers that share common resources such as an IP address and storage volumes
 • Deployments: standard entity that is rolled out with Kubernetes
