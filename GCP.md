@@ -7,10 +7,14 @@
 	- Project --> Billing account
 	    - Resources  --> Labels (k:v)
             
-**Internals**            
-- Zone -> Availability zone (similar to a datacenter) 
-- Region -> Set of zones with high-speed network links 
+**Internals**    
+    
+![GCP Components](static/topology-1024x589.png)
+
 - Network User-controlled IP addresses, subnets and firewalls  
+- Region -> Set of zones with high-speed network links     
+- Zone -> Availability zone (similar to a datacenter) 
+
     
 - Global
     - Static external IP addresses 
@@ -384,8 +388,6 @@ Suite of ops services providing monitoring, logging, debugging, error reporting,
 |     HTML/XML documents   with NoSQL access                |     Firestore                            |     AWS   DynamoDB, Azure Cosmos DB          |
 |     Large, naturally   ordered data with NoSQL access     |     BigTable                             |                                              |
 |     Analytics and   complex queries with SQL access       |     BigQuery                             |     AWS   Redshift, Azure Data Warehouse     |
-
-
 
 
 ### GCP Databases:
