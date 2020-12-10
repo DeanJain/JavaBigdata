@@ -421,7 +421,7 @@ Several factors influence the choice of storage system / databases, such as the 
 - Hbase bigdata key value pair columnar storage 
 
 ##### Cloud Datastore/Firestore 
-- Document DB like MongoDB, Flexible, scalable, 
+- Store JSON docs, Document DB like MongoDB, Flexible, scalable
 - NoSQL database for keeping data in sync across client apps, Mobile and web server development, Realtime listeners
     * Regional	or	multi-regional	resource	scope
     * Cloud-native	NoSQL
@@ -444,6 +444,8 @@ Several factors influence the choice of storage system / databases, such as the 
 Reduce latency with scalable, secure, and highly available in-memory service for Redis and Memcached.
 
 ### GCP Bigdata:
+
+![storage](static/data-lifecycle.svg)
 
 ##### Bigtable - HBase kind...sequential ordering in key column; provides very fast writes as well as reads
    * Regional	resource	scope
