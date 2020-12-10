@@ -368,7 +368,7 @@ A trigger in Cloud Functions is a specification of how to respond to an event. T
 service that allows you to specify infrastructure as code. It is a good practice to define infrastructure as code, since it allows teams to reproduce environments rapidly. It also lends itself to code reviews, version control, and other software engineering practices.
 
 
-#### The gsutil command is used only for Cloud Storage.
+#### _The gsutil command is used only for Cloud Storage_
 
 #### gcloud command, you can interact with other Google Cloud products like the App Engine, Google Kubernetes Engine etc. 
 
@@ -385,7 +385,7 @@ Suite of ops services providing monitoring, logging, debugging, error reporting,
 |     Relational data -   small, regional payloads          |     Cloud SQL                            |     AWS   RDS, Azure SQL Database            |
 |     Relational data -   large, global payloads            |     Cloud Spanner                        |                                              |
 |     HTML/XML documents   with NoSQL access                |     Firestore                            |     AWS   DynamoDB, Azure Cosmos DB          |
-|     Large, naturally   ordered data with NoSQL access     |     BigTable                             |                                              |
+|     Large, naturally   ordered data with NoSQL access     |     BigTable                             |      HBase                                        |
 |     Analytics and   complex queries with SQL access       |     BigQuery                             |     AWS   Redshift, Azure Data Warehouse     |
 
 
@@ -404,7 +404,7 @@ Several factors influence the choice of storage system / databases, such as the 
 - Does your application require low-latency writes?
 - The answer to these and similar questions will help you decide which storage services to use and how to configure them.
 
-##### Cloud Filestore 
+##### Cloud Filestore (NAS)
 - network-attached storage service that provides a filesystem that is accessible from Compute Engine and Kubernetes Engine. Cloud Filestore is designed to provide low latency and IOPS, so it can be used for databases and other performance-sensitive services.
 - Some typical use cases for Cloud Filestore are home directories and shared directories, web server content, and migrated applications that require a filesystem.
 
@@ -431,15 +431,17 @@ Several factors influence the choice of storage system / databases, such as the 
     * ACID	compliance
 
 ##### Cloud Storage - File Storage / Object store
-	* cloud storage life cycle - > store std --> after 6 months move to nearline storage 1 year --> coldline storage 5 yr - delete it
+	* cloud storage life cycle - > store to standard --> after 6 months move to nearline storage 1 year --> coldline storage 5 yr - delete it
 	* like S3
-	* store immutable files, read it and delete it, cant edit, archive it 
+	* store immutable files, read it and delete it, cant edit
 	* 11 9s durability
 	* cloud storage is HDFS compliant same way we can read files like hadoop - hdfs:// vs gs://
 	* cloud object notification --> pubsub or functions 
 
+![Storage](static/GCP_Cloud_Storage_classes.jpg)
+
 ##### Cloud Memorystore
-    * Reduce latency with scalable, secure, and highly available in-memory service for Redis and Memcached.
+Reduce latency with scalable, secure, and highly available in-memory service for Redis and Memcached.
 
 ### GCP Bigdata:
 
