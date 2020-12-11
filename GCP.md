@@ -364,6 +364,13 @@ Cloud Functions use three components: events, triggers, and functions. An event 
 
 A trigger in Cloud Functions is a specification of how to respond to an event. Triggers have associated functions. Currently, Cloud Functions can be written in Python 3, Go, and Node.js 8 and 10.
 
+#### Cloud Run
+- Develop and deploy highly scalable containerized applications on a fully managed serverless platform with autoscaling.
+- Write code your way using your favorite languages, lib or binary (Go, Python, Java, Ruby, Node.js, and more)
+- Abstract away all infrastructure management for a simple developer experience
+- Built upon an open standard Knative, enabling the portability of your applications
+- Pay per use to 100 millisec
+
 #### Deployment Manager 
 service that allows you to specify infrastructure as code. It is a good practice to define infrastructure as code, since it allows teams to reproduce environments rapidly. It also lends itself to code reviews, version control, and other software engineering practices.
 
@@ -483,6 +490,15 @@ Reduce latency with scalable, secure, and highly available in-memory service for
 - *With a push subscription, message data is sent to by HTTP POST request to a push endpoint URL. The push model is useful when a single endpoint processes messages from multiple topics.* 
 - It’s also a good option when the data will be processed by an App Engine Standard application or a Cloud Function. Both of those services bill only when in use, and *pushing a message avoids the need to check the queue continually for messages to pull.*
 - With a pull subscription, a service reads messages from the topic. This is a good approach when processing large volumes of data and efficiency is a top concern.
+
+#### Dataprep
+This is a tool that can be used to perform data visualization and exploring without any coding skills being required. Data can be interactively prepared for further analysis.
+
+#### Data Studio: 
+This a tool that allows you to consume data from sources and visualize it in the form of reports and dashboards.
+
+#### Cloud Composer: 
+This is a fully managed service based on open source Apache Airflow. It allows you to create and orchestrate big data pipelines. 
 
 #### Stackdriver 
 
