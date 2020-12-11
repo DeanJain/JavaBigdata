@@ -560,9 +560,9 @@ Migrations typically require the transfer of large volumes of data and depends o
 
 #### GCP SDK COMPONENTS
 
-gcloud: A command-line tool for interacting with most GCP services
-gsutil: A command-line tool for working with Cloud Storage
-bq: A command-line tool for working with BigQuery
+- gcloud: A command-line tool for interacting with most GCP services
+- gsutil: A command-line tool for working with Cloud Storage
+- bq: A command-line tool for working with BigQuery
 
 
 ### Google Architect Certification Case Studies:
@@ -598,13 +598,14 @@ Technical Requirements
 - Support multiple private connections between the production data center and cloud environment.
 
 Observations:
-Our traffic patterns are highest in the mornings and weekend evenings; during other times, 80 percent of our capacity is sitting idle.
-Our capital expenditure is now exceeding our quarterly projections
-total cost of ownership (TCO) analysis over the next five years for a public cloud strategy achieves a cost reduction of 30–50 percent over our current model
+- Our traffic patterns are highest in the mornings and weekend evenings; during other times, 80 percent of our capacity is sitting idle.
+- Our capital expenditure is now exceeding our quarterly projections
+- total cost of ownership (TCO) analysis over the next five years for a public cloud strategy achieves a cost reduction of 30–50 percent over our current model
 
 
 
-- Mountkirk Games https://cloud.google.com/certification/guides/cloud-architect/casestudy-mountkirkgames-rev2
+#### Mountkirk Games https://cloud.google.com/certification/guides/cloud-architect/casestudy-mountkirkgames-rev2
+
 Existing:
 - online, session-based, multiplayer games for mobile platforms
 - popularity of some of their games, they have had problems scaling their global audience, application servers, MySQL databases, and analytics tools
@@ -637,7 +638,7 @@ Observations:
  - our current technology stack cannot provide the scale we need, so we want to replace MySQL and move to an environment that provides autoscaling, low-latency load balancing, and frees us up from managing physical servers.
 
 
-- TerramEarth https://cloud.google.com/certification/guides/cloud-architect/casestudy-terramearth-rev2
+#### TerramEarth https://cloud.google.com/certification/guides/cloud-architect/casestudy-terramearth-rev2
 Existing:
 - manufactures heavy equipment for the mining and agricultural industries
 - currently have over 500 dealers and service centers in 100 countries
