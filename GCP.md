@@ -11,9 +11,9 @@
     
 ![GCP Components](static/topology-1024x589.png)
 
-- Network User-controlled IP addresses, subnets and firewalls  
-- Region -> Set of zones with high-speed network links     
-- Zone -> Availability zone (similar to a datacenter) 
+- Network User-controlled IP addresses, subnets and firewalls 
+- Region -> Set of zones with high-speed network links    
+- Zone -> Availability zone (similar to a datacenter)
 
     
 - Global
@@ -676,4 +676,3 @@ Technical Requirements
 - Increase security of data transfer from equipment to the data center
 - Improve data in the data warehouse
 - Use customer and equipment data to anticipate customer needs
-
