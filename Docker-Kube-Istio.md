@@ -30,7 +30,7 @@ There are multiple container formats available on the market. Docker is an open 
 ## Kubertnetes
 Kubernetes, also known as K8s, is an open source container orchestrator that was initially developed by Google and donated to the Cloud Native Computing Foundation. It allows you to deploy, scale, and manage containerized applications. As an open source platform, it can run on multiple platforms both on-premise as well as in the public cloud. It is suitable for both stateless as well as stateful applications.
 
-![K8s](static/K8s.png)
+![K8s](static/k8s.png)
 
 ![Kube Deployment](static/KubeDeploy.png)
 
