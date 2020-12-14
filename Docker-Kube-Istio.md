@@ -1,5 +1,8 @@
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 7479778b4675fef5d50348eba564c9dd95099e14
 # While virtual machines virtualize hardware, containers virtualize the operating system.
 
 Containers bring the following advantages:
@@ -9,9 +12,14 @@ Containers bring the following advantages:
 - Portability: Applications are self-contained with all dependencies and are not tied to an OS or a cloud provider.
 - Lightweight: The footprint of the application is much smaller as the containers share a kernel.
 
+<<<<<<< HEAD
 ## Docker 
 There are multiple container formats available on the market. Docker is an open platform and allows you to develop and run containerized applications. It can run on multiple Linux images offered in GCP as they have the same kernel. Docker images are created using a definition called a Dockerfile.
 
+=======
+## Docker Images
+  
+>>>>>>> 7479778b4675fef5d50348eba564c9dd95099e14
  - Immutable   
  - Everything the service needs (but not more)   
  - Inside a Docker registry
