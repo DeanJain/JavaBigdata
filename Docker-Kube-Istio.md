@@ -1,6 +1,17 @@
 
-## Docker Images
-  
+
+# While virtual machines virtualize hardware, containers virtualize the operating system.
+
+Containers bring the following advantages:
+
+- Isolation: Applications can use their own libraries without conflicting with libraries from other applications.
+- Resource limitation: Applications can be limited to the resource's usage.
+- Portability: Applications are self-contained with all dependencies and are not tied to an OS or a cloud provider.
+- Lightweight: The footprint of the application is much smaller as the containers share a kernel.
+
+## Docker 
+There are multiple container formats available on the market. Docker is an open platform and allows you to develop and run containerized applications. It can run on multiple Linux images offered in GCP as they have the same kernel. Docker images are created using a definition called a Dockerfile.
+
  - Immutable   
  - Everything the service needs (but not more)   
  - Inside a Docker registry
@@ -10,7 +21,7 @@
 -   The result of the first stage (the binary) was used in the final stage to assemble the image
 - Push the built image to a docker registry
 
-##### Microservices on Kubernetes and Docker:
+##### Microservices on Kubernetes / Docker:
 - Docker hosts the API bundle as docker file / images
 - Kubernetes manages docker images to create a highly scalable cluster of PODS, it orchestrates the life and times of individual Docker containers, giving us the primitives we need to construct robust and scalable systems.
 - It has many features which are especially useful for applications running in production, like service naming and discovery, load balancing, application health checking, horizontal auto-scaling, and rolling updates.
@@ -18,6 +29,10 @@
 - API Gateway can be created by using ambassador or Ingress on Kube	 
 
 ## Kubertnetes 
+Kubernetes, also known as K8s, is an open source container orchestrator that was initially developed by Google and donated to the Cloud Native Computing Foundation. It allows you to deploy, scale, and manage containerized applications. As an open source platform, it can run on multiple platforms both on-premise as well as in the public cloud. It is suitable for both stateless as well as stateful applications.
+
+![K8s](static/K8s.png)
+
 ![Kube Deployment](static/KubeDeploy.png)
 
 ### MiniKube
