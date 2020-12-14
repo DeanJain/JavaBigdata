@@ -1,4 +1,13 @@
 
+# While virtual machines virtualize hardware, containers virtualize the operating system.
+
+Containers bring the following advantages:
+
+- Isolation: Applications can use their own libraries without conflicting with libraries from other applications.
+- Resource limitation: Applications can be limited to the resource's usage.
+- Portability: Applications are self-contained with all dependencies and are not tied to an OS or a cloud provider.
+- Lightweight: The footprint of the application is much smaller as the containers share a kernel.
+
 ## Docker Images
   
  - Immutable   
