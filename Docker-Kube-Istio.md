@@ -1,8 +1,4 @@
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 7479778b4675fef5d50348eba564c9dd95099e14
 # While virtual machines virtualize hardware, containers virtualize the operating system.
 
 Containers bring the following advantages:
@@ -12,14 +8,9 @@ Containers bring the following advantages:
 - Portability: Applications are self-contained with all dependencies and are not tied to an OS or a cloud provider.
 - Lightweight: The footprint of the application is much smaller as the containers share a kernel.
 
-<<<<<<< HEAD
-## Docker 
+## Docker
 There are multiple container formats available on the market. Docker is an open platform and allows you to develop and run containerized applications. It can run on multiple Linux images offered in GCP as they have the same kernel. Docker images are created using a definition called a Dockerfile.
 
-=======
-## Docker Images
-  
->>>>>>> 7479778b4675fef5d50348eba564c9dd95099e14
  - Immutable   
  - Everything the service needs (but not more)   
  - Inside a Docker registry
@@ -36,7 +27,7 @@ There are multiple container formats available on the market. Docker is an open 
 - MiniKube is the software you can install to have Kubernetes on local mac, You can create a minikube cluster of multiple pods within which will be all images of a provided docker image file
 - API Gateway can be created by using ambassador or Ingress on Kube	 
 
-## Kubertnetes 
+## Kubertnetes
 Kubernetes, also known as K8s, is an open source container orchestrator that was initially developed by Google and donated to the Cloud Native Computing Foundation. It allows you to deploy, scale, and manage containerized applications. As an open source platform, it can run on multiple platforms both on-premise as well as in the public cloud. It is suitable for both stateless as well as stateful applications.
 
 ![K8s](static/K8s.png)
@@ -53,8 +44,8 @@ Kubernetes, also known as K8s, is an open source container orchestrator that was
     minikube docker-env
     eval $(minikube docker-env)
     docker container ls``
-    
-    
+
+
     minikube ssh
     docker container ls
     exit
@@ -73,8 +64,8 @@ Resource types are defined in the Kubernetes APIs
 When	running	 a	deployment,	 Pods	have	an	internal	network	address	in	the	172.17.0.0/16	network
 
 The	service	connects	to	the	Pods	internal	IP	addresses	by	making	them	endpoints
-    
-### Istio 
+
+### Istio
 
 ##### ServiceMesh – Kubernetes, Istio, Conduit, Envoy and Consul
 
@@ -86,9 +77,8 @@ The	service	connects	to	the	Pods	internal	IP	addresses	by	making	them	endpoints
 - Tracing
 - Routing
 - Secure service to service communication
-    
+
 ###### Implementations:        
 - Conduit is a service mesh based on Go and Rust for proxying
 - Istio is also a service mesh based on Go, it uses	Envoy Proxy for Data plane, Istio (Pilot, Mixer and Citadel) for Control plane
 - Consul can also act as control plane with Envoy proxy as Data plane it can create a very flexible and powerful servicemesh
-
