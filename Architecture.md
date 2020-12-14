@@ -1,5 +1,4 @@
 
-
 ![Services Architecture Classification](static/ServicesArch.png)
 
 Which Services Arch fits your needs:
