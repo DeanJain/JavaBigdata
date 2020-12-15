@@ -34,6 +34,27 @@ Kubernetes, also known as K8s, is an open source container orchestrator that was
 
 ![Kube Deployment](static/KubeDeploy.png)
 
+Kubernetes objects are records of intent that are defined in YAML format. They are declarative in nature. Once created, Kubernetes will take care of keeping them in the state declared in the definition file. Some examples of the most important objects are as follows:
+
+- **Pods**: the basic unit in Kubernetes, represents a set of containers that share common resources such as an IP address and storage volumes
+- **ReplicaSets**: A ReplicaSet object is used to manage the number of Pods that are running at a given time. A ReplicaSet monitors how many Pods are running and deploys new ones to reach the desired number of replicas. 
+- **Deployments**: standard entity that is rolled out with Kubernetes
+- **Services**: make deployments accessible from the outside by  providing a single IP/port combination. Services by default  provide access to pods in round-robin fashion using a load balancer. Services are used to group Pods into a single endpoint. As we know, Pods come and go. A service has a stable IP address, and so requests can be sent to it and forwarded to a Pod. Types of Services:
+  - ClusterIP: This is a default service that uses an internal ClusterIP to expose Pods. This means that services are not available from outside of the cluster. The use case for ClusterIP is internal communication between microservices within the cluster
+  - NodePort: This simply exposes each node outside of the cluster. The Pods can be accessed using <NodeIP>:<NodePort>. If there are multiple nodes, then multiple IP addresses with the same port will be exposed
+  - LoadBalancer: This will dynamically create a provider load balancer. In the case of GCP, a network load balancer is created for you. Remember that it uses objects from outside of Kubernetes and generates additional costs
+  - ExternalName: This service is exposed using a DNS name specified in the ExternalName spec. The following is a sample definition of a Service of the ExternalName type
+  - Ingress: This is an object that allows the routing of HTTP(S) traffic according to the defined rules (paths). It can be associated with one or more Service objects. The services are further associated with Pods. In the case of Google Cloud Platform, the ingress controller creates HTTP(S) load balancers. These load balancers are configured automatically using the definition in the Ingress object
+
+- **Persistent Volumes**: persistent (networked) storage that can be mounted within a container by using a Persistent Volume Claim
+- **Namespaces** : Namespaces are essentially virtual clusters within a Kubernetes cluster. In big environments, there can be multiple teams developing an application. By creating namespaces, users are allowed to reuse the names of resources. By default, a Kubernetes cluster comes with three predefined namespaces:
+  - default: A default namespace for objects with no other namespace
+  - kube-system: Used for resources that are created by Kubernetes
+  - kube-public: Reserved for future use:
+
+- 
+
+
 ### MiniKube
 
 - Install minikube + Basic commands:
@@ -54,16 +75,6 @@ Kubernetes, also known as K8s, is an open source container orchestrator that was
     minikube stop
     minikube start
     minikube delete`
-
-Resource types are defined in the Kubernetes APIs
-• Pods: the basic unit in Kubernetes, represents a set of containers that share common resources such as an IP address and storage volumes
-• Deployments: standard entity that is rolled out with Kubernetes
-• Services: make deployments accessible from the outside by providing a single IP/port combination. Services by default provide access to pods in round-robin fashion using a load balancer
-• Persistent Volumes: persistent (networked) storage that can be mounted within a container by using a Persistent Volume Claim
-
-When	running	 a	deployment,	 Pods	have	an	internal	network	address	in	the	172.17.0.0/16	network
-
-The	service	connects	to	the	Pods	internal	IP	addresses	by	making	them	endpoints
 
 ### Istio
 
