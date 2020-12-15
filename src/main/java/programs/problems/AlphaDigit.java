@@ -32,7 +32,7 @@ public class AlphaDigit {
 
         for (int i = 0; i < input.length(); i++) {
             // System.out.print(input.charAt(i));
-            System.out.print(hm.get(String.valueOf(input.charAt(i))));
+            System.out.println(hm.get(String.valueOf(input.charAt(i))));
         }
 
 

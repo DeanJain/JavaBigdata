@@ -1,34 +1,34 @@
 
 ## GCP - Google Cloud Platform
 
-**Hierarchy**    
+**Hierarchy**
+
 - Organization
 	- Folders (grouping within org)
 	- Project --> Billing account
 	    - Resources  --> Labels (k:v)
             
-**Internals**    
-    
+**Internals**
+
 ![GCP Components](static/topology-1024x589.png)
 
-- Network User-controlled IP addresses, subnets and firewalls 
-- Region -> Set of zones with high-speed network links    
+- Network User-controlled IP addresses, subnets and firewalls
+- Region -> Set of zones with high-speed network links
 - Zone -> Availability zone (similar to a datacenter)
 
-    
 - Global
-    - Static external IP addresses 
+    - Static external IP addresses
     - Images and snapshots
     - Networks,firewalls,routes
     
-- Regional 
+- Regional
     - Subnets
     - Regional persistent disks
 
 - Zonal
     - Instances
     - Persistent disks
-   
+
 **Persistent Disks**
    - Block storage
    - Max 64TB in size
@@ -61,8 +61,8 @@
 - Incremental backups possible too
 - Used to back up data from persistent disks
 
-   
 #### Google Virtual Private Cloud - VPC
+
  A VPC network is a global, private, isolated virtual network partition that provides managed network functionality on the GCP
 
 - VPC are global
@@ -222,47 +222,57 @@ Cloud Armor is a service that allows protection against infrastructure DDoS atta
 * **Removing footprints**, the final phase, involves eliminating indications that the attackers have been in the system. This can entail manipulating audit logs and deleting data and code used in the attack.
 
 2. Auditing
+   
 * All managed services does automatic audit logging
 * Cloud Audit Logs - service provided by gcp that records administrative actions and data operations. Administrative actions that modify configurations or metadata of resources is always logged by Cloud Audit Logs.
 
 #### SECURITY DESIGN PRINCIPLES
+
 - **Separation of duties (SoD)** is the practice of limiting the responsibilities of a single individual in order to prevent the person from successfully acting alone in a way detrimental to the organization. 
 - **Least privilege** is the practice of granting only the minimal set of permissions needed to perform a duty. IAM roles and permissions are fine-grained and enable the practice of least privilege.
 - **Defense in depth** is the practice of using more than one security control to protect resources and data
 
 
 ### Google COMPUTE ENGINE - Raw Vms
+
 Managed instance groups are the best way to create a cluster of VMs, all running the same services in the same configuration. A managed instance group uses an instance template to specify the configuration of each VM in the group.
 
-##### login to compute vm instance 
+##### login to compute vm instance
+
 gcloud beta compute ssh --zone "us-central1-a" "unicorn-instance-1" --project "perfect-transit-278123"
 
-##### stop instance 
+##### stop instance
+
 gcloud compute instances stop unicorn-instance-1
 
-##### start instance 
+##### start instance
+
 gcloud compute instances start unicorn-instance-1
 
 ##### create GCP  compute template from existing vm instance
+
 gcloud compute instance-templates create basic-vm-instance-template \
     --source-instance=unicorn-instance-1 \
     --source-instance-zone=us-central1-a
 
 ##### existing instance details
+
 gcloud compute instances list
 
 
 ### GAE APP ENGINE: Platform as a Service PaaS - Deploy your Apps from your code / github etc to STD Image
 
-Standard 
+Standard
+
 - App runs in a proprietary sandbox VM 
 - Instances start up in seconds 
 - Code in few languages/versions only 
 - No other runtimes possible 
 - Apps cannot access Compute Engine resources 
-- No installation of third-party binaries 
+- No installation of third-party binaries
 
-Flexible 
+Flexible
+
 - Instance start up in minutes 
 - Code in far more languages/ versions 
 - Custom runtimes possible
@@ -270,25 +280,29 @@ Flexible
 - Can install and access third-party binaries 
 
 ##### create blank app instance
+
 gcloud app create
 
 get the code in local and make sure it has app.yaml
 git clone \
-    https://github.com/GoogleCloudPlatform/golang-samples
+    <https://github.com/GoogleCloudPlatform/golang-samples>
 
     cd \
     golang-samples/appengine/go11x/helloworld
 
 ##### deploy the code for go app into the GAE
+
 gcloud app deploy
 
 ##### You can stream logs from the command line by running:
+
   $ gcloud app logs tail -s default
 
 
 ### [Kubernetes](Docker-Kube-Istio.md) - Managed Containers orchestration with docker
 
 ### Google Kubernetes Engine GKE
+
 GKE is a fully managed service that allows us to provision Kubernetes clusters on demand. It offloads the burden of deploying clusters manually. It also comes with a number of benefits that manual deployment does not offer, such as the following:
 
 - Automated cluster provisioning
@@ -300,6 +314,9 @@ GKE is a fully managed service that allows us to provision Kubernetes clusters o
 - Integration with Stackdriver for monitoring and logging
 - A GKE cluster can be deployed in two modes: zonal or regional. In a zonal deployment, only one master node is deployed. In a regional deployment, three masters are deployed in different zones. This is shown in the following diagram:
 ![K8s deployment](static/k8s-deploy.png)
+
+**Node pools**
+Node pools are used to put worker nodes into groups with the same configuration. When you create your first cluster, all the nodes are put into the default node pool. You might want to have multiple node pools if you want to have groups with specific characteristics, such as local SSDs, minimum CPU, a specific node image, or using a preemptible instance:
 
 ##### Set Auth for GCP on local:
 
