@@ -318,7 +318,7 @@ GKE is a fully managed service that allows us to provision Kubernetes clusters o
 **Node pools**
 Node pools are used to put worker nodes into groups with the same configuration. When you create your first cluster, all the nodes are put into the default node pool. You might want to have multiple node pools if you want to have groups with specific characteristics, such as local SSDs, minimum CPU, a specific node image, or using a preemptible instance:
 
-##### Set Auth for GCP on local:
+**Set Auth for GCP on local**
 
 ```yaml
 gcloud container clusters get-credentials dean-kube-cluster-1 --zone us-central1-c
@@ -353,6 +353,7 @@ gcloud container clusters get-credentials dean-kube-cluster-1 --zone us-central1
 ```
 
 #### Cloud Functions
+
 Cloud Functions use three components: events, triggers, and functions. An event is an action that occurs in the GCP. Cloud Functions does not work with all possible events in the cloud platform; instead, it is designed to respond to five kinds of events.
    - Cloud Storage
    - Cloud Pub/Sub
@@ -363,23 +364,24 @@ Cloud Functions use three components: events, triggers, and functions. An event 
 A trigger in Cloud Functions is a specification of how to respond to an event. Triggers have associated functions. Currently, Cloud Functions can be written in Python 3, Go, and Node.js 8 and 10.
 
 #### Cloud Run
+
 - Develop and deploy highly scalable containerized applications on a fully managed serverless platform with autoscaling.
 - Write code your way using your favorite languages, lib or binary (Go, Python, Java, Ruby, Node.js, and more)
 - Abstract away all infrastructure management for a simple developer experience
 - Built upon an open standard Knative, enabling the portability of your applications
 - Pay per use to 100 millisec
 
-#### Deployment Manager 
-service that allows you to specify infrastructure as code. It is a good practice to define infrastructure as code, since it allows teams to reproduce environments rapidly. It also lends itself to code reviews, version control, and other software engineering practices.
+#### Deployment Manager
 
+service that allows you to specify infrastructure as code. It is a good practice to define infrastructure as code, since it allows teams to reproduce environments rapidly. It also lends itself to code reviews, version control, and other software engineering practices.
 
 #### _The gsutil command is used only for Cloud Storage_
 
-#### gcloud command, you can interact with other Google Cloud products like the App Engine, Google Kubernetes Engine etc. 
+#### gcloud command, you can interact with other Google Cloud products like the App Engine, Google Kubernetes Engine etc
 
 #### Google Stackdriver
-Suite of ops services providing monitoring, logging, debugging, error reporting, tracing, alerting and profiling. Integrates with several third-party tools
 
+Suite of ops services providing monitoring, logging, debugging, error reporting, tracing, alerting and profiling. Integrates with several third-party tools
 
 ### Storage Usecases
 
@@ -394,7 +396,7 @@ Suite of ops services providing monitoring, logging, debugging, error reporting,
 |     Analytics and   complex queries with SQL access       |     BigQuery                             |     AWS   Redshift, Azure Data Warehouse     |
 
 
-### GCP Databases:
+### GCP Databases
 
 Several factors influence the choice of storage system / databases, such as the following:
 
@@ -410,22 +412,24 @@ Several factors influence the choice of storage system / databases, such as the 
 - The answer to these and similar questions will help you decide which storage services to use and how to configure them.
 
 ##### Cloud Filestore (NAS)
+
 - network-attached storage service that provides a filesystem that is accessible from Compute Engine and Kubernetes Engine. Cloud Filestore is designed to provide low latency and IOPS, so it can be used for databases and other performance-sensitive services.
 - Some typical use cases for Cloud Filestore are home directories and shared directories, web server content, and migrated applications that require a filesystem.
 
 
-##### Cloud SQL -> 
-- RDBMS - MySQL/ PostGres / SQLServer - 10 tb max data, 208 gb ram, 32 cores, 
+##### Cloud SQL
+
+- RDBMS - MySQL/ PostGres / SQLServer - 10 tb max data, 208 gb ram, 32 cores,
 - Transactional support, ACID support
 
-##### Spanner 
+##### Spanner
+
 - Google RDBMS / SQL horizontally scalable - the best RDBMS on the Planet
 - **Relational databases can scale horizontally, but that requires server clock synchronization if strong consistency is required among all nodes. Cloud Spanner uses the TrueTime service, which depends on atomic clocks and GPS signals to track time.**
-
-##### Big table 
+##### Big table
 - Hbase bigdata key value pair columnar storage 
+##### Cloud Datastore/Firestore
 
-##### Cloud Datastore/Firestore 
 - Store JSON docs, Document DB like MongoDB, Flexible, scalable
 - NoSQL database for keeping data in sync across client apps, Mobile and web server development, Realtime listeners
     * Regional	or	multi-regional	resource	scope
@@ -436,6 +440,7 @@ Several factors influence the choice of storage system / databases, such as the 
     * ACID	compliance
 
 ##### Cloud Storage - File Storage / Object store
+
 	* cloud storage life cycle - > store to standard --> after 6 months move to nearline storage 1 year --> coldline storage 5 yr - delete it
 	* like S3
 	* store immutable files, read it and delete it, cant edit
@@ -446,13 +451,15 @@ Several factors influence the choice of storage system / databases, such as the 
 ![Storage](static/GCP_Cloud_Storage_classes.jpg)
 
 ##### Cloud Memorystore
+
 Reduce latency with scalable, secure, and highly available in-memory service for Redis and Memcached.
 
-### GCP Bigdata:
+### GCP Bigdata
 
 ![storage](static/data-lifecycle.svg)
 
 ##### Bigtable - HBase kind...sequential ordering in key column; provides very fast writes as well as reads
+
    * Regional	resource	scope
    * Managed	NoSQL
    * Scalable	but	not	serverless
@@ -460,7 +467,8 @@ Reduce latency with scalable, secure, and highly available in-memory service for
    * HBase	compatible*
    * Great	for	many	concurrent	reads/writes
    
-##### BigQuery 
+##### BigQuery
+
 - EDW Enterprise data warehouse, fully managed, petabyte scale, low cost enterprise data warehouse for analytics, Serverless, There is no infrastructure to manage and you don't need a database administrator, so you can focus on analyzing data to find meaningful insights using familiar SQL.
     * Regional	resource	scope
     * OLAP
@@ -469,18 +477,21 @@ Reduce latency with scalable, secure, and highly available in-memory service for
     * Dedicated	CLI
     * Separate compute and storage	tiers
     * Integrates with ML and BI	offerings
-    
-##### Dataflow 
+##### Dataflow
+
 -  Apache Beam impl for ETL and Streaming both 
 - unified programming for both batch and streaming. dynamic workflow rebalancing, fully managed and auto scales. Developers can write stream and batch processing code using Java, Python, and SQL. If you need to process the data, for example applying transformations to a stream of IoT data, then Cloud Dataflow is good option.
 
-##### DataProc  
+##### DataProc
+
 - Hadoop / Spark Cluster for batch / hadoop only, Use Google Cloud Dataproc, a managed Spark and Hadoop service, to easily process big datasets using the powerful and open tools in the Apache big data ecosystem.
 
-##### Cloud Datalab 
+##### Cloud Datalab
+
 - Analytical / Visual tool, interactive notebook (based on Jupyter) to explore, collaborate, analyze and visualize data. It is integrated with BigQuery and Google Cloud Machine Learning to give you easy access to key data processing services
 
-##### Cloud Pub/Sub 
+##### Cloud Pub/Sub
+
 - Event Driven and is a message queue (e.g. Rabbit MQ), serverless, large scale, reliable, real-time messaging service that allows you to send and receive messages between independent applications, 
 - You can leverage Cloud Pub/Sub’s flexibility to decouple systems and components hosted on Cloud Platform or elsewhere on the Internet. 
 - By building on the same technology Google uses, Cloud Pub/Sub is designed to provide “at least once” delivery at low latency with on-demand scaling to tens of millions of messages per second.
@@ -490,15 +501,18 @@ Reduce latency with scalable, secure, and highly available in-memory service for
 - With a pull subscription, a service reads messages from the topic. This is a good approach when processing large volumes of data and efficiency is a top concern.
 
 #### Dataprep
+
 This is a tool that can be used to perform data visualization and exploring without any coding skills being required. Data can be interactively prepared for further analysis.
 
-#### Data Studio: 
+#### Data Studio
+
 This a tool that allows you to consume data from sources and visualize it in the form of reports and dashboards.
 
-#### Cloud Composer: 
+#### Cloud Composer
+
 This is a fully managed service based on open source Apache Airflow. It allows you to create and orchestrate big data pipelines. 
 
-#### Stackdriver 
+#### Stackdriver
 
 - Logging receives, indexes, and stores log entries from many sources, including Google Cloud Platform, Amazon Web Services, VM instances running the Stackdriver Logging fluentd agent, and user applications.
 - All log entries in Stackdriver Logging are represented using a single data type, LogEntry, which defines certain common data for all log entries as well as carrying individual payloads.
@@ -508,7 +522,8 @@ This is a fully managed service based on open source Apache Airflow. It allows 
 - Currently, Stackdriver Trace collects end-to-end latency data for requests to App Engine URIs and additional data for round-trip RPC calls to App Engine services like Datastore, URL Fetch, and Memcache.
 
 
-#### Designing a solution infrastructure that meets business requirements. 
+#### Designing a solution infrastructure that meets business requirements
+
 - Business use cases and product strategy
 - Cost optimization
 - Supporting the application design
@@ -519,8 +534,8 @@ This is a fully managed service based on open source Apache Airflow. It allows 
 - Success measurements (e.g., Key Performance Indicators (KPI), Return on Investment (ROI), metrics)
 - Compliance and observability
 
-
 #### IMPROVING COMPLIANCE WITH INDUSTRY REGULATIONS
+
 - Health Insurance Portability and Accountability Act (HIPAA), a healthcare regulation
 - Children’s Online Privacy Protection Act (COPPA), a privacy regulation
 - Sarbanes-Oxley Act (SOX), a financial reporting regulation
@@ -533,7 +548,8 @@ This is a fully managed service based on open source Apache Airflow. It allows 
 
 - Service-Level Objective (SLO) An agreed-upon target for a measurable attribute of a service that is specified in a service-level agreement.
 
-#### Cloud TCO 
+#### Cloud TCO
+
 The combination of all expenses related to maintaining a service, which can include the following:
 - Software licensing costs
 - Cloud computing costs, including infrastructure and managed services
@@ -545,6 +561,7 @@ The combination of all expenses related to maintaining a service, which can incl
 - Network connectivity charges, such as those for a dedicated connection between an on-premises data center and Google Cloud
 
 #### MIGRATION SERVICES AND TOOLS
+
 Migrations typically require the transfer of large volumes of data and depends on:
 
 - Volume of data
@@ -558,26 +575,26 @@ Migrations typically require the transfer of large volumes of data and depends o
 * Third-party vendors
 
 #### Migration Planning
+
 - Integrating cloud services with existing systems
 - Migrating systems and data
 - License mapping
 - Network management planning
 - Testing and proof-of-concept development
 
-##### five-step migration planning:
+##### five-step migration planning
+
 * Assessment
 * Pilot
 * Data migration
 * Application migration
 * Optimization
 
-
 #### GCP SDK COMPONENTS
 
 - gcloud: A command-line tool for interacting with most GCP services
 - gsutil: A command-line tool for working with Cloud Storage
 - bq: A command-line tool for working with BigQuery
-
 
 ### Google Architect Certification Case Studies:
 
