@@ -32,6 +32,18 @@ Kubernetes, also known as K8s, is an open source container orchestrator that was
 
 ![K8s](static/k8s.png)
 
+**Node (Inside a Node Pool) --> Service --> 1+ Pods --> 1+  Containers**
+  
+A Kubernetes cluster has two types of instances: cluster masters and nodes.
+
+- The cluster master runs four core services that are part of the control plane: controller manager, API server, scheduler, and etcd.
+- The controller manager runs services that manage Kubernetes abstract components, such as deployments and replica sets.
+- Applications interacting with the Kubernetes cluster make calls to the master using the API server. The API server also handles intercluster interactions.
+- The scheduler is responsible for determining where to run pods, which are low-level compute abstractions that support containers.
+- ectd is a distributed key-value store used to store state / StatefulSets information across a cluster.
+- Nodes are instances that execute workloads. They communicate with the cluster master through an agent called kubelet
+- _Node is worker, Each Node can Have a Service, Service can have multiple pods, each pods can have multiple container_
+
 ![Kube Deployment](static/KubeDeploy.png)
 
 Kubernetes objects are records of intent that are defined in YAML format. They are declarative in nature. Once created, Kubernetes will take care of keeping them in the state declared in the definition file. Some examples of the most important objects are as follows:
@@ -52,7 +64,20 @@ Kubernetes objects are records of intent that are defined in YAML format. They a
   - kube-system: Used for resources that are created by Kubernetes
   - kube-public: Reserved for future use:
 
-- 
+#### Workloads on Kubernetes
+
+- Stateless applications
+   • Does not preserve state, saves no data to persistent disk
+   • Deployed using the Deployment object
+- Stateful applications
+   • State is saved or persisted, uses persistent volumes
+   • Deployed using the StatefulSet object
+- Batch jobs
+   • Finite, independent, parallel jobs
+   • Deployed using the Job object
+- Daemons
+    • Ongoing, background tasks, run without intervention
+    • Deployed using a DaemonSet
 
 
 ### MiniKube

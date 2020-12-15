@@ -286,39 +286,20 @@ gcloud app deploy
   $ gcloud app logs tail -s default
 
 
-### [Kubernetes](Docker-Kube-Istio.md) - Managed Containers on docker
+### [Kubernetes](Docker-Kube-Istio.md) - Managed Containers orchestration with docker
 
-A Kubernetes cluster has two types of instances: cluster masters and nodes.
+### Google Kubernetes Engine GKE
+GKE is a fully managed service that allows us to provision Kubernetes clusters on demand. It offloads the burden of deploying clusters manually. It also comes with a number of benefits that manual deployment does not offer, such as the following:
 
-- The cluster master runs four core services that are part of the control plane: controller manager, API server, scheduler, and etcd.
-- The controller manager runs services that manage Kubernetes abstract components, such as deployments and replica sets.
-- Applications interacting with the Kubernetes cluster make calls to the master using the API server. The API server also handles intercluster interactions.
-- The scheduler is responsible for determining where to run pods, which are low-level compute abstractions that support containers.
-- ectd is a distributed key-value store used to store state / StatefulSets information across a cluster.
-- Nodes are instances that execute workloads. They communicate with the cluster master through an agent called kubelet
-- _Node is worker, Each Node can Have a Service, Service can have multiple pods, each pods can have multiple container_
-
-- Node (Inside a Node Pool) --> Service --> 1+ Pods --> 1+  Containers
-- Deployments (uses pod templates) --> set of Multiple identical pods, Versioning and rollback
-- ReplicaSet - Scaling and healing
-- Service - Static(non-ephemeral) IP addresses,  Stable networking
-- Persistent volumes - Non-ephemeral storage
-- StatefulSets - used to designate pods as stateful and assign a unique identifier to them. Kubernetes uses these to track which clients are using which pods and to keep them paired
-
-#### Workloads on Kubernetes
-
-- Stateless applications
-   • Does not preserve state, saves no data to persistent disk
-   • Deployed using the Deployment object
-- Stateful applications
-   • State is saved or persisted, uses persistent volumes
-   • Deployed using the StatefulSet object
-- Batch jobs
-   • Finite, independent, parallel jobs
-   • Deployed using the Job object
-- Daemons
-    • Ongoing, background tasks, run without intervention
-    • Deployed using a DaemonSet
+- Automated cluster provisioning
+- Automated cluster scaling
+- Automated upgrades
+- Auto-repair
+- Integrated load balancing
+- Node pools
+- Integration with Stackdriver for monitoring and logging
+- A GKE cluster can be deployed in two modes: zonal or regional. In a zonal deployment, only one master node is deployed. In a regional deployment, three masters are deployed in different zones. This is shown in the following diagram:
+![K8s deployment](static/k8s-deploy.png)
 
 ##### Set Auth for GCP on local:
 
