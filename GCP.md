@@ -232,11 +232,9 @@ Cloud Armor is a service that allows protection against infrastructure DDoS atta
 - **Least privilege** is the practice of granting only the minimal set of permissions needed to perform a duty. IAM roles and permissions are fine-grained and enable the practice of least privilege.
 - **Defense in depth** is the practice of using more than one security control to protect resources and data
 
-
 ### Google COMPUTE ENGINE - Raw Vms
 
 Managed instance groups are the best way to create a cluster of VMs, all running the same services in the same configuration. A managed instance group uses an instance template to specify the configuration of each VM in the group.
-
 ##### login to compute vm instance
 
 gcloud beta compute ssh --zone "us-central1-a" "unicorn-instance-1" --project "perfect-transit-278123"
@@ -259,26 +257,33 @@ gcloud compute instance-templates create basic-vm-instance-template \
 
 gcloud compute instances list
 
+### Google App Engine GAE
 
-### GAE APP ENGINE: Platform as a Service PaaS - Deploy your Apps from your code / github etc to STD Image
+- Platform as a Service PaaS - Deploy your Apps from your code / github etc to STD Image.
+- each project can host only one App Engine application. application can have multiple services with multiple versions
+- Which version is served to the end user is based on the network traffic configuration
+- Applications in App Engine are deployed regionally
+![gae](static/gae.png)
 
-Standard
+**Standard**
 
-- App runs in a proprietary sandbox VM 
-- Instances start up in seconds 
-- Code in few languages/versions only 
-- No other runtimes possible 
-- Apps cannot access Compute Engine resources 
+- App runs on **containers** running in GCP
+- Instances start up in seconds
+- can scale down to 0
+- Code in few languages/versions only
+- No other runtimes possible
+- Apps cannot access Compute Engine resources
 - No installation of third-party binaries
 
-Flexible
+**Flexible**
 
+- Flexible environment uses **GCE virtual machine** instances
 - Instance start up in minutes 
+- can scale down to 1
 - Code in far more languages/ versions 
 - Custom runtimes possible
 - Apps can access Compute Engine resources, some OS packages
 - Can install and access third-party binaries 
-
 ##### create blank app instance
 
 gcloud app create
@@ -297,7 +302,6 @@ gcloud app deploy
 ##### You can stream logs from the command line by running:
 
   $ gcloud app logs tail -s default
-
 
 ### [Kubernetes](Docker-Kube-Istio.md) - Managed Containers orchestration with docker
 
@@ -355,7 +359,9 @@ Node pools are used to put worker nodes into groups with the same configuration.
     kubectl get services --watch
 ``` 
 
-#### Cloud Functions
+Kubernetes Engine uses Compute Engine services. ***You are billed for every virtual machine instance that is running as a node of the cluster***. Because Kubernetes Engine abstracts master machines, you are not charged for them.
+
+### Cloud Functions
 
 Cloud Functions use three components: events, triggers, and functions. An event is an action that occurs in the GCP. Cloud Functions does not work with all possible events in the cloud platform; instead, it is designed to respond to five kinds of events.
    - Cloud Storage
@@ -366,7 +372,7 @@ Cloud Functions use three components: events, triggers, and functions. An event 
 
 A trigger in Cloud Functions is a specification of how to respond to an event. Triggers have associated functions. Currently, Cloud Functions can be written in Python 3, Go, and Node.js 8 and 10.
 
-#### Cloud Run
+### Cloud Run
 
 - Develop and deploy highly scalable containerized applications on a fully managed serverless platform with autoscaling.
 - Write code your way using your favorite languages, lib or binary (Go, Python, Java, Ruby, Node.js, and more)
@@ -374,7 +380,7 @@ A trigger in Cloud Functions is a specification of how to respond to an event. T
 - Built upon an open standard Knative, enabling the portability of your applications
 - Pay per use to 100 millisec
 
-#### Deployment Manager
+### Deployment Manager
 
 service that allows you to specify infrastructure as code. It is a good practice to define infrastructure as code, since it allows teams to reproduce environments rapidly. It also lends itself to code reviews, version control, and other software engineering practices.
 
@@ -382,7 +388,7 @@ service that allows you to specify infrastructure as code. It is a good practice
 
 #### gcloud command, you can interact with other Google Cloud products like the App Engine, Google Kubernetes Engine etc
 
-#### Google Stackdriver
+### Google Stackdriver
 
 Suite of ops services providing monitoring, logging, debugging, error reporting, tracing, alerting and profiling. Integrates with several third-party tools
 
@@ -397,7 +403,6 @@ Suite of ops services providing monitoring, logging, debugging, error reporting,
 |     HTML/XML documents   with NoSQL access                |     Firestore                            |     AWS   DynamoDB, Azure Cosmos DB          |
 |     Large, naturally   ordered data with NoSQL access     |     BigTable                             |      HBase                                        |
 |     Analytics and   complex queries with SQL access       |     BigQuery                             |     AWS   Redshift, Azure Data Warehouse     |
-
 
 ### GCP Databases
 
@@ -418,7 +423,6 @@ Several factors influence the choice of storage system / databases, such as the 
 
 - network-attached storage service that provides a filesystem that is accessible from Compute Engine and Kubernetes Engine. Cloud Filestore is designed to provide low latency and IOPS, so it can be used for databases and other performance-sensitive services.
 - Some typical use cases for Cloud Filestore are home directories and shared directories, web server content, and migrated applications that require a filesystem.
-
 
 ##### Cloud SQL
 
@@ -469,7 +473,7 @@ Reduce latency with scalable, secure, and highly available in-memory service for
    * Powers	well-known apps like gmail, maps etc
    * HBase	compatible*
    * Great	for	many	concurrent	reads/writes
-   
+
 ##### BigQuery
 
 - EDW Enterprise data warehouse, fully managed, petabyte scale, low cost enterprise data warehouse for analytics, Serverless, There is no infrastructure to manage and you don't need a database administrator, so you can focus on analyzing data to find meaningful insights using familiar SQL.
@@ -480,6 +484,7 @@ Reduce latency with scalable, secure, and highly available in-memory service for
     * Dedicated	CLI
     * Separate compute and storage	tiers
     * Integrates with ML and BI	offerings
+
 ##### Dataflow
 
 -  Apache Beam impl for ETL and Streaming both 
@@ -523,7 +528,6 @@ This is a fully managed service based on open source Apache Airflow. It allows 
 - Stackdriver Trace is a distributed tracing system for Google Cloud Platform that collects latency data from Google App Engine, Google HTTP(S) load balancers, and applications instrumented with the Stackdriver Trace SDKs, and displays it in near real time in the Google Cloud Platform Console.
 - It helps you understand how long it takes your application to handle incoming requests from users or other applications, and how long it takes to complete operations like RPC calls performed when handling the requests.
 - Currently, Stackdriver Trace collects end-to-end latency data for requests to App Engine URIs and additional data for round-trip RPC calls to App Engine services like Datastore, URL Fetch, and Memcache.
-
 
 #### Designing a solution infrastructure that meets business requirements
 
@@ -635,8 +639,6 @@ Observations:
 - Our traffic patterns are highest in the mornings and weekend evenings; during other times, 80 percent of our capacity is sitting idle.
 - Our capital expenditure is now exceeding our quarterly projections
 - total cost of ownership (TCO) analysis over the next five years for a public cloud strategy achieves a cost reduction of 30–50 percent over our current model
-
-
 
 #### Mountkirk Games https://cloud.google.com/certification/guides/cloud-architect/casestudy-mountkirkgames-rev2
 
