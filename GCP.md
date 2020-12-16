@@ -320,37 +320,40 @@ Node pools are used to put worker nodes into groups with the same configuration.
 
 **Set Auth for GCP on local**
 
+**gcloud** is used for managing the GKE cluster while **kubectl** is a Kubernetes native tool. So, as an example, if you want to scale a GKE cluster, you would use gcloud, while for scaling a deployment, you would use kubectl.
+
 ```yaml
-gcloud container clusters get-credentials dean-kube-cluster-1 --zone us-central1-c
 
-   gcloud container clusters  list
+    gcloud container clusters get-credentials dean-kube-cluster-1 --zone us-central1-c
 
-   gcloud container clusters describe dean-kube-cluster-1 --zone us-central1-c
+    gcloud container clusters  list
 
-   kubectl config current-context
+    gcloud container clusters describe dean-kube-cluster-1 --zone us-central1-c
 
-   kubectl create -f examples/guestbook-go/redis-master-controller.json
+    kubectl config current-context
 
-   kubectl get rc
-   kubectl get pods
+    kubectl create -f examples/guestbook-go/redis-master-controller.json
 
-   kubectl create -f examples/guestbook-go/redis-master-service.json
-   kubectl get services
-   kubectl create -f examples/guestbook-go/redis-slave-controller.json
-   kubectl get services
-   kubectl get rc
+    kubectl get rc
+    kubectl get pods
 
-   kubectl get services
-   kubectl get pods
-   kubectl create -f examples/guestbook-go/redis-slave-service.json
-   kubectl get services
-   kubectl create -f examples/guestbook-go/guestbook-controller.json
-   kubectl get rc
-   kubectl get pods
-   kubectl create -f examples/guestbook-go/guestbook-service.json
-   kubectl get services
-   kubectl get services --watch
-```
+    kubectl create -f examples/guestbook-go/redis-master-service.json
+    kubectl get services
+    kubectl create -f examples/guestbook-go/redis-slave-controller.json
+    kubectl get services
+    kubectl get rc
+
+    kubectl get services
+    kubectl get pods
+    kubectl create -f examples/guestbook-go/redis-slave-service.json
+    kubectl get services
+    kubectl create -f examples/guestbook-go/ guestbook-controller.json
+    kubectl get rc
+    kubectl get pods
+    kubectl create -f examples/guestbook-go/ guestbook-service.json
+    kubectl get services
+    kubectl get services --watch
+``` 
 
 #### Cloud Functions
 
