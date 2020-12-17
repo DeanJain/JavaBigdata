@@ -61,57 +61,32 @@
 - Incremental backups possible too
 - Used to back up data from persistent disks
 
-#### Google Virtual Private Cloud - VPC
+### Networking
+GCP offers two service tiers, as follows:
+
+- **Premium**: The premium tier provides high-performance routing. On top of that, it offers global load balancing and a Content Delivery Network (CDN) service. It is aimed at use cases where global presence is required and has the best user experience in mind. This tier comes with Service Level Agreements (SLAs).
+- **Standard**: The standard tier is a lower performance network with no SLAs attached. The CDN service is not available and load balancers are regional. It is aimed at use cases where cost is the main deciding factor. The GCP networking that's exposed to the user is based on a Software-Defined Network (SDN) called **Andromeda**. This platform is an orchestration point for all network services in GCP. Fortunately, this is abstracted from the user and there is no need to understand how Andromeda works itself.
+
+### Google Virtual Private Cloud - VPC
 
  A VPC network is a global, private, isolated virtual network partition that provides managed network functionality on the GCP
 
 - VPC are global
-- Subnet in each region
+- Subnet in each region (regional subnetwork)
 - resources are provisioned on the subnet
 - Each VPC must exist inside a project
 - Default VPC pre-created in each project 
 - can have upto 5 max VPC per project
 - VPCs types
-    - Auto Mode
-    - Custom Mode  
-    - Default Mode              
+    - Auto Mode : Automatically creates one subnet per region with predefined IP ranges with the /20 mask from the 10.128.0.0/9 CIDR block. Each subnet is expandable to the /16 mask.
+    - Custom Mode : It does not create subnets automatically and delegates complete control to the user. You decide how many subnets should be created and in which regions.
 
-#### Hybrid cloud topology / **Network Links:**
 
-- Virtual Private Network (VPN): VPNs allow a connection between your on-premises network and GCP VPC through an IPsec tunnel over the internet. Only site-to-site VPNs are supported. To establish a VPN connection, there needs to be two gateways on each side of the tunnel. The traffic in transit is encrypted. Both static and dynamic routing are supported, with the former requiring a cloud router. Using a VPN should be the first method of connecting your environment to GCP as it entails the lowest cost. lower-cost option that does not require managing site-to-site connections, but throughput is lower, implemented using IPsec VPNs and supports bandwidths up to 3 Gbps. transmitted over the public Internet
+When you create a new project, a default network is created for you. Subnets are created for each region and have allocated non-overlapping CIDR blocks.
 
-- Cloud Interconnect: If there is a need for low latency and a highly available connection, then interconnect should be considered. In this case, the traffic does not traverse the internet. There are two interconnect options, which are as follows:
-    - Dedicated / Direct Interconnect: 10 Gbps piped directly to a Google datacenter - 10 Gbps or 100 Gbps configurations
-    - Partner Interconnect: 50 Mbps - 10 Gbps piped through a Google partner
-    - Direct peering: works by exchanging Border Gateway Protocol (BGP) routes, which define paths for transmitting data between networks. not recommended...
+Classless Inter-Domain Routing (**CIDR**) is an IP addressing schema that replaces the classful A, B, C system. It is based on variable-length subnet masks. In the case of CIDR, the prefixes of the subnet can be defined as an arbitrary number, making the network mask length more flexible. This means that organizations can make more efficient utilization of the IP address schemas.
 
-**Topology:**
-- Mirrored topology. In this topology, the public cloud and private on-premise environments mirror each other. This topology could be used to set up test or disaster recovery environments.
-- Meshed topology. With this topology, all systems within all clouds and private networks can communicate with each other.
-- Gated egress topology. In this topology, on-premises service APIs are made available to applications running in the cloud without exposing them to the public Internet.
-- Gated ingress topology. With this topology, cloud service APIs are made available to applications running on premises without exposing them to the public Internet.
-- Gated egress and ingress topology. This topology combines gated egress and gated ingress.
-- Handover topology. In this topology, applications running on premises upload data to a shared storage service, such as Cloud Storage, and then a service running in GCP consumes and processes that data. This is commonly used with data warehousing and analytic services.
-
-#### Load Balancing
-High performance, scalable load balancing, GCP provides Global Load Balancing - Scale your applications on Google Compute Engine from zero to full-throttle. Distribute your load balanced compute resources in single or multiple regions, close to your users and to meet your high availability requirements.
- 
-Types:
- - **Network TCP/UDP regional**
-    - uses forwarding rules to determine how to distribute traffic. 
-    - Forwarding rules use the IP address, protocol, and ports to determine which servers, known as a target pool, should receive the traffic.
- 
- - **Internal TCP/UDP regional**: only internal load balancer
- - **HTTP(S)** : global premium network tier
-    - distribute HTTP and HTTPS traffic globally
-    - use forwarding rules to direct traffic to a target HTTP proxy. then route the traffic to a URL map, which determines which target group to send the request to based on the URL
- 
- - **SSL Proxy** : global premium network tier
- SSL offloading terminates SSL/TLS traffic at the load balancer and distributes traffic across the set of backend servers
- 
- - **TCP Proxy** : global premium network tier
-lets you use a single IP address for all users regardless of where they are on the globe, and it will route traffic to the closest instance. should be used for non-HTTPS and non-SSL traffic.
-
+It is possible to convert an auto mode network in a custom mode network, but not the other way round. Remember to not use IP ranges that overlap between VPCs or on-premise if you will be connecting those networks either through VPC peering or VPNs.
 #### Subnets
 
 -  VPC Contains Subnetworks (Subnet)
@@ -129,19 +104,54 @@ lets you use a single IP address for all users regardless of where they are on t
 - Each subnet must have primary address range 
 - Valid RFC 1918 CIDR block
 - Subnet ranges in same network cannot overlap
-- Subnet ranges in different networks can overlap    
-    
- #### IP Addresses
+- Subnet ranges in different networks can overlap
+  
+#### IP Addresses
+
+VMs can have two types of IP addresses:
+
+- Internal IP address: Assigned within the virtual machine operating system
+- External IP address (optional): Assigned to a virtual machine but not visible in the operating system
+
  - IPv4 uses four octets, such as 192.168.20.10. IPv6 uses eight 16-bit blocks, such as FE80:0000:0000:0000:0202:B3FF:FE1E:8329.
  - When you create a subnet, you will have to specify a range of IP addresses.
  - specify an IP range using the CIDR notation
  - **IPv4 IP address followed by a /, followed by an integer. The integer specifies the number of bits used to identify the subnet (known as subnet mask); the remaining bits are used to determine the host address.**
-- You can assign certain resources with IP addresses , You can assign external and internal IP addresses to Compute Engine (VM) , forwarding rule for external or internal Load balancing resp.
+- You can assign certain resources with IP addresses,You can assign external and internal IP addresses to Compute Engine (VM), forwarding rule for external or internal Load balancing resp.
 - Each VM has one primary – internal IP address, one or more secondary IP addresses and one external IP address
 - To communicate with VM within VPC you can use internal IP address and to communicate with internet you must use external IP address
 - Both internal and external IP addresses can be static or ephemeral
 
-#### Routes
+#### Network Cost
+
+The general rule of thumb is that the following traffic is **FREE**:
+
+- Ingress traffic
+- Egress within the same zones using internal IPs
+- Egress to a different GCP service within the same region using an external IP address or an internal IP address
+
+The following traffic is **charged** for:
+
+- Egress between zones within the regions
+- Egress between regions
+- Internet egress
+
+### Cross VPC Connectivity
+
+- Shared VPC
+- VPC Peering
+  
+#### Shared VPC
+
+- You may need to put different departments or different applications into different projects for purposes of separating budgeting, access control, and so on
+- With Shared VPC, Cloud Organization administrators can give multiple projects permission to use a single, shared VPC network and corresponding networking resources
+  
+#### VPC Peering
+
+connect two existing VPCs, regardless of whether they belong to the same project or organization
+
+### Routes
+
 - All network have automatically created routes to the internet and IP range in network
 - The subnet routes let instances send traffic to any other instance or resource in the same VPC network.
 - The default route let instances send traffic outside the VPC n/w
@@ -154,8 +164,9 @@ lets you use a single IP address for all users regardless of where they are on t
 - Enable VM on same subnet to communicate
 
 #### Firewall
+
  GCP Firewall is a service that allows for micro-segmentation. Firewall rules are created per VPC and can be based on IPs, IP ranges, tags, and service accounts. Several firewall rules are created by default but can be modified.
- 
+
 - Each network has its own firewall controlling access to and from the instances
 - You can have “allow” rules , no “deny’ rules
 - The default network has automatically created firewall rules that are shown in default firewall rules
@@ -165,43 +176,87 @@ lets you use a single IP address for all users regardless of where they are on t
     - Tags are user defined Strings
     - Tags are applied to VM and not to IP.
 
-#### Shared VPC
-- You may need to put different departments or different applications into different projects for purposes of separating budgeting, access control, and so on
-- With Shared VPC, Cloud Organization administrators can give multiple projects permission to use a single, shared VPC network and corresponding networking resources
- 
-#### Cloud Router 
+#### Hybrid cloud topology / **Network Links:**
+
+- Virtual Private Network (VPN): VPNs allow a connection between your on-premises network and GCP VPC through an IPsec tunnel over the internet. Only site-to-site VPNs are supported. To establish a VPN connection, there needs to be two gateways on each side of the tunnel. The traffic in transit is encrypted. Both static and dynamic routing are supported, with the former requiring a cloud router. Using a VPN should be the first method of connecting your environment to GCP as it entails the lowest cost. lower-cost option that does not require managing site-to-site connections, but throughput is lower, implemented using IPsec VPNs and supports bandwidths up to 3 Gbps. transmitted over the public Internet
+
+- Cloud Interconnect: If there is a need for low latency and a highly available connection, then interconnect should be considered. In this case, the traffic does not traverse the internet. There are two interconnect options, which are as follows:
+    - Dedicated / Direct Interconnect: 10 Gbps piped directly to a Google datacenter - 10 Gbps or 100 Gbps configurations
+    - Partner Interconnect: 50 Mbps - 10 Gbps piped through a Google partner
+    - Direct peering: works by exchanging Border Gateway Protocol (BGP) routes, which define paths for transmitting data between networks. not recommended...
+
+**Topology:**
+
+- Mirrored topology. In this topology, the public cloud and private on-premise environments mirror each other. This topology could be used to set up test or disaster recovery environments.
+- Meshed topology. With this topology, all systems within all clouds and private networks can communicate with each other.
+- Gated egress topology. In this topology, on-premises service APIs are made available to applications running in the cloud without exposing them to the public Internet.
+- Gated ingress topology. With this topology, cloud service APIs are made available to applications running on premises without exposing them to the public Internet.
+- Gated egress and ingress topology. This topology combines gated egress and gated ingress.
+- Handover topology. In this topology, applications running on premises upload data to a shared storage service, such as Cloud Storage, and then a service running in GCP consumes and processes that data. This is commonly used with data warehousing and analytic services.
+
+### Load Balancing
+
+High performance, scalable load balancing, GCP provides Global Load Balancing - Scale your applications on Google Compute Engine from zero to full-throttle. Distribute your load balanced compute resources in single or multiple regions, close to your users and to meet your high availability requirements.
+
+Types:
+
+- **Network TCP/UDP regional**
+  - uses forwarding rules to determine how to distribute traffic.
+  - Forwarding rules use the IP address, protocol, and ports to determine which servers, known as a target pool, should receive the traffic.
+
+- **Internal TCP/UDP regional**: only internal load balancer
+  
+- **HTTP(S)** : global premium network tier
+  - distribute HTTP and HTTPS traffic globally
+  - use forwarding rules to direct traffic to a target HTTP proxy. then route the traffic to a URL map, which determines which target group to send the request to based on the URL
+
+- **SSL Proxy** : global premium network tier
+ SSL offloading terminates SSL/TLS traffic at the load balancer and distributes traffic across the set of backend servers
+
+- **TCP Proxy** : global premium network tier
+lets you use a single IP address for all users regardless of where they are on the globe, and it will route traffic to the closest instance. should be used for non-HTTPS and non-SSL traffic.
+
+#### Cloud Router
+
 Cloud Router is a service that allows for dynamic routing exchange between Compute Engine, VPNs, and external networks. It eliminates the need for the creation of static routes. 
 
 #### Cloud NAT
+
 Cloud [NAT](https://en.wikipedia.org/wiki/Network_address_translation) is a regional service that allows VMs without external IPs to communicate with the internet. It is a fully managed service with built-in autoscalability. It works with both GCE and GKE. It is a better alternative for NAT instances that need to be managed by users.
 
-##### Google Cloud CDN 
+##### Google Cloud CDN
+
 - leverages Google's globally distributed edge caches to accelerate content delivery for websites and applications served out of Google Compute Engine.
 - Cloud CDN lowers network latency, offloads origins, and reduces serving costs. Once you've set up HTTP(S) Load Balancing, simply enable Cloud CDN with a single checkbox
 
-##### Google Cloud DNS 
+##### Google Cloud DNS
+
 - scalable, reliable and managed authoritative Domain Naming System (DNS) service running on the same infrastructure as Google.
-- It has low latency, high availability and is a cost-effective way to make application and services available to your users.   
+- It has low latency, high availability and is a cost-effective way to make application and services available to your users.
 
 ##### Identity Aware Proxy (IAP)
+
 IAP is a service that replaces the VPN when a user is working from an untrusted network. It controls access to your application based on user identity, device status, and IP address. It is part of Google's BeyondCorp security model.
 
 ##### Cloud Armor
+
 Cloud Armor is a service that allows protection against infrastructure DDoS attacks using Google's global infrastructure and security systems. It integrates with global HTTP(S) load balancers and blocks traffic based on IP addresses or ranges. Preview mode allows users to analyze the attack pattern without cutting off regular users.
 
 ### Cloud IAM
+
 - Roles :  diff roles defined
 - Member : who can get access
-- Policy : join both roles to member 
-    
-**GCP Identities:**
+- Policy : join both roles to member
+
+#### GCP Identities
+
 - Google accounts
 - Service accounts
 - Google groups
 - GSuite domains
 - Cloud Identity domains
 
-#### encryption at rest:
+#### encryption at rest
 
 - Data at rest is encrypted by default in Google Cloud Platform.
 - Data is encrypted at multiple levels, including the application, infrastructure, and device levels.
@@ -209,11 +264,13 @@ Cloud Armor is a service that allows protection against infrastructure DDoS atta
 - Data encryption keys are themselves encrypted using a key encryption key.
 
 #### Key management
+
 1. default key management - inbuilt in gcp
 2. kms - store keys into gcp kms 
 3. Customer supplied keys - keys are stored on prem and then sent over to services along with request and it not persisted on gcp  
     
 #### Security Evaluation
+
 1. Penetration testing
 * **Reconnaissance** is the phase at which penetration testers gather information about the target system and the people who operate it or have access to it. This could include phishing attacks that lure a user into disclosing their login credentials or details of software running on their network equipment and servers.
 * **Scanning** is the automated process of probing ports and checking for known and unpatched vulnerabilities.
@@ -299,9 +356,16 @@ git clone \
 
 gcloud app deploy
 
-##### You can stream logs from the command line by running:
+##### You can stream logs from the command line by running
 
   $ gcloud app logs tail -s default
+
+#### GAE Memcache
+
+Memcache is a service that's built in to App Engine. It allows you to keep key-value pairs in memory that can be accessed much faster than querying a database. There are two service levels for Memcache, as follows:
+
+- **Shared**: This is the default and free version of Memcache. Note that this service is provided on best effort. The resources are shared with multiple applications within the App Engine platform.
+- **Dedicated**: This is an optional and paid version of Memcache. It provides a fixed cache capacity dedicated to your application. It is paid per GB/hour. This should be used for applications that require predictable performance.
 
 ### [Kubernetes](Docker-Kube-Istio.md) - Managed Containers orchestration with docker
 
@@ -361,19 +425,22 @@ Node pools are used to put worker nodes into groups with the same configuration.
 
 Kubernetes Engine uses Compute Engine services. ***You are billed for every virtual machine instance that is running as a node of the cluster***. Because Kubernetes Engine abstracts master machines, you are not charged for them.
 
-### Cloud Functions
+### Cloud Functions (FaaS Serverless Compute)
 
-Cloud Functions use three components: events, triggers, and functions. An event is an action that occurs in the GCP. Cloud Functions does not work with all possible events in the cloud platform; instead, it is designed to respond to five kinds of events.
+Serverless, Event-Driven, Stateless and Autoscaling (0 to desired scale). Cloud Functions use three components: events, triggers, and functions. An event is an action that occurs in the GCP. Cloud Functions does not work with all possible events in the cloud platform; instead, it is designed to respond to five kinds of events.
    - Cloud Storage
    - Cloud Pub/Sub
    - HTTP
-   - Firebase
+   - Firebase/FireStore
    - Stackdriver Logging
 
 A trigger in Cloud Functions is a specification of how to respond to an event. Triggers have associated functions. Currently, Cloud Functions can be written in Python 3, Go, and Node.js 8 and 10.
 
+**Pricing depends on number of Invocations, Compute time, and network rate (Networking)**
+
 ### Cloud Run
 
+- alternative to Cloud Functions if you want to use a language that is not supported by Cloud Function
 - Develop and deploy highly scalable containerized applications on a fully managed serverless platform with autoscaling.
 - Write code your way using your favorite languages, lib or binary (Go, Python, Java, Ruby, Node.js, and more)
 - Abstract away all infrastructure management for a simple developer experience
