@@ -181,8 +181,8 @@ connect two existing VPCs, regardless of whether they belong to the same project
 - Virtual Private Network (VPN): VPNs allow a connection between your on-premises network and GCP VPC through an IPsec tunnel over the internet. Only site-to-site VPNs are supported. To establish a VPN connection, there needs to be two gateways on each side of the tunnel. The traffic in transit is encrypted. Both static and dynamic routing are supported, with the former requiring a cloud router. Using a VPN should be the first method of connecting your environment to GCP as it entails the lowest cost. lower-cost option that does not require managing site-to-site connections, but throughput is lower, implemented using IPsec VPNs and supports bandwidths up to 3 Gbps. transmitted over the public Internet
 
 - Cloud Interconnect: If there is a need for low latency and a highly available connection, then interconnect should be considered. In this case, the traffic does not traverse the internet. There are two interconnect options, which are as follows:
-    - Dedicated / Direct Interconnect: 10 Gbps piped directly to a Google datacenter - 10 Gbps or 100 Gbps configurations
-    - Partner Interconnect: 50 Mbps - 10 Gbps piped through a Google partner
+    - Dedicated / Direct Interconnect: 10 Gbps each connection piped directly to a Google datacenter - max 8 connections
+    - Partner Interconnect: 50 Mbps to 10 Gbps piped through a Google partner
     - Direct peering: works by exchanging Border Gateway Protocol (BGP) routes, which define paths for transmitting data between networks. not recommended...
 
 **Topology:**
@@ -194,9 +194,13 @@ connect two existing VPCs, regardless of whether they belong to the same project
 - Gated egress and ingress topology. This topology combines gated egress and gated ingress.
 - Handover topology. In this topology, applications running on premises upload data to a shared storage service, such as Cloud Storage, and then a service running in GCP consumes and processes that data. This is commonly used with data warehousing and analytic services.
 
+![hybrid](static/hybridcloud.png)
+
 ### Load Balancing
 
 High performance, scalable load balancing, GCP provides Global Load Balancing - Scale your applications on Google Compute Engine from zero to full-throttle. Distribute your load balanced compute resources in single or multiple regions, close to your users and to meet your high availability requirements.
+
+![lb](static/lb.png)
 
 Types:
 
@@ -216,29 +220,34 @@ Types:
 - **TCP Proxy** : global premium network tier
 lets you use a single IP address for all users regardless of where they are on the globe, and it will route traffic to the closest instance. should be used for non-HTTPS and non-SSL traffic.
 
-#### Cloud Router
+![lbtypes](static/lbchose.png)
 
-Cloud Router is a service that allows for dynamic routing exchange between Compute Engine, VPNs, and external networks. It eliminates the need for the creation of static routes. 
+### Cloud Router
 
-#### Cloud NAT
+Cloud Router is a service that allows for dynamic routing exchange between Compute Engine, VPNs, and external networks. It eliminates the need for the creation of static routes.
 
-Cloud [NAT](https://en.wikipedia.org/wiki/Network_address_translation) is a regional service that allows VMs without external IPs to communicate with the internet. It is a fully managed service with built-in autoscalability. It works with both GCE and GKE. It is a better alternative for NAT instances that need to be managed by users.
+### Cloud NAT
 
-##### Google Cloud CDN
+Cloud [NAT](https://en.wikipedia.org/wiki/Network_address_translation) is a regional service that allows VMs without external IPs to communicate with the internet. It is a fully managed service with built-in autoscalability. It works with both GCE and GKE. It is a better alternative for NAT instances that need to be managed by users. There are currently two options for NAT, as follows:
+
+- NAT gateway
+- Cloud NAT (Google Recommended)
+
+### Google Cloud CDN
 
 - leverages Google's globally distributed edge caches to accelerate content delivery for websites and applications served out of Google Compute Engine.
 - Cloud CDN lowers network latency, offloads origins, and reduces serving costs. Once you've set up HTTP(S) Load Balancing, simply enable Cloud CDN with a single checkbox
 
-##### Google Cloud DNS
+### Google Cloud DNS
 
 - scalable, reliable and managed authoritative Domain Naming System (DNS) service running on the same infrastructure as Google.
 - It has low latency, high availability and is a cost-effective way to make application and services available to your users.
 
-##### Identity Aware Proxy (IAP)
+### Identity Aware Proxy (IAP)
 
 IAP is a service that replaces the VPN when a user is working from an untrusted network. It controls access to your application based on user identity, device status, and IP address. It is part of Google's BeyondCorp security model.
 
-##### Cloud Armor
+### Cloud Armor
 
 Cloud Armor is a service that allows protection against infrastructure DDoS attacks using Google's global infrastructure and security systems. It integrates with global HTTP(S) load balancers and blocks traffic based on IP addresses or ranges. Preview mode allows users to analyze the attack pattern without cutting off regular users.
 
@@ -248,7 +257,7 @@ Cloud Armor is a service that allows protection against infrastructure DDoS atta
 - Member : who can get access
 - Policy : join both roles to member
 
-#### GCP Identities
+### GCP Identities
 
 - Google accounts
 - Service accounts
@@ -256,7 +265,7 @@ Cloud Armor is a service that allows protection against infrastructure DDoS atta
 - GSuite domains
 - Cloud Identity domains
 
-#### encryption at rest
+### encryption at rest
 
 - Data at rest is encrypted by default in Google Cloud Platform.
 - Data is encrypted at multiple levels, including the application, infrastructure, and device levels.
