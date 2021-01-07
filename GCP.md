@@ -480,6 +480,8 @@ Suite of ops services providing monitoring, logging, debugging, error reporting,
 |     Large, naturally   ordered data with NoSQL access     |     BigTable                             |      HBase                                        |
 |     Analytics and   complex queries with SQL access       |     BigQuery                             |     AWS   Redshift, Azure Data Warehouse     |
 
+![storage](static/storage.png)
+
 ### GCP Databases
 
 Several factors influence the choice of storage system / databases, such as the following:
@@ -531,7 +533,7 @@ Several factors influence the choice of storage system / databases, such as the 
 	* cloud storage is HDFS compliant same way we can read files like hadoop - hdfs:// vs gs://
 	* cloud object notification --> pubsub or functions 
 
-![Storage](static/GCP_Cloud_Storage_classes.jpg)
+![Storage](static/storageclass.png)
 
 ##### Cloud Memorystore
 
@@ -563,7 +565,7 @@ Reduce latency with scalable, secure, and highly available in-memory service for
 
 ##### Dataflow
 
--  Apache Beam impl for ETL and Streaming both 
+- Apache Beam impl for ETL and Streaming both 
 - unified programming for both batch and streaming. dynamic workflow rebalancing, fully managed and auto scales. Developers can write stream and batch processing code using Java, Python, and SQL. If you need to process the data, for example applying transformations to a stream of IoT data, then Cloud Dataflow is good option.
 
 ##### DataProc
