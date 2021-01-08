@@ -507,31 +507,25 @@ Several factors influence the choice of storage system / databases, such as the 
 - RDBMS - MySQL/ PostGres / SQLServer - 10 tb max data, 208 gb ram, 32 cores,
 - Transactional support, ACID support
 
-##### Spanner
-
-- Google RDBMS / SQL horizontally scalable - the best RDBMS on the Planet
-- **Relational databases can scale horizontally, but that requires server clock synchronization if strong consistency is required among all nodes. Cloud Spanner uses the TrueTime service, which depends on atomic clocks and GPS signals to track time.**
-##### Big table
-- Hbase bigdata key value pair columnar storage 
 ##### Cloud Datastore/Firestore
 
 - Store JSON docs, Document DB like MongoDB, Flexible, scalable
 - NoSQL database for keeping data in sync across client apps, Mobile and web server development, Realtime listeners
-    * Regional	or	multi-regional	resource	scope
-    * Cloud-native	NoSQL
-    * Strong	mobile	support
-    * Offline	support	for	clients
-    * Documents	and	collections
-    * ACID	compliance
+    - Regional or multi-regional resource scope
+    - Cloud-native NoSQL
+    - Strong mobile support
+    - Offline support for clients
+    - Documents and collections
+    - ACID compliance
 
 ##### Cloud Storage - File Storage / Object store
 
-	* cloud storage life cycle - > store to standard --> after 6 months move to nearline storage 1 year --> coldline storage 5 yr - delete it
-	* like S3
-	* store immutable files, read it and delete it, cant edit
-	* 11 9s durability
-	* cloud storage is HDFS compliant same way we can read files like hadoop - hdfs:// vs gs://
-	* cloud object notification --> pubsub or functions 
+ - cloud storage life cycle - > store to standard --> after 6 months move to nearline storage 1 year --> coldline storage 5 yr - delete it
+ - like S3
+ - store immutable files, read it and delete it, cant edit
+ - 11 9s durability
+ - cloud storage is HDFS compliant same way we can read files like hadoop - hdfs:// vs gs://
+ - cloud object notification --> pubsub or functions 
 
 ![Storage](static/storageclass.png)
 
@@ -543,25 +537,40 @@ Reduce latency with scalable, secure, and highly available in-memory service for
 
 ![storage](static/data-lifecycle.svg)
 
+##### Spanner
+
+- Google RDBMS / SQL horizontally scalable - the best RDBMS on the Planet
+- Strongly consistent
+- can host petabytes of data
+- global db with multi regions
+- ACID support with atomic transactions
+- auto replication (R/W, read-only, witness)
+- 99.999% availability
+- charged for data nodes hourly + data storage + egress
+- **Relational databases can scale horizontally, but that requires server clock synchronization if strong consistency is required among all nodes. Cloud Spanner uses the TrueTime service, which depends on atomic clocks and GPS signals to track time.**
+  
 ##### Bigtable - HBase kind...sequential ordering in key column; provides very fast writes as well as reads
 
-   * Regional	resource	scope
-   * Managed	NoSQL
-   * Scalable	but	not	serverless
-   * Powers	well-known apps like gmail, maps etc
-   * HBase	compatible*
-   * Great	for	many	concurrent	reads/writes
+   - Regional resource scope
+   - Managed NoSQL
+   - Scalable but not serverless
+   - Powers well-known apps like gmail, maps etc
+   - HBase compatible
+   - Great for many concurrent reads/writes
+   - Can host petabytes
+   - Great for OLAP/Analytics and realtime access, IOT with high speed txns, time series usecase 
+   - Only provide single row level ACID txn
 
 ##### BigQuery
 
 - EDW Enterprise data warehouse, fully managed, petabyte scale, low cost enterprise data warehouse for analytics, Serverless, There is no infrastructure to manage and you don't need a database administrator, so you can focus on analyzing data to find meaningful insights using familiar SQL.
-    * Regional	resource	scope
-    * OLAP
-    * Scales	to	Petabytes
-    * SQL	(ANSI:2011)	compliant
-    * Dedicated	CLI
-    * Separate compute and storage	tiers
-    * Integrates with ML and BI	offerings
+    - Regional resource scope
+    - OLAP
+    - Scales to Petabytes
+    - SQL (ANSI:2011) compliant
+    - Dedicated CLI
+    - Separate compute and storage tiers
+    - Integrates with ML and BI offerings
 
 ##### Dataflow
 
@@ -582,7 +591,7 @@ Reduce latency with scalable, secure, and highly available in-memory service for
 - You can leverage Cloud Pub/Sub’s flexibility to decouple systems and components hosted on Cloud Platform or elsewhere on the Internet. 
 - By building on the same technology Google uses, Cloud Pub/Sub is designed to provide “at least once” delivery at low latency with on-demand scaling to tens of millions of messages per second.
 - It supports both push and pull subscriptions.
-- *With a push subscription, message data is sent to by HTTP POST request to a push endpoint URL. The push model is useful when a single endpoint processes messages from multiple topics.* 
+- *With a push subscription, message data is sent to by HTTP POST request to a push endpoint URL. The push model is useful when a single endpoint processes messages from multiple topics.*
 - It’s also a good option when the data will be processed by an App Engine Standard application or a Cloud Function. Both of those services bill only when in use, and *pushing a message avoids the need to check the queue continually for messages to pull.*
 - With a pull subscription, a service reads messages from the topic. This is a good approach when processing large volumes of data and efficiency is a top concern.
 
