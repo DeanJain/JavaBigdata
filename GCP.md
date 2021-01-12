@@ -594,6 +594,7 @@ Reduce latency with scalable, secure, and highly available in-memory service for
 - *With a push subscription, message data is sent to by HTTP POST request to a push endpoint URL. The push model is useful when a single endpoint processes messages from multiple topics.*
 - It’s also a good option when the data will be processed by an App Engine Standard application or a Cloud Function. Both of those services bill only when in use, and *pushing a message avoids the need to check the queue continually for messages to pull.*
 - With a pull subscription, a service reads messages from the topic. This is a good approach when processing large volumes of data and efficiency is a top concern.
+- Pub/Sub is billed per message ingestion and delivery. There is also a storage charge for retained acknowledged messages.
 
 #### Dataprep
 
