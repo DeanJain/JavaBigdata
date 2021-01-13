@@ -497,17 +497,17 @@ Several factors influence the choice of storage system / databases, such as the 
 - Does your application require low-latency writes?
 - The answer to these and similar questions will help you decide which storage services to use and how to configure them.
 
-##### Cloud Filestore (NAS)
+#### Cloud Filestore (NAS)
 
 - network-attached storage service that provides a filesystem that is accessible from Compute Engine and Kubernetes Engine. Cloud Filestore is designed to provide low latency and IOPS, so it can be used for databases and other performance-sensitive services.
 - Some typical use cases for Cloud Filestore are home directories and shared directories, web server content, and migrated applications that require a filesystem.
 
-##### Cloud SQL
+#### Cloud SQL
 
 - RDBMS - MySQL/ PostGres / SQLServer - 10 tb max data, 208 gb ram, 32 cores,
 - Transactional support, ACID support
 
-##### Cloud Datastore/Firestore
+#### Cloud Datastore/Firestore
 
 - Store JSON docs, Document DB like MongoDB, Flexible, scalable
 - NoSQL database for keeping data in sync across client apps, Mobile and web server development, Realtime listeners
@@ -518,7 +518,7 @@ Several factors influence the choice of storage system / databases, such as the 
     - Documents and collections
     - ACID compliance
 
-##### Cloud Storage - File Storage / Object store
+#### Cloud Storage - File Storage / Object store
 
  - cloud storage life cycle - > store to standard --> after 6 months move to nearline storage 1 year --> coldline storage 5 yr - delete it
  - like S3
@@ -529,7 +529,7 @@ Several factors influence the choice of storage system / databases, such as the 
 
 ![Storage](static/storageclass.png)
 
-##### Cloud Memorystore
+#### Cloud Memorystore
 
 Reduce latency with scalable, secure, and highly available in-memory service for Redis and Memcached.
 
@@ -537,7 +537,7 @@ Reduce latency with scalable, secure, and highly available in-memory service for
 
 ![storage](static/data-lifecycle.svg)
 
-##### Spanner
+#### Spanner
 
 - Google RDBMS / SQL horizontally scalable - the best RDBMS on the Planet
 - Strongly consistent
@@ -549,7 +549,7 @@ Reduce latency with scalable, secure, and highly available in-memory service for
 - charged for data nodes hourly + data storage + egress
 - **Relational databases can scale horizontally, but that requires server clock synchronization if strong consistency is required among all nodes. Cloud Spanner uses the TrueTime service, which depends on atomic clocks and GPS signals to track time.**
   
-##### Bigtable - HBase kind...sequential ordering in key column; provides very fast writes as well as reads
+#### Bigtable - HBase kind...sequential ordering in key column; provides very fast writes as well as reads
 
    - Regional resource scope
    - Managed NoSQL
@@ -561,7 +561,7 @@ Reduce latency with scalable, secure, and highly available in-memory service for
    - Great for OLAP/Analytics and realtime access, IOT with high speed txns, time series usecase 
    - Only provide single row level ACID txn
 
-##### BigQuery
+#### BigQuery
 
 - EDW Enterprise data warehouse, fully managed, petabyte scale, low cost enterprise data warehouse for analytics, Serverless, There is no infrastructure to manage and you don't need a database administrator, so you can focus on analyzing data to find meaningful insights using familiar SQL.
     - Regional resource scope
@@ -572,20 +572,21 @@ Reduce latency with scalable, secure, and highly available in-memory service for
     - Separate compute and storage tiers
     - Integrates with ML and BI offerings
 
-##### Dataflow
+#### Dataflow
 
 - Apache Beam impl for ETL and Streaming both 
 - unified programming for both batch and streaming. dynamic workflow rebalancing, fully managed and auto scales. Developers can write stream and batch processing code using Java, Python, and SQL. If you need to process the data, for example applying transformations to a stream of IoT data, then Cloud Dataflow is good option.
+- completely serverless and fully managed
 
-##### DataProc
+#### DataProc
 
 - Hadoop / Spark Cluster for batch / hadoop only, Use Google Cloud Dataproc, a managed Spark and Hadoop service, to easily process big datasets using the powerful and open tools in the Apache big data ecosystem.
 
-##### Cloud Datalab
+#### Cloud Datalab
 
 - Analytical / Visual tool, interactive notebook (based on Jupyter) to explore, collaborate, analyze and visualize data. It is integrated with BigQuery and Google Cloud Machine Learning to give you easy access to key data processing services
 
-##### Cloud Pub/Sub
+#### Cloud Pub/Sub
 
 - Event Driven and is a message queue (e.g. Rabbit MQ), serverless, large scale, reliable, real-time messaging service that allows you to send and receive messages between independent applications, 
 - You can leverage Cloud Pub/Sub’s flexibility to decouple systems and components hosted on Cloud Platform or elsewhere on the Internet. 
@@ -595,6 +596,8 @@ Reduce latency with scalable, secure, and highly available in-memory service for
 - It’s also a good option when the data will be processed by an App Engine Standard application or a Cloud Function. Both of those services bill only when in use, and *pushing a message avoids the need to check the queue continually for messages to pull.*
 - With a pull subscription, a service reads messages from the topic. This is a good approach when processing large volumes of data and efficiency is a top concern.
 - Pub/Sub is billed per message ingestion and delivery. There is also a storage charge for retained acknowledged messages.
+
+![pubsub](static/pubsub.png)
 
 #### Dataprep
 
