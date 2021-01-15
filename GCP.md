@@ -658,6 +658,7 @@ This is a fully managed service based on open source Apache Airflow. It allows 
   
 #### Designing a solution infrastructure that meets business requirements
 
+
 - Business use cases and product strategy
 - Cost optimization
 - Supporting the application design
