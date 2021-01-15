@@ -575,16 +575,35 @@ Reduce latency with scalable, secure, and highly available in-memory service for
 #### Dataflow
 
 - Apache Beam impl for ETL and Streaming both 
-- unified programming for both batch and streaming. dynamic workflow rebalancing, fully managed and auto scales. Developers can write stream and batch processing code using Java, Python, and SQL. If you need to process the data, for example applying transformations to a stream of IoT data, then Cloud Dataflow is good option.
+- unified programming for both batch and streaming. dynamic workflow rebalancing
+- fully managed and auto scales. 
+- Developers can write stream and batch processing code using Java, Python, and SQL. If you need to process the data, for example applying transformations to a stream of IoT data, then Cloud Dataflow is good option.
 - completely serverless and fully managed
 
 #### DataProc
 
 - Hadoop / Spark Cluster for batch / hadoop only, Use Google Cloud Dataproc, a managed Spark and Hadoop service, to easily process big datasets using the powerful and open tools in the Apache big data ecosystem.
+- provides spark, hive, pig, hdfs, python
+- leverages GCE underneath
+- can leverage ephemeral nodes for lower cost
+- pay only for use and desroy cluster after job
+
+![proc](static/dataproc.png)
+
+#### Cloud IOT
+
+- fully managed service that allows us to securely connect, manage, and ingest data from devices spread around the globe
+- serverless
+- communicate over HTTP or MQTT
+- MQTT is a Publish/Subscribe protocol and is often used with embedded devices. **MQTT is considered data-focused and better suited to IoT**.
+- device manager: used for registering, configuring, updating, RBAC and communication with IOT devices
+- pricing is based on data volume used per month
+
+![iot](static/iot.png)
 
 #### Cloud Datalab
 
-- Analytical / Visual tool, interactive notebook (based on Jupyter) to explore, collaborate, analyze and visualize data. It is integrated with BigQuery and Google Cloud Machine Learning to give you easy access to key data processing services
+- Analytical / Visual tool, interactive notebook (based on **Jupyter**) to explore, collaborate, analyze and visualize data. It is integrated with BigQuery and Google Cloud Machine Learning to give you easy access to key data processing services
 
 #### Cloud Pub/Sub
 
@@ -596,7 +615,7 @@ Reduce latency with scalable, secure, and highly available in-memory service for
 - It’s also a good option when the data will be processed by an App Engine Standard application or a Cloud Function. Both of those services bill only when in use, and *pushing a message avoids the need to check the queue continually for messages to pull.*
 - With a pull subscription, a service reads messages from the topic. This is a good approach when processing large volumes of data and efficiency is a top concern.
 - Pub/Sub is billed per message ingestion and delivery. There is also a storage charge for retained acknowledged messages.
-
+  
 ![pubsub](static/pubsub.png)
 
 #### Dataprep
@@ -605,7 +624,7 @@ This is a tool that can be used to perform data visualization and exploring with
 
 #### Data Studio
 
-This a tool that allows you to consume data from sources and visualize it in the form of reports and dashboards.
+This a BI (Business Intelligence) tool that allows you to consume data from sources and visualize it in the form of reports and dashboards.
 
 #### Cloud Composer
 
@@ -620,6 +639,23 @@ This is a fully managed service based on open source Apache Airflow. It allows 
 - It helps you understand how long it takes your application to handle incoming requests from users or other applications, and how long it takes to complete operations like RPC calls performed when handling the requests.
 - Currently, Stackdriver Trace collects end-to-end latency data for requests to App Engine URIs and additional data for round-trip RPC calls to App Engine services like Datastore, URL Fetch, and Memcache.
 
+#### GCP ML/AI (Maching Learning)
+
+- **TensorFlow** (for data scientist): This is an option for those who want to work with ML from scratch. It is a software library that's developed and open-sourced by Google. There are more libraries on the market, but this one is the most popular and is used by other cloud providers for their managed ML services.
+- **ML Engine** (for data scientist): This is an option for those who want to train their own models, but who use Google for training and predictions. It is a managed TensorFlow service that offloads all infrastructure and software bits from users.
+  - ML engine can be accessed via cloud console or gcloud ml-engine command
+  - to make predictions use REST API or Python API client
+  - multiple scale tiers with predefined master, workder and parameter servers 
+- **Pretrained ML models** (for developer): This is an option for those who want to leverage ML without having any knowledge of it. It allows Google-developed models to be used to perform predictions.
+- **AutoML** (for developer): This is an option for those who want to leverage ML without having any knowledge of it, and where the pretrained models are not fit for purpose. It allows models to be trained by supporting labeled data.
+
+#### TPU - Tensor Processing Unit
+
+- Google's custom-developed, application-specific integrated circuits (ASICs), which are used to speed up ML workloads
+- enhance the performance of linear algebra computation
+- reduction in model training time from weeks to hours
+- TPU suitable for matrix computations, Models without custom TensorFlow operations inside the main training loop, Models that take a long time to train (in weeks) or with very large batch size
+  
 #### Designing a solution infrastructure that meets business requirements
 
 - Business use cases and product strategy

@@ -13,7 +13,8 @@ The data set on which the machine is trained consists of labelled data or simply
     * Regression
     * Classification
 
-* Regression Algorithms - These algorithms are used to determine the mathematical relationship between two or more variables and the level of dependency between variables. These can be used for predicting an output based on the interdependency of two or more variables.    
+* Regression Algorithms - These algorithms are used to determine the mathematical relationship between two or more variables and the level of dependency between variables. These can be used for predicting an output based on the interdependency of two or more variables.
+* 
 * Types : Linear Regression and Logistic Regression
 
 ##### Linear Regression - 
