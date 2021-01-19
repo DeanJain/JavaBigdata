@@ -646,7 +646,7 @@ This is a fully managed service based on open source Apache Airflow. It allows 
   - ML engine can be accessed via cloud console or gcloud ml-engine command
   - to make predictions use REST API or Python API client
   - multiple scale tiers with predefined master, workder and parameter servers 
-- **Pretrained ML models** (for developer): This is an option for those who want to leverage ML without having any knowledge of it. It allows Google-developed models to be used to perform predictions.
+- **Pretrained ML models** (for developer): This is an option for those who want to leverage ML without having any knowledge of it. It allows Google-developed models to be used to perform predictions. (Speech-to-Text, Text-To-Speech, Translation, Natural Language, Vision, Video Intelligence API, Video Intelligence API etc)
 - **AutoML** (for developer): This is an option for those who want to leverage ML without having any knowledge of it, and where the pretrained models are not fit for purpose. It allows models to be trained by supporting labeled data.
 
 #### TPU - Tensor Processing Unit
