@@ -52,7 +52,7 @@
 - Usually based off OS image
 - Also contains bootloader
 - Can also contain customizations
-- Managed by GCP image service   
+- Managed by GCP image service
 
 **Snapshot**
 - Binary file with exact contents of persistent disk 
@@ -62,6 +62,7 @@
 - Used to back up data from persistent disks
 
 ### Networking
+
 GCP offers two service tiers, as follows:
 
 - **Premium**: The premium tier provides high-performance routing. On top of that, it offers global load balancing and a Content Delivery Network (CDN) service. It is aimed at use cases where global presence is required and has the best user experience in mind. This tier comes with Service Level Agreements (SLAs).
@@ -87,13 +88,14 @@ When you create a new project, a default network is created for you. Subnets are
 Classless Inter-Domain Routing (**CIDR**) is an IP addressing schema that replaces the classful A, B, C system. It is based on variable-length subnet masks. In the case of CIDR, the prefixes of the subnet can be defined as an arbitrary number, making the network mask length more flexible. This means that organizations can make more efficient utilization of the IP address schemas.
 
 It is possible to convert an auto mode network in a custom mode network, but not the other way round. Remember to not use IP ranges that overlap between VPCs or on-premise if you will be connecting those networks either through VPC peering or VPNs.
+
 #### Subnets
 
--  VPC Contains Subnetworks (Subnet)
--  Subnets are Region Specific
--  Subnet be in single zone or multiple zone within the region
--  Using Subnetworks – we can apply single firewall rules all VMs even if they are in different zone.
--  You can create multiple subnets within single region/zone to isolate resources based on different business needs.
+- VPC Contains Subnetworks (Subnet)
+- Subnets are Region Specific
+- Subnet be in single zone or multiple zone within the region
+- Using Subnetworks – we can apply single firewall rules all VMs even if they are in different zone.
+- You can create multiple subnets within single region/zone to isolate resources based on different business needs.
 - Each Subnet has contiguous private RFC1918 IP Space - IP Range
 - Virtual machine (VM) instances in a VPC network can communicate with instances in all other subnets of the same VPC network, regardless of region, using their RFC1918 private IP addresses.
 - You can isolate portions of the network, even entire subnets, using firewall rules.
@@ -112,11 +114,10 @@ VMs can have two types of IP addresses:
 
 - Internal IP address: Assigned within the virtual machine operating system
 - External IP address (optional): Assigned to a virtual machine but not visible in the operating system
-
- - IPv4 uses four octets, such as 192.168.20.10. IPv6 uses eight 16-bit blocks, such as FE80:0000:0000:0000:0202:B3FF:FE1E:8329.
- - When you create a subnet, you will have to specify a range of IP addresses.
- - specify an IP range using the CIDR notation
- - **IPv4 IP address followed by a /, followed by an integer. The integer specifies the number of bits used to identify the subnet (known as subnet mask); the remaining bits are used to determine the host address.**
+- IPv4 uses four octets, such as 192.168.20.10. IPv6 uses eight 16-bit blocks, such asFE80:0000:0000:0000:0202:B3FF:FE1E:8329.
+- When you create a subnet, you will have to specify a range of IP addresses.
+- specify an IP range using the CIDR notation
+- **IPv4 IP address followed by a /, followed by an integer. The integer specifies the number of bitsused to identify the subnet (known as subnet mask); the remaining bits are used to determine the hostaddress.**
 - You can assign certain resources with IP addresses,You can assign external and internal IP addresses to Compute Engine (VM), forwarding rule for external or internal Load balancing resp.
 - Each VM has one primary – internal IP address, one or more secondary IP addresses and one external IP address
 - To communicate with VM within VPC you can use internal IP address and to communicate with internet you must use external IP address
@@ -172,18 +173,18 @@ connect two existing VPCs, regardless of whether they belong to the same project
 - The default network has automatically created firewall rules that are shown in default firewall rules
 - No manually created network has automatically created firewall rules except for a default "allow" rule for outgoing traffic and a default "deny" for incoming traffic.
 - Tags :
-    - Rules can match tags
-    - Tags are user defined Strings
-    - Tags are applied to VM and not to IP.
+  - Rules can match tags
+  - Tags are user defined Strings
+  - Tags are applied to VM and not to IP.
 
 #### Hybrid cloud topology / **Network Links:**
 
 - Virtual Private Network (VPN): VPNs allow a connection between your on-premises network and GCP VPC through an IPsec tunnel over the internet. Only site-to-site VPNs are supported. To establish a VPN connection, there needs to be two gateways on each side of the tunnel. The traffic in transit is encrypted. Both static and dynamic routing are supported, with the former requiring a cloud router. Using a VPN should be the first method of connecting your environment to GCP as it entails the lowest cost. lower-cost option that does not require managing site-to-site connections, but throughput is lower, implemented using IPsec VPNs and supports bandwidths up to 3 Gbps. transmitted over the public Internet
 
 - Cloud Interconnect: If there is a need for low latency and a highly available connection, then interconnect should be considered. In this case, the traffic does not traverse the internet. There are two interconnect options, which are as follows:
-    - Dedicated / Direct Interconnect: 10 Gbps each connection piped directly to a Google datacenter - max 8 connections
-    - Partner Interconnect: 50 Mbps to 10 Gbps piped through a Google partner
-    - Direct peering: works by exchanging Border Gateway Protocol (BGP) routes, which define paths for transmitting data between networks. not recommended...
+  - Dedicated / Direct Interconnect: 10 Gbps each connection piped directly to a Google datacenter - max 8 connections
+  - Partner Interconnect: 50 Mbps to 10 Gbps piped through a Google partner
+  - Direct peering: works by exchanging Border Gateway Protocol (BGP) routes, which define paths for transmitting data between networks. not recommended...
 
 **Topology:**
 
@@ -243,64 +244,10 @@ Cloud [NAT](https://en.wikipedia.org/wiki/Network_address_translation) is a regi
 - scalable, reliable and managed authoritative Domain Naming System (DNS) service running on the same infrastructure as Google.
 - It has low latency, high availability and is a cost-effective way to make application and services available to your users.
 
-### Identity Aware Proxy (IAP)
-
-IAP is a service that replaces the VPN when a user is working from an untrusted network. It controls access to your application based on user identity, device status, and IP address. It is part of Google's BeyondCorp security model.
-
-### Cloud Armor
-
-Cloud Armor is a service that allows protection against infrastructure DDoS attacks using Google's global infrastructure and security systems. It integrates with global HTTP(S) load balancers and blocks traffic based on IP addresses or ranges. Preview mode allows users to analyze the attack pattern without cutting off regular users.
-
-### Cloud IAM
-
-- Roles :  diff roles defined
-- Member : who can get access
-- Policy : join both roles to member
-
-### GCP Identities
-
-- Google accounts
-- Service accounts
-- Google groups
-- GSuite domains
-- Cloud Identity domains
-
-### encryption at rest
-
-- Data at rest is encrypted by default in Google Cloud Platform.
-- Data is encrypted at multiple levels, including the application, infrastructure, and device levels.
-- Data is encrypted in chunks. Each chunk has its own encryption key, which is called a data encryption key.
-- Data encryption keys are themselves encrypted using a key encryption key.
-
-#### Key management
-
-1. default key management - inbuilt in gcp
-2. kms - store keys into gcp kms 
-3. Customer supplied keys - keys are stored on prem and then sent over to services along with request and it not persisted on gcp  
-    
-#### Security Evaluation
-
-1. Penetration testing
-* **Reconnaissance** is the phase at which penetration testers gather information about the target system and the people who operate it or have access to it. This could include phishing attacks that lure a user into disclosing their login credentials or details of software running on their network equipment and servers.
-* **Scanning** is the automated process of probing ports and checking for known and unpatched vulnerabilities.
-* **Gaining access** is the phase at which the attackers exploit the information gathered in the first two phases to access the target system.
-* In the **maintaining access phase**, attackers will do things to hide their presence, such as manipulating logs or preventing attacking processes from appearing in a list of processes running on a server.
-* **Removing footprints**, the final phase, involves eliminating indications that the attackers have been in the system. This can entail manipulating audit logs and deleting data and code used in the attack.
-
-2. Auditing
-   
-* All managed services does automatic audit logging
-* Cloud Audit Logs - service provided by gcp that records administrative actions and data operations. Administrative actions that modify configurations or metadata of resources is always logged by Cloud Audit Logs.
-
-#### SECURITY DESIGN PRINCIPLES
-
-- **Separation of duties (SoD)** is the practice of limiting the responsibilities of a single individual in order to prevent the person from successfully acting alone in a way detrimental to the organization. 
-- **Least privilege** is the practice of granting only the minimal set of permissions needed to perform a duty. IAM roles and permissions are fine-grained and enable the practice of least privilege.
-- **Defense in depth** is the practice of using more than one security control to protect resources and data
-
-### Google COMPUTE ENGINE - Raw Vms
+#### Google COMPUTE ENGINE - Raw Vms
 
 Managed instance groups are the best way to create a cluster of VMs, all running the same services in the same configuration. A managed instance group uses an instance template to specify the configuration of each VM in the group.
+
 ##### login to compute vm instance
 
 gcloud beta compute ssh --zone "us-central1-a" "unicorn-instance-1" --project "perfect-transit-278123"
@@ -456,10 +403,6 @@ A trigger in Cloud Functions is a specification of how to respond to an event. T
 - Built upon an open standard Knative, enabling the portability of your applications
 - Pay per use to 100 millisec
 
-### Deployment Manager
-
-service that allows you to specify infrastructure as code. It is a good practice to define infrastructure as code, since it allows teams to reproduce environments rapidly. It also lends itself to code reviews, version control, and other software engineering practices.
-
 #### _The gsutil command is used only for Cloud Storage_
 
 #### gcloud command, you can interact with other Google Cloud products like the App Engine, Google Kubernetes Engine etc
@@ -470,15 +413,15 @@ Suite of ops services providing monitoring, logging, debugging, error reporting,
 
 ### Storage Usecases
 
-|     Use Case                                              |     Appropriate GCP Service              |     Non-GCP Equivalents                      |
-|-----------------------------------------------------------|------------------------------------------|----------------------------------------------|
-|     Block storage                                         |     Persistent disks   or local SSDs     |     AWS   EBS, Azure Disk                    |
-|     Object/blob   storage                                 |     Cloud Storage   (GCS) buckets        |     AWS   S3, Azure Blob Storage             |
-|     Relational data -   small, regional payloads          |     Cloud SQL                            |     AWS   RDS, Azure SQL Database            |
-|     Relational data -   large, global payloads            |     Cloud Spanner                        |                                              |
-|     HTML/XML documents   with NoSQL access                |     Firestore                            |     AWS   DynamoDB, Azure Cosmos DB          |
-|     Large, naturally   ordered data with NoSQL access     |     BigTable                             |      HBase                                        |
-|     Analytics and   complex queries with SQL access       |     BigQuery                             |     AWS   Redshift, Azure Data Warehouse     |
+| Use Case                                          | Appropriate GCP Service          | Non-GCP Equivalents                  |
+| ------------------------------------------------- | -------------------------------- | ------------------------------------ |
+| Block storage                                     | Persistent disks   or local SSDs | AWS   EBS, Azure Disk                |
+| Object/blob   storage                             | Cloud Storage   (GCS) buckets    | AWS   S3, Azure Blob Storage         |
+| Relational data -   small, regional payloads      | Cloud SQL                        | AWS   RDS, Azure SQL Database        |
+| Relational data -   large, global payloads        | Cloud Spanner                    |                                      |
+| HTML/XML documents   with NoSQL access            | Firestore                        | AWS   DynamoDB, Azure Cosmos DB      |
+| Large, naturally   ordered data with NoSQL access | BigTable                         | HBase                                |
+| Analytics and   complex queries with SQL access   | BigQuery                         | AWS   Redshift, Azure Data Warehouse |
 
 ![storage](static/storage.png)
 
@@ -655,9 +598,94 @@ This is a fully managed service based on open source Apache Airflow. It allows 
 - enhance the performance of linear algebra computation
 - reduction in model training time from weeks to hours
 - TPU suitable for matrix computations, Models without custom TensorFlow operations inside the main training loop, Models that take a long time to train (in weeks) or with very large batch size
+
+### Google Cloud Security
+
+#### GCP Identity
+
+- Cloud Identity is a key GCP service that's offered by Google as an Identity as a Service (IDaaS) solution
+- Free and Premium Tier
+- Google Cloud Directory Sync (GCDS) can synchronize an organization's AD or LDAP database onto Cloud Identity and it is highly scalable. Synchronization is only one-way, that is, from on premises to GCP, and so your on-site DB is never compromised
+
+- Google accounts
+- Service accounts
+- Google groups
+- GSuite domains
+- Cloud Identity domains
+
+#### Cloud IAM
+
+- Roles :  diff roles defined
+- Member : who can get access
+- Policy : join both roles to member
+
+#### encryption at rest
+
+- Data at rest is encrypted by default in Google Cloud Platform.
+- Data is encrypted at multiple levels, including the application, infrastructure, and device levels.
+- Data is encrypted in chunks. Each chunk has its own encryption key, which is called a data encryption key.
+- Data encryption keys are themselves encrypted using a key encryption key.
+
+#### Key management
+
+1. default key management - inbuilt in gcp
+2. kms - store keys into gcp kms 
+3. Customer supplied keys - keys are stored on prem and then sent over to services along with request and it not persisted on gcp  
+
+#### Identity Aware Proxy (IAP)
+
+IAP is a service that replaces the VPN when a user is working from an untrusted network. It controls access to your application based on user identity, device status, and IP address. It is part of Google's BeyondCorp security model.
+
+#### Cloud Armor
+
+Cloud Armor is a service that allows protection against infrastructure DDoS attacks using Google's global infrastructure and security systems. It integrates with global HTTP(S) load balancers and blocks traffic based on IP addresses or ranges. Preview mode allows users to analyze the attack pattern without cutting off regular users.
+
+#### GCP Management Options
+
+- APIs
+  
+  APIs available over REST to create GCp resources, can use API key, OAuth or service accounts to autz and create resources
+- Cloud Deployment Manager
+  
+    Service that allows you to specify infrastructure as code (IaC) in YAML. It is a good practice to define infrastructure as code, since it allows teams to reproduce environments rapidly. It also lends itself to code reviews, version control, and other software engineering practices.
+    - It leverages **gcloud** deployment-manager   command
+    - Full / multi env deployment can be done using templates (templates are written in Python/Jinja)
+
+- Cloud Shell
+  
+  Directly login using cloud console and open shell embedded into browser, provides 5GB local storage with a tiny GCE instance to run commandline scripts, you can upload download scripts open them in vim and run them
+
+- GCP SDK
+  
+  set of tools which can be installed on local to interact with GCP via commandline
+  
+  1. gcloud: A command-line tool for interacting with most GCP services (GCE, SQL, GKE, DataProc, DNS,Deployment Manager, Code/git, Docket Repo)
+  2. gsutil: A command-line python tool for working with Cloud Storage
+  3. bq: A command-line tool for working with BigQuery
+  4. cbt: Commandline tool written in Golang for BigTable
+  
+#### Security Evaluation
+
+##### Penetration testing
+
+- **Reconnaissance** is the phase at which penetration testers gather information about the target system and the people who operate it or have access to it. This could include phishing attacks that lure a user into disclosing their login credentials or details of software running on their network equipment and servers.
+- **Scanning** is the automated process of probing ports and checking for known and unpatched vulnerabilities.
+- **Gaining access** is the phase at which the attackers exploit the information gathered in the first two phases to access the target system.
+- In the **maintaining access phase**, attackers will do things to hide their presence, such as manipulating logs or preventing attacking processes from appearing in a list of processes running on a server.
+- **Removing footprints**, the final phase, involves eliminating indications that the attackers have been in the system. This can entail manipulating audit logs and deleting data and code used in the attack.
+
+##### Auditing
+
+- All managed services does automatic audit logging
+- Cloud Audit Logs - service provided by gcp that records administrative actions and data operations. Administrative actions that modify configurations or metadata of resources is always logged by Cloud Audit Logs.
+
+#### SECURITY DESIGN PRINCIPLES
+
+- **Separation of duties (SoD)** is the practice of limiting the responsibilities of a single individual in order to prevent the person from successfully acting alone in a way detrimental to the organization. 
+- **Least privilege** is the practice of granting only the minimal set of permissions needed to perform a duty. IAM roles and permissions are fine-grained and enable the practice of least privilege.
+- **Defense in depth** is the practice of using more than one security control to protect resources and data
   
 #### Designing a solution infrastructure that meets business requirements
-
 
 - Business use cases and product strategy
 - Cost optimization
@@ -704,10 +732,10 @@ Migrations typically require the transfer of large volumes of data and depends o
 - Workflow time constraints on data transfer
 - Location of data
 
-* Google Transfer Service - allows for the transfer of data from an HTTP/S location, an AWS S3 bucket, or a Cloud Storage bucket
-* gsutil command-line utility
-* Google Transfer Appliance
-* Third-party vendors
+- Google Transfer Service - allows for the transfer of data from an HTTP/S location, an AWS S3 bucket, or a Cloud Storage bucket
+- gsutil command-line utility
+- Google Transfer Appliance
+- Third-party vendors
 
 #### Migration Planning
 
@@ -719,19 +747,13 @@ Migrations typically require the transfer of large volumes of data and depends o
 
 ##### five-step migration planning
 
-* Assessment
-* Pilot
-* Data migration
-* Application migration
-* Optimization
+- Assessment
+- Pilot
+- Data migration
+- Application migration
+- Optimization
 
-#### GCP SDK COMPONENTS
-
-- gcloud: A command-line tool for interacting with most GCP services
-- gsutil: A command-line tool for working with Cloud Storage
-- bq: A command-line tool for working with BigQuery
-
-### Google Architect Certification Case Studies:
+### Google Architect Certification Case Studies
 
 #### Dress4Win https://cloud.google.com/certification/guides/cloud-architect/casestudy-dress4win-rev2
 
