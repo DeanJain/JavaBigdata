@@ -411,6 +411,9 @@ A trigger in Cloud Functions is a specification of how to respond to an event. T
 
 Suite of ops services providing monitoring, logging, debugging, error reporting, tracing, alerting and profiling. Integrates with several third-party tools
 
+- used for monitoring, logging and APM
+- agentless, more detailed will need agent collectd for monitoring and fluentd for logging
+
 ### Storage Usecases
 
 | Use Case                                          | Appropriate GCP Service          | Non-GCP Equivalents                  |
