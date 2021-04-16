@@ -245,3 +245,4 @@ spark-warehouse/
 .settings/org.eclipse.m2e.core.prefs
 .classpath
 .project
+.vscode/launch.json

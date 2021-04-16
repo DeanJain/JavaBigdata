@@ -10,8 +10,3 @@
 * [Databases](DB.md)
 * [Architecture](Architecture.md)
 * [Google Cloud Platform](GCP.md)
-* Apache Spark
-* ElasticSearch
-* Kafka
-* MicroServices
-* Kotlin

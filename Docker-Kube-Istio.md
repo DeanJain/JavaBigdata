@@ -1,5 +1,10 @@
+## How Linux Kernel Cgroups And Namespaces Made Modern Containers Possible
 
-# While virtual machines virtualize hardware, containers virtualize the operating system.
+- **cgroups**, which stands for control groups, are a kernel mechanism for limiting and measuring the total resources used by a group of processes running on a system. For example, you can apply CPU, memory, network or IO quotas. cgroups were originally developed by Paul Menage and Rohit Seth of Google, and their first features were merged into Linux 2.6.24.
+
+- **Namespaces** are a kernel mechanism for limiting the visibility that a group of processes has of the rest of a system. For example you can limit visibility to certain process trees, network interfaces, user IDs or filesystem mounts. namespaces were originally developed by Eric Biederman, and the final major namespace was merged into Linux 3.8.
+
+#### While virtual machines virtualize hardware, containers virtualize the operating system.
 
 Containers bring the following advantages:
 
