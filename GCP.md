@@ -407,12 +407,6 @@ A trigger in Cloud Functions is a specification of how to respond to an event. T
 
 #### gcloud command, you can interact with other Google Cloud products like the App Engine, Google Kubernetes Engine etc
 
-### Google Stackdriver
-
-Suite of ops services providing monitoring, logging, debugging, error reporting, tracing, alerting and profiling. Integrates with several third-party tools
-
-- used for monitoring, logging and APM
-- agentless, more detailed will need agent collectd for monitoring and fluentd for logging
 
 ### Storage Usecases
 
@@ -578,12 +572,16 @@ This is a fully managed service based on open source Apache Airflow. It allows 
 
 #### Stackdriver
 
+Suite of ops services providing monitoring, logging, debugging, error reporting, tracing, alerting and profiling. Integrates with several third-party tools
+
+- used for monitoring, logging and APM
+- agentless, more detailed will need agent collectd for monitoring and fluentd for logging
 - Logging receives, indexes, and stores log entries from many sources, including Google Cloud Platform, Amazon Web Services, VM instances running the Stackdriver Logging fluentd agent, and user applications.
 - All log entries in Stackdriver Logging are represented using a single data type, LogEntry, which defines certain common data for all log entries as well as carrying individual payloads.
-
 - Stackdriver Trace is a distributed tracing system for Google Cloud Platform that collects latency data from Google App Engine, Google HTTP(S) load balancers, and applications instrumented with the Stackdriver Trace SDKs, and displays it in near real time in the Google Cloud Platform Console.
 - It helps you understand how long it takes your application to handle incoming requests from users or other applications, and how long it takes to complete operations like RPC calls performed when handling the requests.
 - Currently, Stackdriver Trace collects end-to-end latency data for requests to App Engine URIs and additional data for round-trip RPC calls to App Engine services like Datastore, URL Fetch, and Memcache.
+- APM : trace, debugger and profiler => tracer need to use Stackdriver Trace SDK or API, debugger allows debugging live apps without restarting, catpure snapshoot, call stack and local vars etc, profiler allows for checking how much resources your code is using needs a profiler agent
 
 #### GCP ML/AI (Maching Learning)
 
