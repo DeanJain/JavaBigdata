@@ -1,6 +1,13 @@
 
 ![Services Architecture Classification](static/ServicesArch.png)
 
+
+- SOA : application components provide services to other components via a communications protocol over a network. The communication can involve either simple data passing or it could involve two or more services coordinating connecting services to each other. it uses Enterprise Service Bus (ESB) which is a style of the integration architecture that allows communication via a common communication bus that consists of a variety of point-to-point connections between providers and consumers . In addition to above, the data storage is shared within all services in SOA
+
+Microsercice vs SOA:
+- SOA is ESB dependent and can be single point of failure (SPOF)
+- 
+
 Which Services Arch fits your needs:
 ![Services Architecture Pros and Cons](static/ServicesArchProsCons.png)
 
