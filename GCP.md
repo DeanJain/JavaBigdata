@@ -824,6 +824,12 @@ Observations:
  - Our investors want more key performance indicators (KPIs) to evaluate the speed and stability of the game, as well as other metrics that provide deeper insight into usage patterns
  - our current technology stack cannot provide the scale we need, so we want to replace MySQL and move to an environment that provides autoscaling, low-latency load balancing, and frees us up from managing physical servers.
 
+Solution:
+https://cloud.google.com/architecture/mobile-gaming-analysis-telemetry
+
+![ref arch](static/telemetry-01-reference-architecture.png)
+
+
 
 #### TerramEarth https://cloud.google.com/certification/guides/cloud-architect/casestudy-terramearth-rev2
 Existing:
