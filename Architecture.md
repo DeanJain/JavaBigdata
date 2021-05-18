@@ -2,29 +2,21 @@
 ![Services Architecture Classification](static/ServicesArch.png)
 
 
-- SOA : application components provide services to other components via a communications protocol over a network. The communication can involve either simple data passing or it could involve two or more services coordinating connecting services to each other. it uses Enterprise Service Bus (ESB) which is a style of the integration architecture that allows communication via a common communication bus that consists of a variety of point-to-point connections between providers and consumers . In addition to above, the data storage is shared within all services in SOA
+- SOA : application components provide services to other components via a communications protocol over a network. The communication can involve either simple data passing or it could involve two or more services coordinating connecting services to each other. it uses Enterprise Service Bus (ESB) which is a style of the integration architecture that allows communication via a common communication bus that consists of a variety of point-to-point connections between providers and consumers . In addition to above, the data storage is shared within all services in SOA (Same DB)
 
-Microsercice vs SOA:
+Microservice (MS) vs SOA:
 - SOA is ESB dependent and can be single point of failure (SPOF)
-- 
+- No noisy neighbour problem with MS while SOA does
+- Size and Scope is main diff, SOA can be either a monolith or it can be comprised of multiple microservices
+- MS has synchronous calls which introduce real-time dependencies, resulting in a loss of resilience. It may also cause latency, which impacts performance
+- SOAs operate more slowly than microservices architectures, which minimize sharing in favor of duplication.
 
-Which Services Arch fits your needs:
-![Services Architecture Pros and Cons](static/ServicesArchProsCons.png)
+Service-Based Architecture (Macro Service):
+- Service-based architectures limit the number of network calls by grouping much larger chunks of code together by domain. 
+- This should result in better performance. What might have been a call graph of a dozen related microservices becomes method calls within a single service.
+- A service-based architecture provides more delivery speed than a monolith or service-oriented architecture (SOA) by breaking the code apart in the domain-centric way advocated by microservice and DDD proponents
+- It decreases the testing surface to a single component to be released belonging to a single domain 
 
-#### 12 Factor App:
-![12f](static/12f.png)
-
-#### OOPs SOLID Principles:
-* Single Responsibility Principle - (SRP) states that a class should have exactly one responsibility
-* Open/Closed Principle - class (or function) should be open for extension but closed for modification
-* Liskov Substitution Principle - LSP states that if type S inherits from type T then both T and S should be interchangeable in functions that expect T.
-* Interface Segregation Principle - It says to avoid writing monstrous interfaces that burden classes with responsibilities they don't need or want. 
-* Dependency Inversion Principle - Instead of writing code that refers to actual classes, you should instead write code that refers to interfaces or perhaps abstract classes
-![solid](static/solid.png)
-
-#### DRY - Dont Repeat Yourself!
-
-#### KISS - Keep It Simple Stupid!
 
 #### CQRS - Command Query Responsibility Segregation with Event Sourcing
 
@@ -69,12 +61,36 @@ Compensations should be designed carefully.
 4. Design fault-tolerant systems by compensations and reconciliation processes to keep the system consistent
 5. Eventual consistent patterns requires a change in mindset for design and development
 
-
 #### EDD Event Driven Design
 
+1. Consume and Project -> publish to Kafka and subscriber reads and wrties to a DB to provide an eventual consistency
+2. E2E event driven -> publish to kafka, subscriber to kafka and notify back to consumer via websocket/hooks (no pollling from client, we push them when we are done
+3. In Memroy K:V Pair -> Publish to kafka (compated topic), subscriber reads and update the inmemory K:V store, so lookups have 0 latency (being inmemory) and can also have a persisted backup storage on Kafka (Compated topic which ensure at least latest value of keys are not deleted)
+4. 
 
 #### DDD Domain Driven Design
 
+
+
+#### Which Services Arch fits your needs:
+![Services Architecture Pros and Cons](static/ServicesArchProsCons.png)
+
+#### 12 Factor App:
+![12f](static/12f.png)
+
+#### OOPs SOLID Principles:
+* Single Responsibility Principle - (SRP) states that a class should have exactly one responsibility
+* Open/Closed Principle - class (or function) should be open for extension but closed for modification
+* Liskov Substitution Principle - LSP states that if type S inherits from type T then both T and S should be interchangeable in functions that expect T.
+* Interface Segregation Principle - It says to avoid writing monstrous interfaces that burden classes with responsibilities they don't need or want. 
+* Dependency Inversion Principle - Instead of writing code that refers to actual classes, you should instead write code that refers to interfaces or perhaps abstract classes
+
+![solid](static/solid.png)
+
+
+#### DRY - Dont Repeat Yourself!
+
+#### KISS - Keep It Simple Stupid!
 
 #### Database Normalization:
 - 1NF: no repeated values in same column, like a comma separated etc
