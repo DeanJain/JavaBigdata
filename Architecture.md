@@ -2,16 +2,17 @@
 ![Services Architecture Classification](static/ServicesArch.png)
 
 
-- SOA : application components provide services to other components via a communications protocol over a network. The communication can involve either simple data passing or it could involve two or more services coordinating connecting services to each other. it uses Enterprise Service Bus (ESB) which is a style of the integration architecture that allows communication via a common communication bus that consists of a variety of point-to-point connections between providers and consumers . In addition to above, the data storage is shared within all services in SOA (Same DB)
+####  SOA 
+  Application components provide services to other components via a communications protocol over a network. The communication can involve either simple data passing or it could involve two or more services coordinating connecting services to each other. it uses Enterprise Service Bus (ESB) which is a style of the integration architecture that allows communication via a common communication bus that consists of a variety of point-to-point connections between providers and consumers . In addition to above, the data storage is shared within all services in SOA (Same DB)
 
-Microservice (MS) vs SOA:
+#### Microservice (MS) vs SOA:
 - SOA is ESB dependent and can be single point of failure (SPOF)
 - No noisy neighbour problem with MS while SOA does
 - Size and Scope is main diff, SOA can be either a monolith or it can be comprised of multiple microservices
 - MS has synchronous calls which introduce real-time dependencies, resulting in a loss of resilience. It may also cause latency, which impacts performance
 - SOAs operate more slowly than microservices architectures, which minimize sharing in favor of duplication.
 
-Service-Based Architecture (Macro Service):
+#### Service-Based Architecture (Macro Service):
 - Service-based architectures limit the number of network calls by grouping much larger chunks of code together by domain. 
 - This should result in better performance. What might have been a call graph of a dozen related microservices becomes method calls within a single service.
 - A service-based architecture provides more delivery speed than a monolith or service-oriented architecture (SOA) by breaking the code apart in the domain-centric way advocated by microservice and DDD proponents
@@ -62,14 +63,23 @@ Compensations should be designed carefully.
 5. Eventual consistent patterns requires a change in mindset for design and development
 
 #### EDD Event Driven Design
+An event-driven architecture is made up of event producers and event consumers, its async and loosely coupled because event producers don’t know which event consumers are listening for an event, and the event doesn’t know what the consequences are of its occurrence.
 
-1. Consume and Project -> publish to Kafka and subscriber reads and wrties to a DB to provide an eventual consistency
-2. E2E event driven -> publish to kafka, subscriber to kafka and notify back to consumer via websocket/hooks (no pollling from client, we push them when we are done
-3. In Memroy K:V Pair -> Publish to kafka (compated topic), subscriber reads and update the inmemory K:V store, so lookups have 0 latency (being inmemory) and can also have a persisted backup storage on Kafka (Compated topic which ensure at least latest value of keys are not deleted)
-4. 
+##### Pub/sub model
+This is a messaging infrastructure based on subscriptions to an event stream. With this model, after an event occurs, or is published, it is sent to subscribers that need to be informed.
+
+##### Event streaming model
+With an event streaming model, events are written to a log. Event consumers don’t subscribe to an event stream. Instead, they can read from any part of the stream and can join the stream at any time. 
+
+1. **Consume and Project** -> publish to Kafka and subscriber reads and wrties to a DB to provide an eventual consistency
+2. **E2E Event Driven** -> publish to kafka, subscriber to kafka and notify back to consumer via websocket/hooks (no pollling from client, we push them when we are done
+3. **In Memroy K:V Pair** -> Publish to kafka (compated topic), subscriber reads and update the inmemory K:V store, so lookups have 0 latency (being inmemory) and can also have a persisted backup storage on Kafka (Compated topic which ensure at least latest value of keys are not deleted)
+4. **Schedule and Forget** -> Scheduler to publish to kafka and a subscriber async processes it with retry and exponential backoff to gurantee eventaul processing and also ensure sequential / ordered processing (with in same partition)
+5. **Events in transaction** -> 
+   1. Kafka support idempotence with newer version and can be used to support exactly once delivery **(enable.idempotence=true)**
+   2. Kafka also support a new **atomic transaction API** which can be used to write a batch of events into kafka multi partitions in a way that either all are written successfully or none, consumer can also read all those events as a single transaction, making an end to end exactly once semantics.
 
 #### DDD Domain Driven Design
-
 
 
 #### Which Services Arch fits your needs:
