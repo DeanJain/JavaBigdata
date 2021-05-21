@@ -14,10 +14,10 @@ public class WordReverse {
 
         Scanner scan = new Scanner(System.in);
         String input = scan.nextLine();
-
+        char[] s = input.toCharArray();
         //  wordReverse(input);
-
-        System.out.println("reverse in place = " + reverseStringInPlace(input));
+   //     System.out.println("reverse in place = " + reverseStringInPlace(input));
+        reverseStringInPlace(s);
     }
 
     private static void wordReverse(String input) {
@@ -35,19 +35,24 @@ public class WordReverse {
 
 
     private static String reverseStringInPlace(String input) {
-
         StringBuilder sb = new StringBuilder(input);
-
         for (int i = 0; i < sb.length() / 2; i++) {
             char c = sb.charAt(i);
             int otherEnd = sb.length() - i - 1;
             sb.setCharAt(i, sb.charAt(otherEnd));
             sb.setCharAt(otherEnd, c);
         }
-
         return sb.toString();
-
     }
 
+    private static void reverseStringInPlace(char[] s) {
+        for (int i = 0; i < s.length / 2; i++) {
+            char c = s[i];
+            int otherEnd = s.length - i - 1;
+            s[i] = s[otherEnd];
+            s[otherEnd] = c;
+        }
+        System.out.println(s);
+    }
 
 }

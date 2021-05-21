@@ -79,9 +79,6 @@ With an event streaming model, events are written to a log. Event consumers don�
    1. Kafka support idempotence with newer version and can be used to support exactly once delivery **(enable.idempotence=true)**
    2. Kafka also support a new **atomic transaction API** which can be used to write a batch of events into kafka multi partitions in a way that either all are written successfully or none, consumer can also read all those events as a single transaction, making an end to end exactly once semantics.
 
-#### DDD Domain Driven Design
-
-
 #### Which Services Arch fits your needs:
 ![Services Architecture Pros and Cons](static/ServicesArchProsCons.png)
 
@@ -101,6 +98,38 @@ With an event streaming model, events are written to a log. Event consumers don�
 #### DRY - Dont Repeat Yourself!
 
 #### KISS - Keep It Simple Stupid!
+
+#### Conways Law: 
+Any organization that designs a system (defined broadly) will produce a design whose structure is a copy of the organization's communication structure. The law is based on the reasoning that in order for a software module to function, multiple authors must communicate frequently with each other. Therefore, the software interface structure of a system will reflect the social boundaries of the organizations that produced it, across which communication is more difficult. 
+
+#### DDD Domain Driven Design
+- Domain-driven design (DDD) is the concept that the structure and language of software code (class names, class methods, class variables) should match the business domain
+- DDD proposes to align business and technical concerns through analysis of the business domain, modeling of the problem domain—the problems that should be solved by the software—and making design decisions according to the model of the problem domain. It provides tools for making design decisions on two levels: strategic and tactical.
+- Domain-driven design proposes a better way of getting the knowledge from domain experts to software engineers—using a **ubiquitous language**.
+  
+- **Strategic Design** patterns and practices provide a framework for analyzing a company’s business domain and distilling the software’s problem domain—i.e., *what problems should be solved* or addressed by the software.The strategic tools also provide a robust framework for making **high-level architectural** decisions, including tasks such as decomposing a system into modular components and mapping the interaction patterns between them.
+
+- **Tactical Design** patterns support making **low-level design** decisions relating to the implementation of the system’s components and their business logic, The goal of tactical design is to architect the solution so that it *fits the problem domain as closely as possible*.
+
+- Domains -> Business Domain, Subdomain (Core, Generic, Supporting)
+
+
+
+##### DDD Building Blocks
+- Entity (Diff POJO)
+An object that is not defined by its attributes, but rather by a thread of continuity and its **identity**.
+- Value object (POJO Instance)
+A value object is an object that contains attributes but has no conceptual identity. They should be treated as immutable.
+- Aggregate (Inheritance OOPs)
+A group of objects that are bound together by a root entity: the aggregate root. Objects outside the aggregate are allowed to hold references to the root but not to any other object of the aggregate. The aggregate root is responsible for checking the consistency of changes in the aggregate.
+- Domain Event
+A domain object that defines an event (something that happens). A domain event is an event that domain experts care about.
+- Service
+When an operation does not conceptually belong to any object. Following the natural contours of the problem, you can implement these operations in services. 
+- Repository
+Methods for retrieving domain objects should delegate to a specialized Repository object such that alternative storage implementations may be easily interchanged.
+- Factory
+Methods for creating domain objects should delegate to a specialized Factory object such that alternative implementations may be easily interchanged.
 
 #### Database Normalization:
 - 1NF: no repeated values in same column, like a comma separated etc
@@ -130,13 +159,13 @@ Decorator Pattern -
 Flyweight Pattern - 
 * make flyweight objects by sharing as much value as possible in memory
 * ex Integer in Java stores a cache of all integer objects which are shared using valueOf
-* share same objects across needs the object to be immutable 
+* share same objects across 
+* needs the object to be immutable 
 
 Singleton Pattern - 
 * One instance per JVM reused by multiple threads
 * Enum is the best way to implement singleton
-* other ways have issues due to serialization and reflection 
-* serialization would create new objects even when its a singleton class
+* other ways have issues due to serialization and reflection, serialization would create new objects even when its a singleton class
 * public enum singleton { INSTANCE; } 
 * its good only for small concurrent users, for building highly scalable concurrent systems stay away from singleton
 
