@@ -8,6 +8,11 @@
 
 ![Java Collections Big Picture](static/JavaCollectionCheatSheet.png)
 
+![BigO Data Strcuture](static/bigODS.png)
+
+![BigO Sorting](static/BigOSort.png)
+
+
 #### Arrays / ArrayList ->
 * Random access , direct access by memory calculation (mem ref + Data type * index)
 * great for fixed length/elements with no/fewer updates/deletes
@@ -94,18 +99,7 @@ Core Algos : (BIQM) Bubble - Insertion - Quick - Merge
 	* Pivot anywhere mostly in middle or end/right, lower list adds < pivot  and higher list add >= pivot
 	* Recursively call function for all lower list.
 	* Add pivot 
-	* Recursively call function for all higher list.
-
-#### Cost of the Sorting Algos - The BigO:
-
-            Algorithm	Time Complexity			        Space Complexity
-	                        Best	    Average	        Worst	    Worst
-            Quicksort	Ω(n log(n))	    Θ(n log(n))	    O(n^2)	    O(log(n))
-            Mergesort	Ω(n log(n))	    Θ(n log(n))	    O(n log(n))	O(n)
-            Heapsort	Ω(n log(n))	    Θ(n log(n))	    O(n log(n))	O(1)
-            Bubble Sort	Ω(n)	        Θ(n^2)	        O(n^2)	    O(1)
-            Insertion Sort	Ω(n)	    Θ(n^2)	        O(n^2)	    O(1)
-            Selection Sort	Ω(n^2)	    Θ(n^2)          O(n^2)	    O(1)
+	* Recursively call function for all higher list
 
 #### Searching:
 
@@ -116,7 +110,7 @@ Binary Search - O(log n):
    * return true when match found or false when list is empty or null
 
 
-### Core Concepts -
+### Core Concepts
 
 #### String interning / constants pool (constant pool storage and lookup) -
 * When the String class is loaded by the JVM, it holds all the literals in a constants pool. 
@@ -125,12 +119,12 @@ Binary Search - O(log n):
 * Strings as stored in PermGen space and not heap as they are reused and need to survive GC and should be final constant to be immutable
 * The String constant pool is an implementation of the `Flyweight Pattern`
 
-#### Generics - 
+#### Generics 
 * Generics are also known as parameterized types
 * By using generics, any potential exceptions at run time are moved to actual compiler errors
 * Explicitly telling compiler with generics / types on what to expect in a collection, eliminate need for casting and also make the collection strongly typed.
 
-#### Exceptions -
+#### Exceptions
 * Throwable 
     * Exception -> should be handled by programmer
         * RuntimeException like NP Exception
