@@ -113,8 +113,6 @@ Any organization that designs a system (defined broadly) will produce a design w
 
 - Domains -> Business Domain, Subdomain (Core, Generic, Supporting)
 
-
-
 ##### DDD Building Blocks
 - Entity (Diff POJO)
 An object that is not defined by its attributes, but rather by a thread of continuity and its **identity**.
@@ -130,6 +128,51 @@ When an operation does not conceptually belong to any object. Following the natu
 Methods for retrieving domain objects should delegate to a specialized Repository object such that alternative storage implementations may be easily interchanged.
 - Factory
 Methods for creating domain objects should delegate to a specialized Factory object such that alternative implementations may be easily interchanged.
+
+#### CAP / Brewer's theorem 
+It is impossible for a distributed data store to simultaneously provide more than two out of the following three guarantees:
+- **Consistency**: Every read receives the most recent write or an error
+- **Availability**: Every request receives a (non-error) response, without the guarantee that it contains the most recent write
+- **Partition tolerance**: The system continues to operate despite an arbitrary number of messages being dropped (or delayed) by the network between nodes
+
+When a network partition failure happens should we decide to:
+- Cancel the operation and thus decrease the availability but ensure consistency
+- Proceed with the operation and thus provide availability but risk inconsistency
+
+The CAP theorem implies that in the presence of a network partition, **one has to choose between consistency and availability.**
+
+CAP is frequently misunderstood as if one has to choose to abandon one of the three guarantees at all times. In fact, the choice is really between consistency and availability only when a network partition or failure happens; at all other times, no trade-off has to be made.
+
+- Database systems designed with traditional ACID guarantees in mind such as **RDBMS choose consistency over availability**
+-  systems designed around the BASE philosophy, common in the **NoSQL choose availability over consistency**
+-  Blockchain technology sacrifices consistency for availability and partition tolerance, but is achieved through validation among the nodes over time with the resulting impression that the theorem is not valid.
+
+
+#### BASE (Basically Available, Soft State, Eventual Consistency)
+Eventual consistency is a consistency model used in distributed computing to achieve high availability that informally guarantees that, if no new updates are made to a given data item, eventually all accesses to that item will return the last updated value. Its also called optimistic replication, is widely deployed in distributed systems, A system that has achieved eventual consistency is often said to have converged, or achieved replica convergence.
+- **Basically Available**: basic reading and writing operations are available as much as possible (using all nodes of a database cluster), but without any kind of consistency guarantees (the write may not persist after conflicts are reconciled, the read may not get the latest write)
+- **Soft state**: without consistency guarantees, after some amount of time, we only have some probability of knowing the state, since it may not yet have converged
+- **Eventually consistent**: If the system is functioning and we wait long enough after any given set of inputs, we will eventually be able to know what the state of the database is, and so any further reads will be consistent with our expectations
+
+#### Conflict resolution for distributed data/systems
+In order to ensure replica convergence, a system must reconcile differences between multiple copies of distributed data. This consists of two parts:
+
+- exchanging versions or updates of data between servers (often known as anti-entropy)
+- choosing an appropriate final state when concurrent updates have occurred, called reconciliation.
+- A widespread approach is "last writer wins". Another is to invoke a user-specified conflict handler. Timestamps and vector clocks are often used to detect concurrency between updates. Some people use "first writer wins" in situations where "last writer wins" is unacceptable.
+
+Reconciliation of concurrent writes must occur sometime before the next read, and can be scheduled at different instants:
+
+- Read repair: The correction is done when a read finds an inconsistency. This slows down the read operation.
+- Write repair: The correction takes place during a write operation, if an inconsistency has been found, slowing down the write operation.
+- Asynchronous repair: The correction is not part of a read or write operation.
+
+
+#### CRDT - conflict-free replicated data type
+In distributed computing, a conflict-free replicated data type (CRDT) is a data structure which can be replicated across multiple computers in a network, where the replicas can be **updated independently and concurrently without coordination between the replicas**, and where it is always mathematically possible to resolve inconsistencies that might come up. The NoSQL distributed databases Redis, Riak and Cosmos DB have CRDT data types.
+
+
+
 
 #### Database Normalization:
 - 1NF: no repeated values in same column, like a comma separated etc

@@ -10,9 +10,6 @@
 
 ![BigO Data Strcuture](static/bigODS.png)
 
-![BigO Sorting](static/BigOSort.png)
-
-
 #### Arrays / ArrayList ->
 * Random access , direct access by memory calculation (mem ref + Data type * index)
 * great for fixed length/elements with no/fewer updates/deletes
@@ -80,6 +77,8 @@
 ### Sorting:
 Comparable - natural ordering, example Arrays.sort(), String class.
 Comparator - controlled custom impl - Collections.sort(list, ComparatorIMPL)
+
+![BigO Sorting](static/BigOSort.png)
 
 Core Algos : (BIQM) Bubble - Insertion - Quick - Merge
 
