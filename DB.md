@@ -18,3 +18,11 @@ ACID (atomicity, consistency, isolation, durability) is a set of properties of d
 - **Consistency**: ensures that a transaction can only bring the database from one valid state to another, maintaining database invariants: any data written to the database must be valid according to all defined rules, including constraints, cascades, triggers, and any combination thereof. This prevents database corruption by an illegal transaction, but does not guarantee that a transaction is correct.
 - **Isolation**: Transactions are often executed concurrently (e.g., multiple transactions reading and writing to a table at the same time). Isolation ensures that concurrent execution of transactions leaves the database in the same state that would have been obtained if the transactions were executed sequentially. Isolation is the main goal of concurrency control; depending on the method used, the effects of an incomplete transaction might not even be visible to other transactions. 
 - **Durability**: guarantees that once a transaction has been committed, it will remain committed even in the case of a system failure (e.g., power outage or crash). This usually means that completed transactions (or their effects) are recorded in non-volatile memory.
+
+
+#### Database Normalization:
+- 1NF: no repeated values in same column, like a comma separated etc
+- 2NF: 1NF + should not have a composite key candidate (combination of cols to make uniq key)
+- 3NF: 2NF + Transitive dependencies should not exist (A->B->C => A->C) holds for non key attributes
+- BCNF(Boyce Codd): Same as 3NF + holds for all attributes including key attributes
+  
