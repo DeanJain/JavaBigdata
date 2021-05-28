@@ -171,6 +171,7 @@ Reconciliation of concurrent writes must occur sometime before the next read, an
 #### CRDT - conflict-free replicated data type
 In distributed computing, a conflict-free replicated data type (CRDT) is a data structure which can be replicated across multiple computers in a network, where the replicas can be **updated independently and concurrently without coordination between the replicas**, and where it is always mathematically possible to resolve inconsistencies that might come up. The NoSQL distributed databases Redis, Riak and Cosmos DB have CRDT data types.
 
+ CRDT is ideal for optimistic replication as concurrent updates are allowed to go through, with inconsistencies possibly created, and the results are merged or "resolved" later. In this approach, consistency between the replicas is eventually re-established via "merges" of differing replicas. it is mathematically always possible to merge or resolve concurrent updates on different replicas of the data structure without conflicts. 
 
 
 
