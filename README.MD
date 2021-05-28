@@ -7,10 +7,13 @@
 If I had an hour to solve a problem I’d spend 55 minutes thinking about the problem and 5 minutes thinking about solutions.
 —Albert Einstein
 
-* [Java & Data Structure](Java-DataStructure.md)
+* [Java](Java.md)
+* [Data Structure & Algo](Algo-DataStructure.md)
+* [Patterns](Patterns.md)
 * [Machine Learning](ML.md)
 * [Docker Kube ServiceMesh](Docker-Kube-Istio.md) 
 * [Reactive Programming](Reactive.md)
 * [Databases](DB.md)
 * [Architecture](Architecture.md)
 * [Google Cloud Platform](GCP.md)
+* [Leadership](EngineeringLeadership.md)
