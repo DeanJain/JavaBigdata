@@ -1,7 +1,7 @@
 
 ### Java Collections Framework
 * Collection is parent interface --> Sets and Lists ; Maps Interface does not follow Collection
-* ArrayList class is both a List and a Queue as it implements both interface
+* LinkedList class is both a List and a Queue as it implements both interface
 * All single-element collections implement the Collection interface, sets and lists and not Maps
 *  `LinkedHashMap` has all the properties of a HashMap, quick lookup on a key, it also preserves the order of entry into the map.
 * for any serious use of a Map interface in a parallel environment, use `ConcurrentHashMap`
@@ -20,17 +20,25 @@
 
     
 #### Linked List (Singly / Doubly) ->
-* Linked List is better for frequency updates/deletes/extension of list
+* Linked List is better for frequent updates/deletes/extension of list
 * Its a Recursive datatype
 * traverse through length to get element
 * add/update/delete without reshuffling whole list
 
-#### Queue / Dequeue ->
-* Queue - FIFO, add, remove, peek (move next without removing)
-* Dequeue - known as double ended queue or Stack (push / pop), add/remove from both ends 
+#### Queue / Deque ->
+* Queue - FIFO, add, remove, peek (move next without removing),
+* Deque - known as double ended queue add/remove from both ends, can act as both FIFO as well as LIFO (like stack) 
 * priority queue, where each element is assigned a priority and enqueued according to this priority
+* In java Deque is preferred over stack 
+
+#### Stack
+* LIFO
+* old API class and concrete impl without interface
+* extends vector (old api)
+* syncronized so slow
 
 #### Maps (Hash, Associative array, dictionary)
+* A map is a key-value mapping, which means that every key is mapped to exactly one value
 * Map implementations - `HashMap, TreeMap, Hashtable and LinkedHashMap`
 * HashMap internally uses arrays and is not ordered and not Synchronized
 * HashTable is same as HashMap but is Synchronized, this is deprecated and should not be used
@@ -41,8 +49,8 @@
 * In case of hash collision, can use secondary hash fn and value can be used as an offset
 
 #### Sets 
-* Unordered set of elements with no duplicates
-* Set interface implementation: HashSet, TreeSet and LinkedHashSet (All allow unique elements only, are NOT synchronized)
+* set is simply a group of unique things, it is Unordered set of elements with no duplicates
+* Set interface implementation: **HashSet, TreeSet and LinkedHashSet** (All allow unique elements only, are NOT synchronized)
 * HashSet uses hashmap as implementation, key is the element and value is stored as a marker, Use HashSet if you don’t want to maintain any order of elements.
 * Use LinkedHashSet if you want to maintain insertion order of elements, it internally uses Map and Linked List 
 * Use TreeSet if you want to sort the elements according to some Comparator
