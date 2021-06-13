@@ -10,14 +10,14 @@ public class DeDuplicateOrderedArray {
         System.out.println(Arrays.toString(input));
     }
 
-    private static int deDupe(int[] input){
-        if (input.length == 0) return 0;
+    private static int deDupe(int[] nums){
+        if (nums.length == 0) return 0;
         int i = 0;
-        for (int j = 1; j < input.length; j++) {
-            if (input[j] == input[i])
+        for (int j = 1; j < nums.length; j++) {
+            if (nums[j] == nums[i])
                 continue;
-            input[++i] = input[j];
-            System.out.println(Arrays.toString(input));
+            nums[++i] = nums[j];
+            System.out.println(Arrays.toString(nums));
         }
         return i + 1;
     }
