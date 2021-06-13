@@ -18,7 +18,7 @@ public class SumOfNumber {
         int sum = 9;
 
         // using extra heap for this object
-        Set al = new HashSet<>();
+        Set<Integer> al = new HashSet<>();
 
         for (int i = 0; i < validNumber.length - 1; i++) {
 
@@ -28,14 +28,6 @@ public class SumOfNumber {
             }
 
             al.add(validNumber[i]);
-
-//            for (int j = i+1; j < validNumber.length; j++) {
-//                if(validNumber[i] + validNumber[j] == sum)
-//                {
-//                    System.out.println("true");
-//                    System.exit(1);
-//                }
-//            }
 
         }
         System.out.println("false");

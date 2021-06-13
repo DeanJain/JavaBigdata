@@ -33,9 +33,9 @@
 
 #### Stack
 * LIFO
-* old API class and concrete impl without interface
-* extends vector (old api)
-* syncronized so slow
+* Old API class and concrete impl without interface
+* Extends vector (old api)
+* Syncronized so slow
 
 #### Maps (Hash, Associative array, dictionary)
 * A map is a key-value mapping, which means that every key is mapped to exactly one value
@@ -133,3 +133,5 @@ Binary Search - O(log n):
    * match element at middle if less then recursively call function with lower list else with higher list
    * return true when match found or false when list is empty or null
 
+#### Recursion
+ 

@@ -2,7 +2,7 @@ package programs.problems;
 
 import java.util.Arrays;
 
-public class DeDuplicateOrderedArray {
+public class RemoveDuplicates {
 
     public static void main(String[] args) {
         int[] input = {1,3,4,4,4,5,6};
@@ -17,7 +17,6 @@ public class DeDuplicateOrderedArray {
             if (nums[j] == nums[i])
                 continue;
             nums[++i] = nums[j];
-            System.out.println(Arrays.toString(nums));
         }
         return i + 1;
     }
