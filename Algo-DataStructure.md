@@ -1,9 +1,33 @@
+#### Big O notation
+
+Big O Notation is a mathematical function used in computer science to describe an algorithm’s complexity. It is usually
+a measure of the runtime required for an algorithm’s execution. instead of telling you how fast or slow an algorithm’s
+runtime is, it tells you how an **algorithm’s performance changes with the size of the input** (size n).
+
+| Big O Notation     | Name         | Example(s)                                                                                                                                                                                                                                                                                                                                                                  |
+| ------------------ | ------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| _O(1)_             | Constant     | [Odd or Even number]                                  |
+| _O(log n)_         | Logarithmic  | [Finding element on sorted array with **binary
+search**]                                                                                    |
+| _O(
+n)_             | Linear       | [Find max element in unsorted array]                                                                                                          |
+| _O(n log n)_       | Linearithmic | [Sorting elements in array with **merge
+sort**]                                                                                                      |
+| _O(n<sup>2</sup>)_ | Quadratic    | [Duplicate elements in array Sorting array with **bubble sort**]|
+| _O(n<sup>
+3</sup>)_ | Cubic        | [3 variables equation solver]                                                                                                                                         |
+| _O(2<sup>
+n</sup>)_ | Exponential  | [Find all subsets]                                                                                                                                                             |
+| _O(
+n!)_            | Factorial    | [Find all permutations of a given set/string]                                                                                                                  |
 
 ### Java Collections Framework
+
 * Collection is parent interface --> Sets and Lists ; Maps Interface does not follow Collection
 * LinkedList class is both a List and a Queue as it implements both interface
 * All single-element collections implement the Collection interface, sets and lists and not Maps
-*  `LinkedHashMap` has all the properties of a HashMap, quick lookup on a key, it also preserves the order of entry into the map.
+* `LinkedHashMap` has all the properties of a HashMap, quick lookup on a key, it also preserves the order of entry into
+  the map.
 * for any serious use of a Map interface in a parallel environment, use `ConcurrentHashMap`
 
 ![Java Collections Big Picture](static/JavaCollectionCheatSheet.png)
@@ -18,7 +42,6 @@
 * StringBuffer - is mutable unlike string and is thread safe / synchronized.
 * StringBuilder - is mutable and is not thread safe so gives better performance when multi threads are not used.
 
-    
 #### Linked List (Singly / Doubly) ->
 * Linked List is better for frequent updates/deletes/extension of list
 * Its a Recursive datatype
@@ -55,14 +78,13 @@
 * Use LinkedHashSet if you want to maintain insertion order of elements, it internally uses Map and Linked List 
 * Use TreeSet if you want to sort the elements according to some Comparator
 * Collections.newSetFromMap returns a Set from Map
- 
+
 #### Graphs
 * data structure for storing connected data in a **network model**
 * consists of vertices and edges. A vertex represents the entity (for example, people) and an edge represents the relationship between entities
 * If these edges feature a direction in them, the resulting graph is known as a directed graph
 * If  these edges carry relative weight, this graph is known as a weighted graph.
 * it can be uni or bidreictional, can have loops 
-
 
 ##### Graph Representations - Adjacency Matrix and Adjacency List
 * adjacency matrix is a square matrix with dimensions equivalent to the number of vertices in the graph, matrix typically have values ‘0’ or ‘1’. value of ‘1’ indicates adjacency between the vertices in the row and column and a value of ‘0’ otherwise
@@ -78,7 +100,6 @@
 * JGraphT is one of the most popular libraries in Java for the graph data structure. It allows the creation of a simple graph, directed graph, weighted graph, amongst others.
 * Apache Giraph, currently used at Facebook to analyze the graph formed by their users, and Apache TinkerPop, commonly used on top of graph databases.
 
-
 #### Trees:
 * Tree is a Minimally connected Graph with no loops, its a non-linear data structure where data objects are organized in terms of hierarchical relationship.
 * Unidirectional, one root node, only one parent, tree is hierarchical 
@@ -87,8 +108,8 @@
 * **BST** : binary search tree, less left, eq/more right
 * **Binary Heap Tree** : Children are more than parent, binary tree
 * **Red & Black Tree** : 
-  * Java tree API implementation is an instance of this data structure, it is a kind of self-balancing binary search tree
-  * Each node is either red or black, The root is black, All leaves are black, If a node is red, then both its children are black.
+    * Java tree API implementation is an instance of this data structure, it is a kind of self-balancing binary search tree
+    * Each node is either red or black, The root is black, All leaves are black, If a node is red, then both its children are black.
 * Java Trees - TreeSet and TreeMap (only 2)
 
 ##### Tree Traversal
@@ -119,19 +140,20 @@ Core Algos : (BIQM) Bubble - Insertion - Quick - Merge
     * if not less then any sorted list element then add at end of Linked List
 
 3. Quick Sort - avg O(nlogn):
-	* Divide n conquer algo
-	* Pivot anywhere mostly in middle or end/right, lower list adds < pivot  and higher list add >= pivot
-	* Recursively call function for all lower list.
-	* Add pivot 
-	* Recursively call function for all higher list
+    * Divide n conquer algo
+    * Pivot anywhere mostly in middle or end/right, lower list adds < pivot  and higher list add >= pivot
+    * Recursively call function for all lower list.
+    * Add pivot 
+    * Recursively call function for all higher list
 
 #### Searching:
 
 Binary Search - O(log n):
-   * Needs a Sorted list as input
-   * break it from middle of list
-   * match element at middle if less then recursively call function with lower list else with higher list
-   * return true when match found or false when list is empty or null
+
+* Needs a Sorted list as input
+* break it from middle of list
+* match element at middle if less then recursively call function with lower list else with higher list
+* return true when match found or false when list is empty or null
 
 #### Recursion
  

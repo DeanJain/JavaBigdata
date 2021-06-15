@@ -3,6 +3,10 @@ package programs.problems;
 import java.util.HashMap;
 import java.util.Scanner;
 
+/**
+ * Given a string s, return the first non-repeating character in it and return its index. If it does not exist, return
+ * -1. Input: s = "loveleetcode" Output: 2
+ */
 public class FirstUniqueChar {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);

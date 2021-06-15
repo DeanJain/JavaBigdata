@@ -1,7 +1,5 @@
 package programs.problems;
 
-import java.util.Arrays;
-
 /**
  * You are given an n x n 2D matrix representing an image, rotate the image by 90 degrees (clockwise).
  * You have to rotate the image in-place, which means you have to modify the input 2D matrix directly.
@@ -11,7 +9,7 @@ import java.util.Arrays;
  */
 public class RotateImage {
     public static void main(String[] args) {
-        int[][] matrix = {{1,2,3},{4,5,6},{7,8,9}};
+        int[][] matrix = {{1, 2, 3, 4}, {5, 6, 7, 8}, {9, 10, 11, 12}, {13, 14, 15, 16}};
         rotate(matrix);
     }
     public static void rotate(int[][] matrix) {
@@ -24,14 +22,13 @@ public class RotateImage {
                 matrix[i][j] = temp;
             }
         }
-        System.out.println("Transpose = "+Arrays.deepToString(matrix));
         // reflection
-        for (int i = 0; i < len; i++) {
-            int temp = matrix[i][0];
-            matrix[i][0] = matrix[i][len-1];
-            matrix[i][len-1] = temp;
+        for (int i = 0; i < len / 2; i++) {
+            for (int j = 0; j < len; j++) {
+                int temp = matrix[j][i];
+                matrix[j][i] = matrix[j][len - i - 1];
+                matrix[j][len - i - 1] = temp;
+            }
         }
-        System.out.println("Reflect = "+Arrays.deepToString(matrix));
-
     }
 }
