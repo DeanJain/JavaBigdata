@@ -1,11 +1,12 @@
 # Learnings: 
 
-*Software development is a learning process; working code is a side effect*
+- *Software development is a learning process; working code is a side effect*
 
-“The real problem is that programmers have spent far too much time worrying about efficiency in the wrong places and at the wrong times; premature optimization is the root of all evil (or at least most of it) in programming.”
+- “The real problem is that programmers have spent far too much time worrying about efficiency in the wrong places and at the wrong times; premature optimization is the root of all evil (or at least most of it) in programming.”
 
-If I had an hour to solve a problem I’d spend 55 minutes thinking about the problem and 5 minutes thinking about solutions.
-—Albert Einstein
+- If I had an hour to solve a problem I’d spend 55 minutes thinking about the problem and 5 minutes thinking about solutions —> Albert Einstein
+
+- Believe you can and you're halfway there -> Theodore Roosevelt
 
 * [Java](Java.md)
 * [Data Structure & Algo](Algo-DataStructure.md)

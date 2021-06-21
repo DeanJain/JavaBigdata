@@ -95,10 +95,6 @@ With an event streaming model, events are written to a log. Event consumers donâ
 ![solid](static/solid.png)
 
 
-#### DRY - Dont Repeat Yourself!
-
-#### KISS - Keep It Simple Stupid!
-
 #### Conways Law: 
 Any organization that designs a system (defined broadly) will produce a design whose structure is a copy of the organization's communication structure. The law is based on the reasoning that in order for a software module to function, multiple authors must communicate frequently with each other. Therefore, the software interface structure of a system will reflect the social boundaries of the organizations that produced it, across which communication is more difficult. 
 

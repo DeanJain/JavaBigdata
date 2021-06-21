@@ -33,7 +33,7 @@ public class ShuffleArray {
     public int[] shuffle() {
         int len = this.sa.length;
         int rand = (int) (Math.random() * (len - 1) + 1);
-        System.out.println(rand);
+
         int[] temp = new int[len];
         System.arraycopy(this.sa, 0, temp, 0, len);
         for (int i = 0; i < len; i++) {

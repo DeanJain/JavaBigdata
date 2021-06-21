@@ -4,139 +4,76 @@
 
 package programs.datastructure;
 
+public class MyLinkedList {
 
-import java.util.LinkedList;
+    Node head = null;
+    int size = 0;
 
-public class MyLinkedList<T> {
-
-    public T getElement() {
-        return element;
+    void addNodeAtEnd(int value) {
+        Node node = new Node(value);
+        if (head == null)
+            head = node;
+        else {
+            Node nextNode = head;
+            while (nextNode.next != null)
+                nextNode = nextNode.next;
+            nextNode.next = node;
+        }
+        size++;
     }
 
-    public void setElement(T element) {
-        this.element = element;
+    void removeLastNode() {
+        if (head != null) {
+            Node secondLastNode = head;
+            Node nextNode = head.next;
+            while (nextNode.next != null) {
+                secondLastNode = nextNode;
+                nextNode = nextNode.next;
+            }
+            secondLastNode.next = null;
+        }
+        size--;
     }
 
-    private T element;
+    public void printList(){
+        if (head == null)
+            System.out.println("empty");
+        else {
+            System.out.println("Next Node Val = "+head.val);
+            Node nextNode = head.next;
+            while (nextNode != null) {
+                System.out.println("Next Node Val = "+nextNode.val);
+                nextNode = nextNode.next;
+            }
 
-    public MyLinkedList<T> getNext() {
-        return this.next;
+        }
     }
 
-    public void setNext(MyLinkedList<T> next) {
-        this.next = next;
-    }
-
-    private MyLinkedList<T> next = null, current = this;
-
-    public MyLinkedList(T t) {
-        this.setElement(t);
-    }
-
-    public boolean add(T e) {
-
-        MyLinkedList<T> temp = new MyLinkedList<>(e);
-
-        LinkedList l = new LinkedList();
-
-        if (this.getNext() == null) {
-            this.setNext(temp);
-            System.out.println("added element " + e);
-            return true;
-        } else {
-
-            // traversing for finding null next
-            MyLinkedList<T> current = this.getNext();
-
-            while (true) {
-                if (current.getNext() != null) {
-                    current = current.getNext();
-                } else {
-                    current.setNext(temp);
-                    System.out.println("added element " + e);
-                    return true;
-                }
+    public Node searchNode(int value) {
+        if (head != null) {
+            if(head.val==value) return head;
+            Node nextNode = head.next;
+            while (nextNode.next != null) {
+                if(nextNode.val==value) return nextNode;
+                nextNode = nextNode.next;
             }
         }
-
+        return null;
     }
 
-    public boolean remove(T e) {
-
-        if (this.getElement() == e) {
-            this.current = this.getNext();
-            System.out.println("removed element " + e);
-            return true;
-        } else {
-
-            // traversing for finding null next
-            MyLinkedList<T> next = this.getNext();
-
-            while (next != null) {
-                if (next.getElement() == e) {
-                    current.setNext(next.getNext());
-                    System.out.println("removed element " + e);
-                    break;
-                } else {
-                    current = next;
-                    next = next.getNext();
-                }
-            }
-        }
-        return false;
+    public boolean isEmpty(){
+        return head==null;
     }
 
-    public MyLinkedList<T> reverseLinkedList() {
 
-        MyLinkedList current = this, next = null, previous = null;
+}
 
-        while (current != null) {
-            next = current.getNext();
+class Node {
+    int val;
+    Node next;
 
-            current.setNext(previous);
-
-            previous = current;
-            current = next;
-        }
-        return previous;
-    }
-
-    public int size() {
-        int count = 1;
-        MyLinkedList current = this;
-
-        while (current.getNext() != null) {
-            ++count;
-            current = current.getNext();
-        }
-
-        return count;
-
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-
-        if (obj == this) {
-            return true;
-        }
-
-        if (!(obj instanceof MyLinkedList)) {
-            return false;
-        }
-
-        MyLinkedList lhs = this, rhs = (MyLinkedList) obj;
-
-
-        do {
-            if (lhs.getElement() != rhs.getElement())
-                return false;
-            lhs = lhs.getNext();
-            rhs = rhs.getNext();
-
-        } while (rhs != null);
-
-        return true;
-
+    public Node(int val) {
+        this.val = val;
+        this.next = null;
     }
 }

@@ -6,11 +6,12 @@ public class MergeArrays {
 
     public static void main(String[] args) {
 
-        int[] a1 = {1, 2, 3, 4, 5, 6, 100, 150, 300, 1000};
-        int[] a2 = {4, 5, 6, 9, 12, 77};
+        int[] a1 = {1,2,3,0,0,0};
+        int[] a2 = {2,5,6};
 
-        mergeArray(a1, a2);
-
+        //  mergeArray(a1, a2);
+            merge(a1,3, a2,3);
+        System.out.println(Arrays.toString(a1));
     }
 
     private static void mergeArray(int[] a1, int[] a2) {
@@ -30,5 +31,24 @@ public class MergeArrays {
             System.out.print(it.next() + " ");
 
     }
+
+    // [1,2,3,0,0,0],  [2,5,6]
+    public static void merge(int[] nums1, int m, int[] nums2, int n) {
+        m--;
+        n--;
+        for (int i = m + n + 1; i >=0; i--) {
+            int a = m >=0 ? nums1[m]:Integer.MIN_VALUE;
+            int b = n >=0 ? nums2[n]:Integer.MIN_VALUE;
+            if (a > b) {
+                nums1[i] = a;
+                m--;
+            }
+            else {
+                nums1[i] = b;
+                n--;
+            }
+        }
+    }
+
 
 }
